@@ -1,5 +1,9 @@
 import hapi from '@hapi/hapi';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const fileName = fileURLToPath(import.meta.url);
+const dirName = path.dirname(fileName);
 
 const PORT = process.env.PORT || 616;
 
@@ -10,7 +14,7 @@ const PORT = process.env.PORT || 616;
         host: '0.0.0.0',
         routes: {
             files: {
-                relativeTo: path.join(__dirname, 'dist')
+                relativeTo: path.join(dirName, 'dist')
             }
         }
     });
