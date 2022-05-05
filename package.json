@@ -70,6 +70,7 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.2.2",
+    "@hapi/inert": "^6.0.5",
     "ovenplayer": "^0.10.18"
   }
 }
