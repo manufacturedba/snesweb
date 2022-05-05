@@ -14,6 +14,13 @@ module.exports = function (environment) {
       },
     },
 
+    'ember-cli-google': {
+      analytics: {
+        version: 'v4',
+        measurementId: 'G-XXXXXXXXXX',
+      },
+    },
+
     APP: {},
   };
 
@@ -36,6 +43,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
+    ENV.liveMode = process.env.LIVE_MODE || false;
     ENV['ember-cli-google'] = {
       analytics: {
         version: 'v4',
