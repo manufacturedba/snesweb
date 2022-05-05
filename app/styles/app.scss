@@ -1,0 +1,29 @@
+@use 'imports';
+
+/* Global style covering only route level */
+body {
+    background-color: #4F43AE;
+}
+
+.tepache-mode {
+    height: 100%;
+    width: 100%;
+}
+
+.tepache-mode-construction {
+    color: #FFFFFF;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    grid-auto-rows: 200px;
+    grid-template-areas:
+      ". a a ."
+      ". a a .";
+}
+
+.tepache-mode-construction__message {
+    grid-area: a;
+    align-self: center;
+    justify-self: center;
+    font-size: 2em;
+}
