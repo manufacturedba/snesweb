@@ -37,8 +37,10 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     ENV['ember-cli-google'] = {
-      analytics: 'v4',
-      measurementId: process.env.GOOGLE_MEASUREMENT_ID,
+      analytics: {
+        version: 'v4',
+        measurementId: process.env.GOOGLE_MEASUREMENT_ID,
+      },
     };
   }
 

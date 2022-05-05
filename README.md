@@ -29,7 +29,7 @@ You will need the following things properly installed on your computer.
 
 ### Running / Production
 
-- `GOOGLE_MEASUREMENT_ID=G-XXXXXXXXXX npm start`
+- `npm start`
 
 _Be sure to build application prior to running production server_
 
@@ -54,7 +54,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 #### Building
 
 - `ember build` (development)
-- `ember build --environment production` (production)
+- `GOOGLE_MEASUREMENT_ID=G-XXXXXXXXXX ember build --environment production` (production)
 
 ### Further Reading / Useful Links
 
