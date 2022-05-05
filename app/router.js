@@ -7,5 +7,9 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('main', { path: '/' });
+  if (config.liveMode) {
+    this.route('main', { path: '/' });
+  } else {
+    this.route('construction', { path: '/' });
+  }
 });
