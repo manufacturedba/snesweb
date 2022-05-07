@@ -1,5 +1,9 @@
 # tepacheweb
 
+![The Tepache Mode mascot](/public/tepache-for-docs.png 'Rotting pineapple')
+
+_Rotting pineapple by Kelsey Clarke_
+
 Browser application for watching and interacting with Tepache Mode
 
 Player provided by [OvenPlayer](https://www.ovenmediaengine.com/ovenplayer)
