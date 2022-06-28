@@ -47,6 +47,8 @@
     "ember-page-title": "^7.0.0",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
+    "ember-sinon": "^5.0.0",
+    "ember-sinon-qunit": "^6.0.0",
     "ember-source": "~4.3.0",
     "ember-template-lint": "^4.3.0",
     "ember-welcome-page": "^6.2.0",
@@ -71,8 +73,14 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@ember/render-modifiers": "^2.0.4",
     "@hapi/hapi": "^20.2.2",
     "@hapi/inert": "^6.0.5",
     "ovenplayer": "^0.10.18"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/ember-oven-player"
+    ]
   }
 }
