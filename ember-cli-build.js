@@ -5,6 +5,7 @@ module.exports = function emberCLIBuild(defaults) {
     // Add options here
   });
 
+  app.import('node_modules/ovenplayer/dist/ovenplayer.js');
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
