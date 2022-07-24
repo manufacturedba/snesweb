@@ -2,7 +2,10 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function emberCLIBuild(defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
+    'ember-bootstrap': {
+      bootstrapVersion: 5,
+      importBootstrapCSS: false,
+    },
   });
 
   app.import('node_modules/ovenplayer/dist/ovenplayer.js');

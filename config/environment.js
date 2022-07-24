@@ -49,7 +49,9 @@ module.exports = function (environment) {
       },
     },
 
-    APP: {},
+    APP: {
+      remoteConfig,
+    },
   };
 
   if (environment === 'development') {
@@ -71,13 +73,14 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.liveMode = process.env.LIVE_MODE || false;
     ENV['ember-cli-google'] = {
       analytics: {
         version: 'v4',
         measurementId: process.env.GOOGLE_MEASUREMENT_ID,
       },
     };
+    ENV['ember-cloud-firestore-adapter'].firestore.emulator = null;
+    ENV['ember-cloud-firestore-adapter'].auth.emulator = null;
   }
 
   return ENV;
