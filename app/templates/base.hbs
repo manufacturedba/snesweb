@@ -1,0 +1,19 @@
+<div class="tepache-mode-base">
+    <BsNavbar @type="light" @backgroundColor="light" as |navbar| >
+        <LinkTo @route="base" class="navbar-brand">Tepache Mode</LinkTo>
+        {{#if this.session.isAuthenticated}}
+            <BsButton @type="light" class="navbar-brand" {{on "click" this.invalidateSession}}>Logout</BsButton >
+        {{/if}}
+        <navbar.toggle/>
+        <navbar.content>
+            <navbar.nav as |nav|>
+                <nav.item>
+                    <nav.link-to @route="base.about">About</nav.link-to>
+                </nav.item>
+            </navbar.nav>
+        </navbar.content>
+    </BsNavbar>
+    <div class="container-fluid mt-5">
+        {{outlet}}
+    </div>
+</div>
