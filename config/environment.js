@@ -1,5 +1,7 @@
 'use strict';
 
+const remoteConfig = require('../remote_config_defaults.json');
+
 module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'tepacheweb',
@@ -18,6 +20,32 @@ module.exports = function (environment) {
       analytics: {
         version: 'v4',
         measurementId: 'G-XXXXXXXXXX',
+      },
+    },
+
+    'ember-cloud-firestore-adapter': {
+      firebaseConfig: {
+        apiKey: 'AIzaSyDiKmk72f0aOl3Dw0xK9ehK1YyQhzmHxIE',
+        authDomain: 'tepache-mode.firebaseapp.com',
+        projectId: 'tepache-mode',
+        storageBucket: 'tepache-mode.appspot.com',
+        messagingSenderId: '135682984531',
+        appId: '1:135682984531:web:ff2d084602798c1c4694a6',
+        measurementId: 'G-EM9H1WY5XC',
+      },
+
+      firestore: {
+        emulator: {
+          hostname: 'localhost',
+          port: 8080,
+        },
+      },
+
+      auth: {
+        emulator: {
+          hostname: 'localhost',
+          port: 9099,
+        },
       },
     },
 
@@ -43,7 +71,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.liveMode = process.env.LIVE_MODE || false;
+    ENV.APP.liveMode = process.env.LIVE_MODE || false;
     ENV['ember-cli-google'] = {
       analytics: {
         version: 'v4',
