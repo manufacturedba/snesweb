@@ -33,3 +33,7 @@ node_modules/
 
 # ssl
 /ssl/
+
+# Firebase
+firestore-debug.log
+ui-debug.log
