@@ -31,7 +31,7 @@ module.exports = function (environment) {
         storageBucket: 'tepache-mode.appspot.com',
         messagingSenderId: '135682984531',
         appId: '1:135682984531:web:ff2d084602798c1c4694a6',
-        measurementId: 'G-EM9H1WY5XC',
+        measurementId: 'G-VNHTKVCJLS',
       },
 
       firestore: {
