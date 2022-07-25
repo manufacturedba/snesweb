@@ -32,6 +32,14 @@ const PORT = process.env.PORT || 616;
     },
   });
 
+  server.ext('onPreResponse', (req, h) => {
+    const { response } = req;
+    if (response.isBoom && response.output.statusCode === 404) {
+      return h.file('index.html');
+    }
+    return h.continue;
+  });
+
   await server.start();
 
   console.log('Tepache Web running at', PORT);

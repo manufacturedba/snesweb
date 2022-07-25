@@ -16,13 +16,6 @@ module.exports = function (environment) {
       },
     },
 
-    'ember-cli-google': {
-      analytics: {
-        version: 'v4',
-        measurementId: 'G-XXXXXXXXXX',
-      },
-    },
-
     'ember-cloud-firestore-adapter': {
       firebaseConfig: {
         apiKey: 'AIzaSyDiKmk72f0aOl3Dw0xK9ehK1YyQhzmHxIE',
@@ -73,12 +66,6 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV['ember-cli-google'] = {
-      analytics: {
-        version: 'v4',
-        measurementId: process.env.GOOGLE_MEASUREMENT_ID,
-      },
-    };
     ENV['ember-cloud-firestore-adapter'].firestore.emulator = null;
     ENV['ember-cloud-firestore-adapter'].auth.emulator = null;
   }

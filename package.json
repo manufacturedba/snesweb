@@ -28,7 +28,6 @@
     "@faker-js/faker": "^7.3.0",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
-    "@onehilltech/ember-cli-google-analytics": "^1.2.0",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^5.2.0",
     "broccoli-asset-rev": "^3.0.0",

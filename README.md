@@ -39,6 +39,8 @@ _Be sure to build application prior to running production server_
 
 #### Environment parameters
 
+TODO - Say goodbye to standalone google analytics package
+
 `GOOGLE_MEASUREMENT_ID` - Unique tag ID for Google Analytics usage V4
 
 #### Code Generators
