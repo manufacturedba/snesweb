@@ -7,15 +7,18 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('base', { path: '/' }, function () {
-    this.route('index', { path: '/' });
-    this.route('about');
-    this.route('magwest', function () {
-      this.route('live');
+  this.route('authenticated', { path: '' }, function () {
+    this.route('base', { path: '/' }, function () {
+      this.route('index', { path: '/' });
+      this.route('about');
+      this.route('magwest', function () {
+        this.route('live');
+      });
+      this.route('games');
     });
-    this.route('games');
+    this.route('construction');
+    // TODO - This treats 404 scenarios as valid.
+    this.route('404', { path: '/*path' });
   });
-  this.route('construction');
-  // TODO - This treats 404 scenarios as valid.
-  this.route('404', { path: '/*path' });
+  this.route('login');
 });

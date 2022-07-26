@@ -9,7 +9,7 @@ export default class ConstructionRoute extends Route {
     return this.remoteConfig.fetchAndActivate().then(() => {
       const live = this.remoteConfig.getBoolean('live');
       if (live) {
-        this.router.transitionTo('base.index');
+        this.router.transitionTo('authenticated.base.index');
       }
     });
   }

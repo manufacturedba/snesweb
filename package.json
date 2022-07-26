@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
+    "@ember/render-modifiers": "^2.0.4",
     "@ember/test-helpers": "^2.6.0",
     "@faker-js/faker": "^7.3.0",
     "@glimmer/component": "^1.0.4",
@@ -78,7 +79,6 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@ember/render-modifiers": "^2.0.4",
     "@hapi/hapi": "^20.2.2",
     "@hapi/inert": "^6.0.5",
     "firebase-admin": "^11.0.0",

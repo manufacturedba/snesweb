@@ -8,11 +8,14 @@ export default class BaseRoute extends Route {
   @service
   remoteConfig;
 
+  @service
+  session;
+
   beforeModel() {
     const live = this.remoteConfig.getBoolean('live');
 
     if (!live) {
-      this.router.transitionTo('construction');
+      this.router.transitionTo('authenticated.construction');
     }
   }
 }

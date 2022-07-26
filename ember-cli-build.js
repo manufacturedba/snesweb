@@ -6,6 +6,9 @@ module.exports = function emberCLIBuild(defaults) {
       bootstrapVersion: 5,
       importBootstrapCSS: false,
     },
+    'ember-simple-auth': {
+      useSessionSetupMethod: true,
+    },
   });
 
   app.import('node_modules/ovenplayer/dist/ovenplayer.js');
