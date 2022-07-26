@@ -16,4 +16,6 @@ Router.map(function () {
     this.route('games');
   });
   this.route('construction');
+  // TODO - This treats 404 scenarios as valid.
+  this.route('404', { path: '/*path' });
 });
