@@ -4,6 +4,7 @@ const remoteConfig = require('../remote_config_defaults.json');
 
 module.exports = function (environment) {
   let ENV = {
+    routeAfterAuthentication: 'authenticated.base',
     modulePrefix: 'tepacheweb',
     environment,
     rootURL: '/',

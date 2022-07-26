@@ -5,6 +5,9 @@ export default class ConstructionRoute extends Route {
   @service
   remoteConfig;
 
+  @service
+  router;
+
   beforeModel() {
     return this.remoteConfig.fetchAndActivate().then(() => {
       const live = this.remoteConfig.getBoolean('live');

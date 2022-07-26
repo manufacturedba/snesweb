@@ -8,7 +8,7 @@ export default class AuthenticatedRoute extends Route {
 
   async beforeModel() {
     if (!this.session.isAuthenticated) {
-      return await this.session.authenticate('authenticator:firebase', (auth) =>
+      this.session.authenticate('authenticator:firebase', (auth) =>
         signInAnonymously(auth)
       );
     }

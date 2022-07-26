@@ -9,6 +9,13 @@ export default class TepacheLoginComponent extends Component {
   @service
   session;
 
+  @service
+  router;
+
+  get email() {
+    return this.session.data.authenticated.user.email;
+  }
+
   @action
   startUI(element) {
     // FirebaseUI config.
@@ -17,10 +24,22 @@ export default class TepacheLoginComponent extends Component {
 
       signInSuccessUrl: '/',
 
-      signInSuccessWithAuthResult: function (authResult) {
-        return this.session.authenticate('authenticator:firebase', () => {
-          return authResult;
-        });
+      callbacks: {
+        signInSuccessWithAuthResult: (authResult) => {
+          this.session
+            .authenticate('authenticator:firebase', () => {
+              return authResult;
+            })
+            .finally(() =>
+              this.router.transitionTo('authenticated.base.index')
+            );
+
+          return false;
+        },
+        signInFailure: (error) => {
+          console.error(error);
+          this.router.transitionTo('authenticated.construction');
+        },
       },
 
       signInOptions: [

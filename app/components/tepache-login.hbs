@@ -1,3 +1,12 @@
-<div {{did-insert this.startUI}}>
-    <div data-firebase-ui/>
+<div class="col-lg-auto" {{did-insert this.startUI}}>
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{#if true}}
+                    You're already authenticated
+                {{/if}}
+            </h5>
+            <div data-firebase-ui></div>
+        </div>
+    </div>
 </div>
