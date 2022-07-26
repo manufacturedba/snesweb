@@ -23,6 +23,14 @@ const PORT = process.env.PORT || 616;
 
   server.route({
     method: 'GET',
+    path: '/login',
+    handler: (request, h) => {
+      return h.file('login.html');
+    },
+  });
+
+  server.route({
+    method: 'GET',
     path: '/{param*}',
     handler: {
       directory: {
