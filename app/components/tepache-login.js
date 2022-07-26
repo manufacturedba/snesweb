@@ -39,11 +39,15 @@ export default class TepacheLoginComponent extends Component {
         signInFailure: (error) => {
           console.error(error);
 
-          this.session
-            .authenticate('authenticator:firebase', () => error.credential)
-            .finally(() =>
-              this.router.transitionTo('authenticated.construction')
-            );
+          if (error.credential) {
+            this.session
+              .authenticate('authenticator:firebase', () => error.credential)
+              .finally(() =>
+                this.router.transitionTo('authenticated.construction')
+              );
+          } else {
+            this.router.transitionTo('authenticated.construction');
+          }
         },
       },
 
