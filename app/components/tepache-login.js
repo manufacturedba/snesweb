@@ -1,5 +1,7 @@
 import Component from '@glimmer/component';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { service } from '@ember/service';
@@ -13,14 +15,13 @@ export default class TepacheLoginComponent extends Component {
   router;
 
   get email() {
-    return this.session.data.authenticated.user.email;
+    return this.session?.data?.authenticated?.user?.email;
   }
 
   @action
   startUI(element) {
-    // FirebaseUI config.
     var uiConfig = {
-      autoUpgradeAnonymousUsers: true,
+      autoUpgradeAnonymousUsers: false,
 
       signInSuccessUrl: '/',
 
@@ -63,10 +64,14 @@ export default class TepacheLoginComponent extends Component {
       // Privacy policy url/callback.
       privacyPolicyUrl: 'https://tepachemode.com/privacy',
     };
-
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
     // The start method will wait until the DOM is loaded.
-    ui.start(element.querySelector('[data-firebase-ui]'), uiConfig);
+    this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+    this.ui.start(element.querySelector('[data-firebase-ui]'), uiConfig);
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+
+    this.ui.reset();
   }
 }
