@@ -1,6 +1,6 @@
 <div class="tepache-mode-base">
     <BsNavbar @type="light" @backgroundColor="light" as |navbar| >
-        <LinkTo @route="base" class="navbar-brand">Tepache Mode</LinkTo>
+        <LinkTo @route="authenticated.base.index" class="navbar-brand">Tepache Mode</LinkTo>
         {{#if this.session.isAuthenticated}}
             <BsButton @type="light" class="navbar-brand" {{on "click" this.invalidateSession}}>Logout</BsButton >
         {{/if}}
