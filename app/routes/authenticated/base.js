@@ -8,10 +8,10 @@ export default class BaseRoute extends Route {
   router;
 
   @service
-  remoteConfig;
+  session;
 
   @service
-  session;
+  store;
 
   beforeModel(transition) {
     this.session.requireAuthentication(
