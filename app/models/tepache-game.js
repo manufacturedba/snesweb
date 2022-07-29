@@ -26,5 +26,5 @@ export default class TepacheGameModel extends Model {
   active;
 
   @attr('timestamp')
-  createdOn;
+  createdAt;
 }
