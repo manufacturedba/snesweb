@@ -24,10 +24,10 @@ export default class BaseRoute extends Route {
     return this.store.query('tepache-game', {
       adapterOptions: {
         isRealtime: true,
-      },
 
-      filter(reference) {
-        return query(reference, where('active', '==', true));
+        filter(reference) {
+          return query(reference, where('active', '==', true));
+        },
       },
     });
   }
