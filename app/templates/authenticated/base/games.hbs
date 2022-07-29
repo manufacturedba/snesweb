@@ -1,2 +1,5 @@
 {{page-title "Games"}}
-{{outlet}}
+
+ {{#each @model as |game|}}
+    <div>{{game.title}}</div>
+{{/each}}

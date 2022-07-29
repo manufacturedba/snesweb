@@ -8,7 +8,10 @@
         <navbar.content>
             <navbar.nav as |nav|>
                 <nav.item>
-                    <nav.link-to @route="authenticated.base.about">About</nav.link-to>
+                    <LinkTo @route="authenticated.base.games" class="nav-link">Games</LinkTo>
+                </nav.item>
+                <nav.item>
+                    <nav.link-to @route="authenticated.base.about" class="nav-link">About</nav.link-to>
                 </nav.item>
             </navbar.nav>
         </navbar.content>
