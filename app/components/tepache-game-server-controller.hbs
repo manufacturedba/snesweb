@@ -1,0 +1,54 @@
+<div class="tepache-game-server-controller">
+  <img
+    class="tepache-game-server-controller__image"
+    alt="controller base"
+    src="/controller/controller-base.png"
+  />
+  <img
+    class="tepache-game-server-controller__image"
+    alt="d base"
+    src="/controller/dpad-base.png"
+  />
+  {{#unless this.aButtonPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="a button"
+      src="/controller/a-up.png"
+    />
+  {{/unless}}
+  {{#unless this.bButtonPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="b button"
+      src="/controller/b-up.png"
+    />
+  {{/unless}}
+  {{#unless this.xButtonPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="x button"
+      src="/controller/x-up.png"
+    />
+  {{/unless}}
+  {{#unless this.yButtonPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="y button"
+      src="/controller/y-up.png"
+    />
+  {{/unless}}
+  {{#unless this.startButtonPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="start button"
+      src="/controller/start-up.png"
+    />
+  {{/unless}}
+  {{#unless this.selectButtonPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="select button"
+      src="/controller/select-up.png"
+    />
+  {{/unless}}
+</div>

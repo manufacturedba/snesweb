@@ -6,6 +6,7 @@ export default class MagwestLiveRoute extends Route {
   remoteConfig;
 
   model() {
-    return JSON.parse(this.remoteConfig.getString('ovenplayer_config'));
+    // return JSON.parse(this.remoteConfig.getString('ovenplayer_config'));
+    return {};
   }
 }
