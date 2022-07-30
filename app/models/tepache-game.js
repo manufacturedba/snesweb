@@ -1,5 +1,9 @@
 import Model, { attr } from '@ember-data/model';
 
+/**
+ * @class TepacheGameModel
+ * @extends Model
+ */
 export default class TepacheGameModel extends Model {
   @attr('string')
   title;

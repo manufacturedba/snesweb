@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 
 const projectId = 'tepache-mode';
-//process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080';
+process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080';
 initializeApp({ projectId });
 
 const db = getFirestore();

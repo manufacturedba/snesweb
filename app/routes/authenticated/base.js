@@ -33,7 +33,8 @@ export default class BaseRoute extends Route {
   }
 
   @action
-  error() {
+  error(error) {
+    console.error(error);
     this.router.replaceWith('authenticated.construction');
   }
 }

@@ -5,6 +5,7 @@
 _Rotting pineapple by Kelsey Clarke_
 
 Browser application for watching and interacting with Tepache Mode
+_This is a work in progress with high churn_
 
 Player provided by [OvenPlayer](https://www.ovenmediaengine.com/ovenplayer)
 

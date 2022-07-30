@@ -2,6 +2,11 @@
   {{page-title "Tepache Mode"}}
 
   <div class="tepache-mode">
-    {{outlet}}
+    {{#if this.loading}}
+      <div class="spinner-border" role="status">
+      </div>        
+    {{else}}
+      {{outlet}}
+    {{/if}}
   </div>
 </div>

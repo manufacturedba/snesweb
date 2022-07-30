@@ -1,22 +1,44 @@
 <div class="tepache-mode-base">
-    <BsNavbar @type="light" @backgroundColor="light" as |navbar| >
-        <LinkTo @route="authenticated.base.index" class="navbar-brand">Tepache Mode</LinkTo>
-        {{#if this.session.isAuthenticated}}
-            <BsButton @type="light" class="navbar-brand" {{on "click" this.invalidateSession}}>Logout</BsButton >
-        {{/if}}
-        <navbar.toggle/>
-        <navbar.content>
-            <navbar.nav as |nav|>
-                <nav.item>
-                    <LinkTo @route="authenticated.base.games" class="nav-link">Games</LinkTo>
-                </nav.item>
-                <nav.item>
-                    <nav.link-to @route="authenticated.base.about" class="nav-link">About</nav.link-to>
-                </nav.item>
-            </navbar.nav>
-        </navbar.content>
-    </BsNavbar>
-    <div class="container-fluid mt-5">
-        {{outlet}}
-    </div>
+  <BsNavbar @type="light" @backgroundColor="light" as |navbar|>
+    <LinkTo @route="authenticated.base.index" class="navbar-brand">
+      Tepache Mode
+    </LinkTo>
+    {{#if this.session.isAuthenticated}}
+      <BsButton
+        @type="light"
+        class="navbar-brand"
+        {{on 'click' this.invalidateSession}}
+      >
+        Logout
+      </BsButton>
+    {{/if}}
+    <navbar.toggle />
+    <navbar.content>
+      <navbar.nav as |nav|>
+        <nav.item>
+          <LinkTo @route="authenticated.base.games" class="nav-link">
+            Games
+          </LinkTo>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="authenticated.base.about" class="nav-link">
+            About
+          </nav.link-to>
+        </nav.item>
+        <nav.item>
+          <LinkTo @route="authenticated.base.terms" class="nav-link">
+            Terms
+          </LinkTo>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="authenticated.base.privacy" class="nav-link">
+            Privacy
+          </nav.link-to>
+        </nav.item>
+      </navbar.nav>
+    </navbar.content>
+  </BsNavbar>
+  <div class="container-fluid mt-5">
+    {{outlet}}
+  </div>
 </div>

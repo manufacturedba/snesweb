@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { getAnalytics } from 'firebase/analytics';
+import { action } from '@ember/object';
 
 export default class ApplicationRoute extends Route {
   @service
@@ -9,9 +10,19 @@ export default class ApplicationRoute extends Route {
   @service
   session;
 
-  async beforeModel() {
+  async model() {
     getAnalytics();
     await this.remoteConfig.fetchAndActivate();
-    await this.session.setup();
+    return await this.session.setup();
+  }
+
+  @action
+  loading(transition) {
+    // eslint-disable-next-line ember/no-controller-access-in-routes
+    const controller = this.controllerFor('application');
+    controller.set('loading', true);
+    transition.promise.finally(() => {
+      controller.set('loading', false);
+    });
   }
 }

@@ -9,11 +9,9 @@ export default class ConstructionRoute extends Route {
   router;
 
   beforeModel() {
-    return this.remoteConfig.fetchAndActivate().then(() => {
-      const live = this.remoteConfig.getBoolean('live');
-      if (live) {
-        this.router.transitionTo('authenticated.base.index');
-      }
-    });
+    const live = this.remoteConfig.getBoolean('live');
+    if (live) {
+      this.router.transitionTo('authenticated.base.index');
+    }
   }
 }

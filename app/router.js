@@ -4,6 +4,7 @@ import config from 'tepacheweb/config/environment';
 export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
+  routeAfterAuthentication = config.routeAfterAuthentication;
 }
 
 Router.map(function () {
@@ -15,6 +16,8 @@ Router.map(function () {
         this.route('live');
       });
       this.route('games');
+      this.route('privacy');
+      this.route('terms');
     });
     this.route('construction');
     // TODO - This treats 404 scenarios as valid.

@@ -1,10 +1,10 @@
-import Service from '@ember/service';
-import { service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import {
-  getRemoteConfig,
-  getValue,
-  getBoolean,
   fetchAndActivate,
+  getBoolean,
+  getRemoteConfig,
+  getString,
+  getValue,
 } from 'firebase/remote-config';
 import config from 'tepacheweb/config/environment';
 
@@ -35,5 +35,9 @@ export default class RemoteConfigService extends Service {
 
   getBoolean(key) {
     return getBoolean(this.#remoteConfig, key);
+  }
+
+  getString(key) {
+    return getString(this.#remoteConfig, key);
   }
 }
