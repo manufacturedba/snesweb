@@ -1,10 +1,10 @@
-<div class="ember-view">
-  {{page-title "Tepache Mode"}}
-
-  <div class="tepache-mode">
+<div class="ember-view h-100">
+  {{page-title 'Tepache Mode'}}
+  <div class="tepache-mode h-100">
     {{#if this.loading}}
-      <div class="spinner-border" role="status">
-      </div>        
+      <div class="container">
+        <span class="align-middle spinner-border mx-auto" role="status"></span>
+      </div>
     {{else}}
       {{outlet}}
     {{/if}}

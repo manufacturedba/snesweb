@@ -1,12 +1,17 @@
-<div class="tepache-mode-base">
-  <BsNavbar @type="light" @backgroundColor="light" as |navbar|>
+<div class="tepache-mode-base text-dark">
+  <BsNavbar @type="dark" @backgroundColor="dark" as |navbar|>
     <LinkTo @route="authenticated.base.index" class="navbar-brand">
-      Tepache Mode
+      <img
+        class="tepache-mode-base__icon"
+        alt="painting of rotting pineapple character"
+        title="Rotting pineapple"
+        src="/its-tepache-bb.png"
+      />
     </LinkTo>
-    {{#if this.session.isAuthenticated}}
+    {{#if this.identifiedUser.user}}
       <BsButton
-        @type="light"
-        class="navbar-brand"
+        @type="dark"
+        class="ml-auto"
         {{on 'click' this.invalidateSession}}
       >
         Logout
@@ -20,25 +25,40 @@
             Games
           </LinkTo>
         </nav.item>
-        <nav.item>
-          <nav.link-to @route="authenticated.base.about" class="nav-link">
-            About
-          </nav.link-to>
-        </nav.item>
-        <nav.item>
-          <LinkTo @route="authenticated.base.terms" class="nav-link">
-            Terms
-          </LinkTo>
-        </nav.item>
-        <nav.item>
-          <nav.link-to @route="authenticated.base.privacy" class="nav-link">
-            Privacy
-          </nav.link-to>
-        </nav.item>
       </navbar.nav>
     </navbar.content>
   </BsNavbar>
-  <div class="container-fluid mt-5">
+  <div class="container-fluid">
     {{outlet}}
   </div>
+  <footer class="fixed-bottom">
+    <BsNavbar
+      @type="light"
+      @backgroundColor="light"
+      @toggleBreakpoint={{null}} as |navbar|
+    >
+      <LinkTo @route="authenticated.base.index" class="navbar-brand">
+        Tepache Mode
+      </LinkTo>
+      <navbar.content>
+        <navbar.nav as |nav|>
+          <nav.item>
+            <nav.link-to @route="authenticated.base.about" class="nav-link">
+              About
+            </nav.link-to>
+          </nav.item>
+          <nav.item>
+            <LinkTo @route="authenticated.base.terms" class="nav-link">
+              Terms
+            </LinkTo>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="authenticated.base.privacy" class="nav-link">
+              Privacy
+            </nav.link-to>
+          </nav.item>
+        </navbar.nav>
+      </navbar.content>
+    </BsNavbar>
+  </footer>
 </div>

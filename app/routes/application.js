@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { getAnalytics } from 'firebase/analytics';
 import { action } from '@ember/object';
 
 export default class ApplicationRoute extends Route {
@@ -10,10 +9,12 @@ export default class ApplicationRoute extends Route {
   @service
   session;
 
-  async model() {
-    getAnalytics();
-    await this.remoteConfig.fetchAndActivate();
+  async beforeModel() {
     return await this.session.setup();
+  }
+
+  async afterModel() {
+    await this.remoteConfig.fetchAndActivate();
   }
 
   @action

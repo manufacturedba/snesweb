@@ -1,0 +1,19 @@
+{{#each @gameList as |game|}}
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{game.title}}
+      </h5>
+      <p class="card-text">
+        {{game.description}}
+      </p>
+      <LinkTo
+        @route="authenticated.base.game"
+        @model={{game.urn}}
+        class="btn btn-primary"
+      >
+        Go somewhere
+      </LinkTo>
+    </div>
+  </div>
+{{/each}}

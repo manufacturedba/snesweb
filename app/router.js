@@ -15,7 +15,10 @@ Router.map(function () {
       this.route('magwest', function () {
         this.route('live');
       });
+
       this.route('games');
+      this.route('game', { path: '/games/:game_urn' });
+
       this.route('privacy');
       this.route('terms');
     });

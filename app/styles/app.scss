@@ -2,13 +2,18 @@
 @import "ember-bootstrap/bootstrap";
 
 /* Global style covering only route level */
-body {
+html, body {
     --bs-body-bg: #4F43AE;
+    height: 100%;
     font-size: 12px;
 }
 
 .tepache-mode-base {
     color: #FFFFFF;
+}
+
+.tepache-mode-base__icon {
+    height: 60px;
 }
 
 .tepache-mode-404 {

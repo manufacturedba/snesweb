@@ -6,8 +6,19 @@ export default class BaseController extends Controller {
   @service
   session;
 
+  @service
+  router;
+
+  @service
+  identifiedUser;
+
   @action
-  invalidateSession() {
-    this.session.invalidate();
+  async invalidateSession() {
+    try {
+      await this.session.invalidate();
+      this.router.transitionTo('authenticated.index');
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
