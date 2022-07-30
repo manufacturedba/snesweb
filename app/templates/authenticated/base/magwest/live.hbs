@@ -1,12 +1,8 @@
 {{page-title 'Live'}}
-<div class="container">
-  <div class="row justify-content-md-center">
-    {{!-- <BsButton @onClick={{this.toggleRandomButton}}>
-      Toggle random button
-    </BsButton> --}}
-    <div class="col col-lg-7">
-      <TepacheGameServerController @pressedState={{this.pressedState}} />
-      {{!-- <OvenPlayer @options={{@model}} /> --}}
-    </div>
-  </div>
+<div class="container justify-content-center">
+  <TepacheGameServerController
+    class="w-100"
+    @pressedState={{this.pressedState}}
+  />
+  {{!-- <OvenPlayer @options={{@model}} /> --}}
 </div>
