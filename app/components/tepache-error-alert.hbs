@@ -1,18 +1,19 @@
-{{#if @message}}
-  <div class="alert alert-danger fade show" role="alert">
-    <strong>
-      {{@message}}
-    </strong>
-    <button
-      type="button"
+{{#if this.errorAlert.message}}
+  <div class="pt-2 alert alert-danger alert-dismissible fade show" role="alert">
+    <span>
+      {{this.errorAlert.message}}
+    </span>
+    <BsButton
+      @size="lg"
+      @type="danger"
+      @outline={{true}}
       class="close"
-      data-dismiss="alert"
       aria-label="Close"
       {{on 'click' this.dismiss}}
     >
       <span aria-hidden="true">
         ×
       </span>
-    </button>
+    </BsButton>
   </div>
 {{/if}}

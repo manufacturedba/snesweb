@@ -10,8 +10,4 @@ export default class TepacheErrorAlertComponent extends Component {
   dismiss() {
     this.errorAlert.clear();
   }
-
-  get message() {
-    return this.errorAlert.message;
-  }
 }

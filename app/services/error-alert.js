@@ -1,17 +1,12 @@
 import Service from '@ember/service';
+import { set } from '@ember/object';
 
 export default class ErrorAlertService extends Service {
-  #message;
-
   set(message = '') {
-    this.#message = message;
+    set(this, 'message', message);
   }
 
   clear() {
-    this.#message = '';
-  }
-
-  get message() {
-    return this.#message;
+    set(this, 'message', null);
   }
 }
