@@ -1,11 +1,16 @@
 @use 'imports';
 @import "ember-bootstrap/bootstrap";
 
+
+:root {
+    --bs-body-font-size: 20px;
+}
+
+
 /* Global style covering only route level */
 html, body {
     --bs-body-bg: #4F43AE;
     height: 100%;
-    font-size: 12px;
 }
 
 .tepache-mode-base {
@@ -37,7 +42,6 @@ html, body {
     grid-area: a;
     align-self: center;
     justify-self: center;
-    font-size: 2em;
 }
 
 .tepache-mode-construction__content {

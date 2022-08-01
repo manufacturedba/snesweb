@@ -24,7 +24,7 @@ export default class AuthenticatedBaseMagwestLiveController extends Controller {
 
     setInterval(() => {
       run(() => {
-        this.toggleRandomButton();
+        // this.toggleRandomButton();
       });
     }, 500);
   }

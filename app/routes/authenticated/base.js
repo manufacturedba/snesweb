@@ -13,6 +13,9 @@ export default class BaseRoute extends Route {
   @service
   store;
 
+  @service
+  errorAlert;
+
   beforeModel(transition) {
     this.session.requireAuthentication(
       transition,
@@ -35,6 +38,7 @@ export default class BaseRoute extends Route {
   @action
   error(error) {
     console.error(error);
+    this.errorAlert.set('Unrecoverable error has occurred');
     this.router.replaceWith('authenticated.construction');
   }
 }
