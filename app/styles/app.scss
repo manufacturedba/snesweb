@@ -1,10 +1,12 @@
 @use 'imports';
 @import "ember-bootstrap/bootstrap";
+@import 'bootstrap-backport';
 
 
 :root {
     --bs-body-font-size: 20px;
 }
+
 
 
 /* Global style covering only route level */
