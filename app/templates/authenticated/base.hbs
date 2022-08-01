@@ -37,7 +37,10 @@
       @backgroundColor="light"
       @toggleBreakpoint={{null}} as |navbar|
     >
-      <LinkTo @route="authenticated.base.index" class="navbar-brand">
+      <LinkTo
+        @route="authenticated.base.index"
+        class="navbar-brand d-none d-sm-block"
+      >
         Tepache Mode
       </LinkTo>
       <navbar.content>
