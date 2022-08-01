@@ -1,5 +1,6 @@
 {
   "live": "false",
+  "magwest_urn": "urn:tepache-game:73431",
   "ovenplayer_config": {
     "image": "https://stream.site.com/stream.jpg",
     "sources": [

@@ -1,1 +1,29 @@
-{{yield}}
+<div class="jumbotron jumbotron-fluid text-white p-4 text-center">
+  <h2 class="display-2">
+    MAGWEST 2022
+  </h2>
+  <p class="lead">
+    Coming to San Jose August 19 - 21st
+  </p>
+  <hr class="my-4" />
+  <p class="display-4 text-warning">
+    Expect live play then!
+  </p>
+  <div class="mt-4">
+    <div class="d-inline mx-auto">
+      {{#unless @gameModel}}
+        <BsTooltip @placement="top">
+          Disabled
+        </BsTooltip>
+      {{/unless}}
+      <BsButton
+        @type="secondary"
+        @size="lg"
+        disabled={{if @gameModel false true}}
+        @onClick={{this.transitionToMagwest}}
+      >
+        PLAY
+      </BsButton>
+    </div>
+  </div>
+</div>
