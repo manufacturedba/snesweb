@@ -16,6 +16,12 @@ export default class BaseRoute extends Route {
   errorAlert;
 
   beforeModel(transition) {
+    const live = this.remoteConfig.getBoolean('live');
+
+    if (!live) {
+      this.router.transitionTo('authenticated.construction');
+    }
+
     this.session.requireAuthentication(
       transition,
       'authenticated.construction'
