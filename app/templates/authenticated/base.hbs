@@ -1,4 +1,4 @@
-<div class="tepache-mode-base h-100 text-dark">
+<div class="tepache-mode-base text-dark mb-5">
   <BsNavbar @type="dark" @backgroundColor="dark" as |navbar|>
     <LinkTo @route="authenticated.base.index" class="navbar-brand">
       <img
@@ -28,10 +28,10 @@
       </navbar.nav>
     </navbar.content>
   </BsNavbar>
-  <div class="container-fluid">
+  <main class="container-fluid mb-5 pb-5">
     {{outlet}}
-  </div>
-  <footer class="fixed-bottom">
+  </main>
+  <footer class="footer fixed-bottom">
     <BsNavbar
       @type="light"
       @backgroundColor="light"
