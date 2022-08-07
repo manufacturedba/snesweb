@@ -1,6 +1,8 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
+import { getAnalytics } from 'firebase/analytics';
+import config from 'tepacheweb/config/environment';
 
 export default class ApplicationRoute extends Route {
   @service
@@ -9,7 +11,11 @@ export default class ApplicationRoute extends Route {
   @service
   session;
 
+  @service
+  router;
+
   async beforeModel() {
+    getAnalytics();
     return await this.session.setup();
   }
 
@@ -25,5 +31,15 @@ export default class ApplicationRoute extends Route {
     transition.promise.finally(() => {
       controller.set('loading', false);
     });
+  }
+
+  @action
+  error(error) {
+    console.error(error);
+    this.errorAlert.set('Unrecoverable error has occurred');
+
+    if (config.redirectAfterError) {
+      this.router.replaceWith('authenticated.construction');
+    }
   }
 }
