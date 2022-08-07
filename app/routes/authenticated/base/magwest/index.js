@@ -31,7 +31,6 @@ export default class MagwestRoute extends Route {
         );
       },
     });
-
     return gameSessions.firstObject;
   }
 }

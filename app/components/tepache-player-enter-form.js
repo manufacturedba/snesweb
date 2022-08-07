@@ -9,8 +9,9 @@ export default class TepachePlayerEnterFormComponent extends Component {
   get playerSession() {
     return new TrackedAsyncData(
       this.store.query('tepache-player-session', {
-        gameSessionUrn: this.args.model.urn,
-      })
+        gameSessionUrn: this.args.gameSessionModel.urn,
+      }),
+      this
     );
   }
 }
