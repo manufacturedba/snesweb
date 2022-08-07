@@ -3,7 +3,6 @@ import { service } from '@ember/service';
 import {
   query,
   where,
-  limit,
   orderBy,
 } from 'ember-cloud-firestore-adapter/firebase/firestore';
 
@@ -16,13 +15,6 @@ export default class BaseIndexRoute extends Route {
 
   @service
   router;
-
-  beforeModel() {
-    const live = this.remoteConfig.getBoolean('live');
-    if (!live) {
-      this.router.transitionTo('authenticated.construction');
-    }
-  }
 
   async model() {
     const magWestGameSessionUrn = this.remoteConfig.getString(

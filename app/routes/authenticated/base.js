@@ -15,6 +15,9 @@ export default class BaseRoute extends Route {
   @service
   errorAlert;
 
+  @service
+  remoteConfig;
+
   beforeModel(transition) {
     const live = this.remoteConfig.getBoolean('live');
 
