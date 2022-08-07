@@ -14,6 +14,9 @@ export default class ApplicationRoute extends Route {
   @service
   router;
 
+  @service
+  errorAlert;
+
   async beforeModel() {
     getAnalytics();
     return await this.session.setup();
