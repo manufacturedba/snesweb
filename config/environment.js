@@ -4,6 +4,7 @@ const remoteConfig = require('../remote_config_defaults.json');
 
 module.exports = function (environment) {
   let ENV = {
+    redirectAfterError: false, // prevent redirect after error
     routeAfterAuthentication: 'authenticated.base',
     modulePrefix: 'tepacheweb',
     environment,
@@ -43,6 +44,11 @@ module.exports = function (environment) {
       },
     },
 
+    // Configuration for requests
+    'platform-adapter': {
+      host: 'http://localhost:7777',
+    },
+
     APP: {
       remoteConfig,
     },
@@ -69,6 +75,9 @@ module.exports = function (environment) {
   if (environment === 'production') {
     ENV['ember-cloud-firestore-adapter'].firestore.emulator = null;
     ENV['ember-cloud-firestore-adapter'].auth.emulator = null;
+    ENV['platform-adapter'].host = process.ENV.API_PLATFORM_HOST;
+
+    ENV.redirectAfterError = true;
   }
 
   return ENV;
