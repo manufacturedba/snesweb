@@ -11,15 +11,15 @@
   </p>
   <div class="mt-4">
     <div class="d-inline mx-auto">
-      {{#unless @gameModel}}
+      {{#if this.isDisabled}}
         <BsTooltip @placement="top">
           Disabled
         </BsTooltip>
-      {{/unless}}
+      {{/if}}
       <BsButton
         @type="secondary"
         @size="lg"
-        disabled={{if @gameModel false true}}
+        disabled={{this.isDisabled}}
         @onClick={{this.transitionToMagwest}}
       >
         PLAY

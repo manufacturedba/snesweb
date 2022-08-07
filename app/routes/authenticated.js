@@ -17,6 +17,7 @@ export default class AuthenticatedRoute extends Route {
           signInAnonymously(auth)
         );
       } catch (e) {
+        // Session service does not allow route configuration
         if (e?.message?.includes('The route index was not found')) {
           this.router.transitionTo('authenticated.base');
         }
@@ -24,12 +25,11 @@ export default class AuthenticatedRoute extends Route {
     }
   }
 
-  @action
-  error(error, transition) {
-    // eslint-disable-next-line ember/no-controller-access-in-routes
-    debugger;
-    const controller = this.controllerFor('application');
-    controller.set('error', error);
-    transition.abort();
-  }
+  // @action
+  // error(error, transition) {
+  //   // eslint-disable-next-line ember/no-controller-access-in-routes
+  //   const controller = this.controllerFor('application');
+  //   controller.set('error', error);
+  //   transition.abort();
+  // }
 }

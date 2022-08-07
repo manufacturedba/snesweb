@@ -1,0 +1,19 @@
+<div class="bg-white p-4 shadow-lg">
+  <BsForm
+    @formLayout="horizontal"
+    @model={{@model}}
+    @onSubmit={{this.submit}} as |form|
+  >
+    <form.element
+      @size="lg"
+      @controlType="text"
+      @label="Name"
+      @property="name" as |el|
+    >
+      <el.control placeholder="Anonymous" />
+    </form.element>
+    <form.submitButton>
+      Play
+    </form.submitButton>
+  </BsForm>
+</div>

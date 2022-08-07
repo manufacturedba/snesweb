@@ -4,6 +4,7 @@ import {
   query,
   where,
   limit,
+  orderBy,
 } from 'ember-cloud-firestore-adapter/firebase/firestore';
 
 export default class BaseIndexRoute extends Route {
@@ -13,20 +14,30 @@ export default class BaseIndexRoute extends Route {
   @service
   remoteConfig;
 
-  async model() {
-    const magWestUrn = this.remoteConfig.getString('magwest_urn');
-    const live = this.remoteConfig.getBoolean('live');
+  @service
+  router;
 
-    if (live && magWestUrn) {
-      const games = await this.store.query('tepache-game', {
-        queryId: magWestUrn,
+  beforeModel() {
+    const live = this.remoteConfig.getBoolean('live');
+    if (!live) {
+      this.router.transitionTo('authenticated.construction');
+    }
+  }
+
+  async model() {
+    const magWestGameSessionUrn = this.remoteConfig.getString(
+      'magwest_game_session_urn'
+    );
+
+    if (magWestGameSessionUrn) {
+      const games = await this.store.query('tepache-game-session', {
+        isRealtime: true,
 
         filter(reference) {
           return query(
             reference,
-            where('active', '==', true),
-            where('urn', '==', magWestUrn),
-            limit(1)
+            where('urn', '==', magWestGameSessionUrn),
+            orderBy('expiresAt', 'desc')
           );
         },
       });

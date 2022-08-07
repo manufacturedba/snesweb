@@ -1,2 +1,7 @@
-{{page-title "Magwest"}}
-{{outlet}}
+{{page-title 'Magwest'}}
+<div class="container justify-content-center mt-5">
+  <TepachePlayerEnterForm
+    @gameSessionModel={{@model}}
+    @onSubmit={{this.submit}}
+  />
+</div>

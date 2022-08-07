@@ -20,7 +20,7 @@ export default class BaseGamesRoute extends Route {
   }
 
   @action
-  error(error, transition) {
+  error(error) {
     console.error('Error in BaseGamesRoute', error);
   }
 }
