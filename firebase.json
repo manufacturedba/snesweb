@@ -1,16 +1,25 @@
 {
   "emulators": {
     "firestore": {
-      "port": 8080
+      "port": 8080,
+      "host": "0.0.0.0"
     },
     "ui": {
       "enabled": true
     },
     "auth": {
-      "port": 9099
+      "port": 9099,
+      "host": "0.0.0.0"
+    },
+    "storage": {
+      "port": 9199,
+      "host": "0.0.0.0"
     }
   },
   "remoteconfig": {
     "template": "remote_config_defaults.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
