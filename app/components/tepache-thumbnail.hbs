@@ -1,0 +1,16 @@
+{{#if @thumbnail}}
+  <img
+    src={{@logo}}
+    alt="..."
+    decoding="async"
+    loading="lazy"
+    class="img-thumbnail"
+  />
+{{else}}
+  <img
+    src="/its-tepache-bb.png"
+    alt="Pineapple character"
+    decoding="sync"
+    class="img-thumbnail"
+  />
+{{/if}}
