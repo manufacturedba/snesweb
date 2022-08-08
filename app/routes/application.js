@@ -22,11 +22,8 @@ export default class ApplicationRoute extends Route {
 
   async beforeModel() {
     setAnalyticsCollectionEnabled(getAnalytics(), true);
-    return await this.session.setup();
-  }
-
-  async afterModel() {
-    await this.remoteConfig.fetchAndActivate();
+    await this.session.setup();
+    return await this.remoteConfig.fetchAndActivate();
   }
 
   @action
