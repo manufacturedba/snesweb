@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { signInAnonymously } from 'ember-cloud-firestore-adapter/firebase/auth';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 export default class AuthenticatedRoute extends Route {
   @service
@@ -28,6 +29,8 @@ export default class AuthenticatedRoute extends Route {
   }
 
   async afterModel() {
+    const analytics = getAnalytics();
     await this.remoteConfig.fetchAndActivate();
+    logEvent(analytics, 'config_fetched');
   }
 }
