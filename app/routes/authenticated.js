@@ -11,7 +11,9 @@ export default class AuthenticatedRoute extends Route {
   router;
 
   async beforeModel() {
+    const analytics = getAnalytics();
     if (!this.session.isAuthenticated) {
+      setUserId(analytics, 'unauthenticated');
       try {
         await this.session.authenticate('authenticator:firebase', (auth) =>
           signInAnonymously(auth)
@@ -24,7 +26,7 @@ export default class AuthenticatedRoute extends Route {
       }
     } else {
       setUserId(
-        getAnalytics(),
+        analytics,
         this.session?.data?.authenticated?.user?.uid || 'NO_UID'
       );
     }
