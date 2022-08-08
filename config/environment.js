@@ -21,7 +21,7 @@ module.exports = function (environment) {
     'ember-cloud-firestore-adapter': {
       firebaseConfig: {
         apiKey: 'AIzaSyDiKmk72f0aOl3Dw0xK9ehK1YyQhzmHxIE',
-        authDomain: 'tepache-mode.firebaseapp.com',
+        authDomain: 'auth.tepachemode.com',
         projectId: 'tepache-mode',
         storageBucket: 'tepache-mode.appspot.com',
         messagingSenderId: '135682984531',

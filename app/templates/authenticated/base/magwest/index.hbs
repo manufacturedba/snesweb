@@ -1,7 +1,8 @@
 {{page-title 'Magwest'}}
 <div class="container justify-content-center mt-5">
   <TepachePlayerEnterForm
-    @gameSessionModel={{@model}}
+    @playerSessionModel={{@model.playerSession}}
+    @gameSessionModel={{@model.gameSession}}
     @onSubmit={{this.submit}}
   />
 </div>

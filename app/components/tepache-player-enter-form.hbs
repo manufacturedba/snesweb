@@ -1,7 +1,7 @@
 <div class="bg-white p-4 shadow-lg">
   <BsForm
     @formLayout="horizontal"
-    @model={{@model}}
+    @model={{this.playerSessionModel}}
     @onSubmit={{this.submit}} as |form|
   >
     <form.element
@@ -12,7 +12,7 @@
     >
       <el.control placeholder="Anonymous" />
     </form.element>
-    <form.submitButton>
+    <form.submitButton @size="lg">
       Play
     </form.submitButton>
   </BsForm>

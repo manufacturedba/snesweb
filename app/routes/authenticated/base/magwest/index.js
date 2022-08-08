@@ -1,11 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import {
-  query,
-  where,
-  limit,
-  orderBy,
-} from 'ember-cloud-firestore-adapter/firebase/firestore';
+import { hash } from 'rsvp';
 
 export default class MagwestRoute extends Route {
   @service
@@ -19,18 +14,13 @@ export default class MagwestRoute extends Route {
       'magwest_game_session_urn'
     );
 
-    const gameSessions = await this.store.query('tepache-game-session', {
-      isRealtime: true,
-
-      filter(reference) {
-        return query(
-          reference,
-          where('urn', '==', magWestGameSessionUrn),
-          orderBy('expiresAt', 'desc'),
-          limit(1)
-        );
-      },
+    const playerSessions = await this.store.query('tepache-player-session', {
+      gameSessionUrn: magWestGameSessionUrn,
     });
-    return gameSessions.firstObject;
+
+    return hash({
+      playerSession: playerSessions.firstObject,
+      gameSession: this.modelFor('authenticated.base.index'),
+    });
   }
 }
