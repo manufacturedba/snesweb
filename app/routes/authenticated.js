@@ -13,7 +13,6 @@ export default class AuthenticatedRoute extends Route {
   remoteConfig;
 
   async beforeModel() {
-    await this.remoteConfig.fetchAndActivate();
     if (!this.session.isAuthenticated) {
       try {
         await this.session.authenticate('authenticator:firebase', (auth) =>
@@ -26,5 +25,9 @@ export default class AuthenticatedRoute extends Route {
         }
       }
     }
+  }
+
+  async afterModel() {
+    await this.remoteConfig.fetchAndActivate();
   }
 }

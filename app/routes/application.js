@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { getAnalytics, setUserId } from 'firebase/analytics';
+import { getAnalytics, setUserId, logEvent } from 'firebase/analytics';
 import config from 'tepacheweb/config/environment';
 
 export default class ApplicationRoute extends Route {
@@ -26,6 +26,8 @@ export default class ApplicationRoute extends Route {
     } else {
       setUserId(analytics, '');
     }
+
+    logEvent(analytics, 'app_start');
   }
 
   @action
