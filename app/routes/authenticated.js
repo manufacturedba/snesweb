@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { signInAnonymously } from 'ember-cloud-firestore-adapter/firebase/auth';
+import { setUserId, getAnalytics } from 'firebase/analytics';
 
 export default class AuthenticatedRoute extends Route {
   @service
@@ -10,7 +11,9 @@ export default class AuthenticatedRoute extends Route {
   router;
 
   async beforeModel() {
+    const analytics = getAnalytics();
     if (!this.session.isAuthenticated) {
+      setUserId(analytics, '');
       try {
         await this.session.authenticate('authenticator:firebase', (auth) =>
           signInAnonymously(auth)
@@ -21,6 +24,11 @@ export default class AuthenticatedRoute extends Route {
           this.router.transitionTo('authenticated.base.index');
         }
       }
+    } else {
+      setUserId(
+        analytics,
+        this.session?.data?.authenticated?.user?.uid || 'NO_UID'
+      );
     }
   }
 }
