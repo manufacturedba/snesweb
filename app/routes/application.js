@@ -6,9 +6,6 @@ import config from 'tepacheweb/config/environment';
 
 export default class ApplicationRoute extends Route {
   @service
-  remoteConfig;
-
-  @service
   session;
 
   @service
@@ -29,8 +26,6 @@ export default class ApplicationRoute extends Route {
     } else {
       setUserId(analytics, '');
     }
-
-    return await this.remoteConfig.fetchAndActivate();
   }
 
   @action

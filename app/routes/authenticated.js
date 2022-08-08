@@ -9,7 +9,11 @@ export default class AuthenticatedRoute extends Route {
   @service
   router;
 
+  @service
+  remoteConfig;
+
   async beforeModel() {
+    await this.remoteConfig.fetchAndActivate();
     if (!this.session.isAuthenticated) {
       try {
         await this.session.authenticate('authenticator:firebase', (auth) =>

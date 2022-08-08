@@ -21,7 +21,6 @@ export default class RemoteConfigService extends Service {
     remoteConfig.defaultConfig = config.APP.remoteConfig;
     remoteConfig.settings.minimumFetchIntervalMillis = 3600000; // 1 hour
 
-    fetchAndActivate(remoteConfig);
     this.#remoteConfig = remoteConfig;
   }
 
