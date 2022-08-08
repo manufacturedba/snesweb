@@ -1,10 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import {
-  getAnalytics,
-  setAnalyticsCollectionEnabled,
-} from 'firebase/analytics';
+import { getAnalytics } from 'firebase/analytics';
 import config from 'tepacheweb/config/environment';
 
 export default class ApplicationRoute extends Route {
@@ -21,7 +18,7 @@ export default class ApplicationRoute extends Route {
   errorAlert;
 
   async beforeModel() {
-    setAnalyticsCollectionEnabled(getAnalytics(), true);
+    getAnalytics();
     await this.session.setup();
     return await this.remoteConfig.fetchAndActivate();
   }
