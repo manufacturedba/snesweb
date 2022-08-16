@@ -1,0 +1,53 @@
+{{#if (is-active @gameSessionModel.state)}}
+  <div class="d-none d-md-block">
+    <OvenPlayer @options={{@ovenPlayerConfig}} />
+  </div>
+  <TepacheGameServerController
+    class="w-100"
+    @pressedState={{this.pressedState}}
+  />
+  {{!-- <TepacheGameClientController
+    class="w-25 h-25"
+    @pressedState={{this.pressedState}}
+  /> --}}
+  {{!-- <OvenPlayer @options={{@model}} /> --}}
+{{/if}}
+{{#if (is-pending @gameSessionModel.state)}}
+  <div class="jumbotron jumbotron-fluid bg-dark text-light">
+    <div class="container text-center p-5">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="display-4">
+            Game will start shortly
+          </h2>
+        </div>
+        <div class="col-12 p-5">
+          <span
+            class="align-middle spinner-grow mx-auto text-primary"
+            role="status"
+          ></span>
+        </div>
+        <div class="col-12 p-5"></div>
+      </div>
+      <br />
+    </div>
+    <br class="mt-5" />
+  </div>
+{{/if}}
+{{#if (is-paused @gameSessionModel.state)}}
+  <div class="jumbotron jumbotron-fluid bg-dark text-light">
+    <div class="container text-center p-5">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="display-4">
+            {{capitalize 'paused'}}
+          </h2>
+        </div>
+        <div class="col-12 p-5"></div>
+        <div class="col-12 p-5"></div>
+      </div>
+      <br />
+    </div>
+    <br class="mt-5" />
+  </div>
+{{/if}}

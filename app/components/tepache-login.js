@@ -6,6 +6,7 @@ import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
+import { setUserId, getAnalytics, logEvent } from 'firebase/analytics';
 
 export default class TepacheLoginComponent extends Component {
   @service
@@ -27,6 +28,10 @@ export default class TepacheLoginComponent extends Component {
 
       callbacks: {
         signInSuccessWithAuthResult: (authResult) => {
+          const analytics = getAnalytics();
+          setUserId(analytics, authResult?.user?.uid);
+          logEvent(analytics, 'login');
+
           this.session
             .authenticate('authenticator:firebase', () => {
               return authResult;

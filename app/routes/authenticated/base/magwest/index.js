@@ -13,23 +13,19 @@ export default class MagwestRoute extends Route {
   router;
 
   async model() {
-    const gameSessionModel = this.modelFor('authenticated.base');
+    const gameSession = this.modelFor('authenticated.base');
 
-    if (!gameSessionModel) {
+    if (!gameSession) {
       return this.router.transitionTo('authenticated.base');
     }
 
-    const magWestGameSessionUrn = await this.remoteConfig.getString(
-      'magwest_game_session_urn'
-    );
-
     const playerSessions = await this.store.query('tepache-player-session', {
-      gameSessionUrn: magWestGameSessionUrn,
+      gameSessionUrn: gameSession.urn,
     });
 
     return hash({
       playerSession: playerSessions.firstObject,
-      gameSession: this.modelFor('authenticated.base.index'),
+      gameSession,
     });
   }
 }

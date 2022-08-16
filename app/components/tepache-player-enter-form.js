@@ -6,10 +6,14 @@ export default class TepachePlayerEnterFormComponent extends Component {
   @service
   store;
 
+  @service
+  router;
+
   #fallbackPlayerSession;
 
   constructor() {
     super(...arguments);
+
     this.#fallbackPlayerSession = this.store.createRecord(
       'tepache-player-session',
       {
@@ -20,7 +24,9 @@ export default class TepachePlayerEnterFormComponent extends Component {
 
   @action
   async submit() {
-    return await this.playerSessionModel.save();
+    await this.playerSessionModel.save();
+
+    return this.router.transitionTo('authenticated.base.magwest.live');
   }
 
   /**

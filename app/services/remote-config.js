@@ -18,8 +18,9 @@ export default class RemoteConfigService extends Service {
     super(...arguments);
     const remoteConfig = getRemoteConfig();
 
-    remoteConfig.defaultConfig = config.APP.remoteConfig;
-    remoteConfig.settings.minimumFetchIntervalMillis = 3600000; // 1 hour
+    remoteConfig.defaultConfig = config.APP.remoteConfig.defaultConfig;
+    remoteConfig.settings.minimumFetchIntervalMillis =
+      config.APP.remoteConfig.settings.minimumFetchIntervalMillis;
 
     this.#remoteConfig = remoteConfig;
   }
