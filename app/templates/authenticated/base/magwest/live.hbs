@@ -1,8 +1,7 @@
 {{page-title 'Live'}}
-<div class="container justify-content-center">
-  <TepacheLiveScreen
-    @gameSessionModel={{@model.gameSession}}
-    @playerSessionModel={{@model.playerSession}}
-    @ovenPlayerConfig={{@model.ovenPlayerConfig}}
-  />
-</div>
+<TepacheLiveScreen
+  @gameSessionModel={{@model.gameSession}}
+  @playerSessionModel={{@model.playerSession}}
+  @ovenPlayerConfig={{@model.ovenPlayerConfig}}
+  @hardwareInputCollection={{@model.hardwareInput}}
+/>

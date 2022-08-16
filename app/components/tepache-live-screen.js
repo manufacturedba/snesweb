@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
-
+import { Timestamp } from 'firebase/firestore';
 const initialPressedState = {
   a: false,
   b: false,
@@ -17,37 +17,21 @@ const initialPressedState = {
 };
 
 export default class TepacheLiveScreenComponent extends Component {
-  @tracked
-  pressedState = { ...initialPressedState };
+  get pressedState() {
+    if (this.currentPressedButton) {
+      return {
+        ...initialPressedState,
+        [this.currentPressedButton.type.toLowerCase()]: true,
+      };
+    }
 
-  constructor() {
-    super(...arguments);
-
-    setInterval(() => {
-      run(() => {
-        // this.toggleRandomButton();
-      });
-    }, 500);
+    return initialPressedState;
   }
 
-  @action
-  toggleRandomButton() {
-    const randomIndex = Math.floor(
-      Math.random() * Object.keys(this.pressedState).length
-    );
-
-    const randomButton = Object.keys(this.pressedState)[randomIndex];
-    this.pressedState = {
-      ...initialPressedState,
-      [randomButton]: true,
-    };
-    console.log(
-      'toggleRandomButton',
-      randomButton,
-      this.pressedState[randomButton]
-    );
-
-    // set(this, `pressedState.${randomButton}`, !this.pressedState[randomButton]);
+  get currentPressedButton() {
+    return this.args.hardwareInputCollection.find((hardwareInputModel) => {
+      return Timestamp.toDate(hardwareInputModel).getTime() > Date.now() - 6000;
+    });
   }
 
   get isPending() {
