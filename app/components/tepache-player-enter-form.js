@@ -1,8 +1,6 @@
 import Component from '@glimmer/component';
-import { TrackedAsyncData } from 'ember-async-data';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { cached } from '@glimmer/tracking';
 
 export default class TepachePlayerEnterFormComponent extends Component {
   @service
@@ -23,19 +21,6 @@ export default class TepachePlayerEnterFormComponent extends Component {
   @action
   async submit() {
     return await this.playerSessionModel.save();
-  }
-
-  /**
-   * Possible session connected to the player.
-   */
-  @cached
-  get playerSessionsAsyncData() {
-    return new TrackedAsyncData(
-      this.store.query('tepache-player-session', {
-        gameSessionUrn: this.args.gameSessionModel.urn,
-      }),
-      this
-    );
   }
 
   /**
