@@ -1,6 +1,5 @@
-<div
-    {{did-insert this.createPlayer}}
-    {{will-destroy this.remove}}
->
+<div {{did-insert this.createPlayer}} {{will-destroy this.remove}}>
+  {{#if @options}}
     <div class="ovenplayer__instance-wrapper"></div>
+  {{/if}}
 </div>
