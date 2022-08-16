@@ -11,6 +11,9 @@ const db = getFirestore();
 (async () => {
   try {
     const gameUrn = `urn:tepache-game:${faker.random.numeric(5)}`;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const expiresAt = Timestamp.fromDate(tomorrow);
 
     await db.collection('tepacheGames').add({
       urn: gameUrn,
@@ -36,7 +39,7 @@ const db = getFirestore();
         },
       ],
       playMode: 'ADMIN_CONTROL',
-      expiresAt: Timestamp.now(),
+      expiresAt,
       createdAt: Timestamp.now(),
     });
 
