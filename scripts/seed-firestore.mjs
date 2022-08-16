@@ -10,14 +10,34 @@ const db = getFirestore();
 
 (async () => {
   try {
+    const gameUrn = `urn:tepache-game:${faker.random.numeric(5)}`;
+
     await db.collection('tepacheGames').add({
-      urn: `urn:tepache-game:${faker.random.numeric(5)}`,
+      urn: gameUrn,
       title: faker.lorem.word(),
       description: faker.lorem.sentence(),
       active: faker.datatype.boolean(),
       createdAt: Timestamp.now(),
       logo: faker.internet.avatar(),
       playModes: ['TEAM', 'ADMIN_CONTROL'],
+    });
+
+    await db.collection('tepacheGameSessions').add({
+      urn: `urn:tepache-game-session:${faker.random.numeric(5)}`,
+      name: faker.lorem.word(),
+      description: faker.lorem.sentence(),
+      logo: faker.internet.avatar(),
+      gameUrn,
+      state: 'ACTIVE',
+      stateHistory: [
+        {
+          state: 'ACTIVE',
+          at: Timestamp.now(),
+        },
+      ],
+      playMode: 'ADMIN_CONTROL',
+      expiresAt: Timestamp.now(),
+      createdAt: Timestamp.now(),
     });
 
     console.log('Successfully seeded firestore emulation');
