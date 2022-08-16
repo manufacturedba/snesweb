@@ -13,10 +13,10 @@ export default class MagwestRoute extends Route {
   router;
 
   async model() {
-    const gameSessionModel = this.modelFor('authenticated.base.index');
+    const gameSessionModel = this.modelFor('authenticated.base');
 
     if (!gameSessionModel) {
-      return this.router.transitionTo('authenticated.base.index');
+      return this.router.transitionTo('authenticated.base');
     }
 
     const magWestGameSessionUrn = await this.remoteConfig.getString(
