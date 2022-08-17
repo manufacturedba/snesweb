@@ -49,6 +49,10 @@ module.exports = function (environment) {
       host: 'http://localhost:7777',
     },
 
+    'hapi-nes': {
+      host: 'ws://localhost:7777',
+    },
+
     APP: {
       remoteConfig: {
         defaultConfig: remoteConfig,
