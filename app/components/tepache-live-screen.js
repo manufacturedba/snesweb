@@ -52,4 +52,19 @@ export default class TepacheLiveScreenComponent extends Component {
 
     return JSON.parse(ovenPlayerConfigJSON);
   }
+
+  get miniOvenPlayerConfig() {
+    const ovenPlayerConfigJSON = getValue(
+      getRemoteConfig(this.firebase),
+      'ovenplayer_config'
+    ).asString();
+
+    const defaultConfig = JSON.parse(ovenPlayerConfigJSON);
+    return {
+      ...defaultConfig,
+      autoStart: false,
+      controls: true,
+      expandFullScreenUI: true,
+    };
+  }
 }

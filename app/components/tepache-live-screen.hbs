@@ -1,4 +1,4 @@
-<div class="container justify-content-center">
+<div class="tepache-live-screen container justify-content-center">
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
       <div class="col-6 d-none d-md-block">
@@ -6,18 +6,35 @@
           <OvenPlayer @options={{this.ovenPlayerConfig}} />
         {{/if}}
       </div>
-      <div class="col-6">
+      <div class="col-6 d-none d-md-block">
         <TepacheGameServerController
           class="w-100"
           @pressedState={{this.pressedState}}
         />
       </div>
     </div>
-    <div class="row">
-      <TepacheGameClientController
-        class="w-25 h-25"
-        @gameSessionModel={{@gameSessionModel}}
-      />
+    <div class="row tepache-live-screen__client-controller-container">
+      <div class="col-12 d-none d-sm-block">
+        <TepacheGameClientController
+          class="w-100"
+          @gameSessionModel={{@gameSessionModel}}
+        />
+      </div>
+      <div class="col-12 d-block d-sm-none">
+        {{#if this.ovenPlayerConfig}}
+          <OvenPlayer @options={{this.miniOvenPlayerConfig}} />
+        {{/if}}
+        <div class="card mt-4 bg-dark text-light">
+          <div class="card-body">
+            <h5 class="display-6 card-title">
+              Rotate your phone to get a controller!
+            </h5>
+            <p class="card-text text-warning">
+              Just be warned that you can't view video at the same time 😭
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   {{/if}}
   {{#if (is-pending @gameSessionModel.state)}}
