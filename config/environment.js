@@ -53,6 +53,13 @@ module.exports = function (environment) {
       host: 'ws://localhost:7777',
     },
 
+    storage: {
+      emulator: {
+        host: 'localhost',
+        port: 9199,
+      },
+    },
+
     APP: {
       remoteConfig: {
         defaultConfig: remoteConfig,
