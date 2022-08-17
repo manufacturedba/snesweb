@@ -13,10 +13,10 @@ export default class MagwestRoute extends Route {
   router;
 
   async model() {
-    const gameSession = this.modelFor('authenticated.base');
+    const gameSession = this.modelFor('authenticated.base.index');
 
     if (!gameSession) {
-      return this.router.transitionTo('authenticated.base');
+      return this.router.transitionTo('authenticated.base.index');
     }
 
     const playerSessions = await this.store.query('tepache-player-session', {

@@ -92,6 +92,8 @@ module.exports = function (environment) {
     ENV['ember-cloud-firestore-adapter'].firestore.emulator = null;
     ENV['ember-cloud-firestore-adapter'].auth.emulator = null;
     ENV['platform-adapter'].host = process.env.API_PLATFORM_HOST;
+    ENV['hapi-nes'].host = process.env.API_HAPI_NES_HOST;
+
     ENV.APP.remoteConfig.settings.minimumFetchIntervalMillis = 3600000; // 1 hour
 
     ENV.redirectAfterError = true;
