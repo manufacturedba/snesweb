@@ -1,11 +1,18 @@
 {{#if @thumbnail}}
-  <img
-    src={{@logo}}
-    alt="..."
-    decoding="async"
-    loading="lazy"
-    class="tepache-thumbnail__image img-thumbnail"
-  />
+  {{#if this.imageUrl.isResolved}}
+    <img
+      src={{this.imageUrl.value}}
+      alt="..."
+      decoding="async"
+      loading="lazy"
+      class="tepache-thumbnail__image img-thumbnail"
+    />
+  {{/if}}
+  {{#if this.imageUrl.isPending}}
+    <div class="tepache-thumbnail__image img-thumbnail">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+  {{/if}}
 {{else}}
   <img
     class="tepache-thumbnail__image tepache-thumbnail__image--ghost"
