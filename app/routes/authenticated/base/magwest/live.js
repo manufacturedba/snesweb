@@ -15,6 +15,22 @@ export default class MagwestLiveRoute extends Route {
   @service
   store;
 
+  @service
+  router;
+
+  async beforeModel() {
+    const gameSession = this.modelFor('authenticated.base');
+    const playerSession = this.modelFor('authenticated.base.magwest');
+
+    if (!gameSession) {
+      return this.router.transitionTo('authenticated.base');
+    }
+
+    if (!playerSession) {
+      return this.router.transitionTo('authenticated.base.magwest');
+    }
+  }
+
   async model() {
     const gameSession = this.modelFor('authenticated.base');
     const playerSession = this.modelFor('authenticated.base.magwest');

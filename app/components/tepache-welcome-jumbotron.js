@@ -21,7 +21,7 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
       return true;
     }
 
-    if (!this.gameModel) {
+    if (!this.args.gameSessionModel) {
       return true;
     }
 

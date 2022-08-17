@@ -1,6 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
+import { BUTTON_INTERACTIONS } from '../constants';
 
 const initialPressedState = {
   a: false,
@@ -23,7 +24,7 @@ export default class TepacheLiveScreenComponent extends Component {
   firebase;
 
   get pressedState() {
-    if (this.currentPressedButton) {
+    if (this.currentPressedButton?.type === BUTTON_INTERACTIONS.BUTTON_PRESS) {
       return {
         ...initialPressedState,
         [this.currentPressedButton.button.toLowerCase()]: true,
