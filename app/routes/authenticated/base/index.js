@@ -4,6 +4,7 @@ import {
   query,
   where,
   orderBy,
+  serverTimestamp,
 } from 'ember-cloud-firestore-adapter/firebase/firestore';
 
 export default class BaseIndexRoute extends Route {
@@ -29,6 +30,7 @@ export default class BaseIndexRoute extends Route {
           return query(
             reference,
             where('urn', '==', magWestGameSessionUrn),
+            where('expiresAt', '>', new Date()),
             orderBy('expiresAt', 'desc')
           );
         },
