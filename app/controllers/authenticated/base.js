@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
-import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { getAnalytics, setUserId, logEvent } from 'firebase/analytics';
+import { service } from '@ember/service';
+import { getAnalytics, setUserId } from 'firebase/analytics';
 
 export default class BaseController extends Controller {
   @service

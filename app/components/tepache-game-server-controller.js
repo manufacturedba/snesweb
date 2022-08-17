@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
-import { get } from '@ember/object';
 
 export default class TepacheGameServerControllerComponent extends Component {
   constructor() {

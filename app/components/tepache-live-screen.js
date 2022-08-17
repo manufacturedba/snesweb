@@ -1,16 +1,6 @@
-import Component from '@glimmer/component';
-import { Timestamp } from 'firebase/firestore';
 import { service } from '@ember/service';
-import { TrackedAsyncData } from 'ember-async-data';
-import {
-  fetchAndActivate,
-  getBoolean,
-  getRemoteConfig,
-  getString,
-  getValue,
-  activate,
-  fetchConfig,
-} from 'firebase/remote-config';
+import Component from '@glimmer/component';
+import { getRemoteConfig, getValue } from 'firebase/remote-config';
 
 const initialPressedState = {
   a: false,
