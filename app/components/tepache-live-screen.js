@@ -1,8 +1,17 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { run } from '@ember/runloop';
 import { Timestamp } from 'firebase/firestore';
+import { service } from '@ember/service';
+import { TrackedAsyncData } from 'ember-async-data';
+import {
+  fetchAndActivate,
+  getBoolean,
+  getRemoteConfig,
+  getString,
+  getValue,
+  activate,
+  fetchConfig,
+} from 'firebase/remote-config';
+
 const initialPressedState = {
   a: false,
   b: false,
@@ -17,11 +26,17 @@ const initialPressedState = {
 };
 
 export default class TepacheLiveScreenComponent extends Component {
+  @service
+  remoteConfig;
+
+  @service('-firebase')
+  firebase;
+
   get pressedState() {
     if (this.currentPressedButton) {
       return {
         ...initialPressedState,
-        [this.currentPressedButton.type.toLowerCase()]: true,
+        [this.currentPressedButton.button.toLowerCase()]: true,
       };
     }
 
@@ -30,11 +45,20 @@ export default class TepacheLiveScreenComponent extends Component {
 
   get currentPressedButton() {
     return this.args.hardwareInputCollection.find((hardwareInputModel) => {
-      return Timestamp.toDate(hardwareInputModel).getTime() > Date.now() - 6000;
+      return hardwareInputModel.createdAt.getTime() > Date.now() - 6000;
     });
   }
 
   get isPending() {
     return this.args.gameSessionModel.state.pending;
+  }
+
+  get ovenPlayerConfig() {
+    const ovenPlayerConfigJSON = getValue(
+      getRemoteConfig(this.firebase),
+      'ovenplayer_config'
+    ).asString();
+
+    return JSON.parse(ovenPlayerConfigJSON);
   }
 }

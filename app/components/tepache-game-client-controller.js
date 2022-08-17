@@ -1,8 +1,12 @@
 import Component from '@glimmer/component';
 import Two from 'two.js';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 
 export default class TepacheGameClientControllerComponent extends Component {
+  @service
+  nes;
+
   @action
   loadSVG(element) {
     const two = new Two({
@@ -16,6 +20,18 @@ export default class TepacheGameClientControllerComponent extends Component {
 
       two.add(svg);
       two.update();
+    });
+  }
+
+  @action
+  async handleButtonClick(button) {
+    return await this.nes.request({
+      path: '/api/socket/tepache-session-captures',
+      method: 'POST',
+      payload: {
+        button,
+        gameSessionUrn: this.args.gameSessionModel.urn,
+      },
     });
   }
 

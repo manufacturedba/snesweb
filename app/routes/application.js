@@ -14,9 +14,13 @@ export default class ApplicationRoute extends Route {
   @service
   errorAlert;
 
+  @service
+  remoteConfig;
+
   async beforeModel() {
     const analytics = getAnalytics();
     await this.session.setup();
+    this.remoteConfig.fetchConfig();
 
     logEvent(analytics, 'app_start');
   }

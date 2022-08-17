@@ -19,12 +19,6 @@ export default class MagwestLiveRoute extends Route {
     const gameSession = this.modelFor('authenticated.base');
     const playerSession = this.modelFor('authenticated.base.magwest');
 
-    const ovenPlayerConfigJSON = await this.remoteConfig.getString(
-      'ovenplayer_config'
-    );
-
-    const ovenPlayerConfig = JSON.parse(ovenPlayerConfigJSON);
-
     const hardwareInput = this.store.query('tepache-hardware-input', {
       isRealtime: true,
 
@@ -41,7 +35,6 @@ export default class MagwestLiveRoute extends Route {
     return hash({
       playerSession,
       gameSession,
-      ovenPlayerConfig,
       hardwareInput,
     });
   }

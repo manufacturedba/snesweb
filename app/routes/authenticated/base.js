@@ -22,8 +22,10 @@ export default class BaseRoute extends Route {
 
   async beforeModel(transition) {
     const analytics = getAnalytics();
-    await this.remoteConfig.fetchAndActivate();
-    logEvent(analytics, 'config_fetched');
+    const activated = await this.remoteConfig.activate();
+    logEvent(analytics, 'config_fetched', {
+      activated,
+    });
 
     const live = this.remoteConfig.getBoolean('live');
 

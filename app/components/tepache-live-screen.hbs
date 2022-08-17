@@ -2,7 +2,9 @@
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
       <div class="col-6 d-none d-md-block">
-        <OvenPlayer @options={{@ovenPlayerConfig}} />
+        {{#if this.ovenPlayerConfig}}
+          <OvenPlayer @options={{this.ovenPlayerConfig}} />
+        {{/if}}
       </div>
       <div class="col-6">
         <TepacheGameServerController
@@ -10,11 +12,12 @@
           @pressedState={{this.pressedState}}
         />
       </div>
-      {{!-- <TepacheGameClientController
-    class="w-25 h-25"
-    @pressedState={{this.pressedState}}
-  /> --}}
-      {{!-- <OvenPlayer @options={{@model}} /> --}}
+    </div>
+    <div class="row">
+      <TepacheGameClientController
+        class="w-25 h-25"
+        @gameSessionModel={{@gameSessionModel}}
+      />
     </div>
   {{/if}}
   {{#if (is-pending @gameSessionModel.state)}}

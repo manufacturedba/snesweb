@@ -5,6 +5,8 @@ import {
   getRemoteConfig,
   getString,
   getValue,
+  activate,
+  fetchConfig,
 } from 'firebase/remote-config';
 import config from 'tepacheweb/config/environment';
 
@@ -16,17 +18,31 @@ export default class RemoteConfigService extends Service {
 
   constructor() {
     super(...arguments);
-    const remoteConfig = getRemoteConfig();
 
-    remoteConfig.defaultConfig = config.APP.remoteConfig.defaultConfig;
-    remoteConfig.settings.minimumFetchIntervalMillis =
+    this.#remoteConfig = getRemoteConfig(this.firebase);
+
+    this.#remoteConfig.defaultConfig = {
+      ...config.APP.remoteConfig.defaultConfig,
+    };
+
+    this.#remoteConfig.settings.minimumFetchIntervalMillis =
       config.APP.remoteConfig.settings.minimumFetchIntervalMillis;
-
-    this.#remoteConfig = remoteConfig;
   }
 
   async fetchAndActivate() {
     return await fetchAndActivate(this.#remoteConfig);
+  }
+
+  async activate() {
+    return await activate(this.#remoteConfig);
+  }
+
+  async fetchConfig() {
+    return await fetchConfig(this.#remoteConfig);
+  }
+
+  async ensureInitialized() {
+    return await this.#remoteConfig.ensureInitialized();
   }
 
   getValue(key) {

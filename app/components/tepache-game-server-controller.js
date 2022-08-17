@@ -12,9 +12,7 @@ export default class TepacheGameServerControllerComponent extends Component {
   }
 
   get aButtonPressed() {
-    console.log(this.args.pressedState.a);
-
-    return get(this.args, 'pressedState.a');
+    return this.args.pressedState.a;
   }
 
   get bButtonPressed() {
