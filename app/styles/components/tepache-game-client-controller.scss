@@ -9,18 +9,18 @@
     position: absolute;
 }
 
-.tepache-game-server-controller__button {
-    position: absolute;
-    top: 170px;
-    right: 150px;
-    z-index: 1000;
+.tepache-game-client-controller__button {
+    background: none;
+    border: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .controller-container {
     height: 100%;
     left: 0;
     margin: 0 auto;
-    position: absolute;
+    position: relative;
     right: 0;
     top: 0;
   }

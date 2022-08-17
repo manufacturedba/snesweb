@@ -14,8 +14,18 @@
           <div class="dpad__center">
             <div class="dpad__circle"></div>
           </div>
-          <div class="dpad__arrow arrow--left"></div>
-          <div class="dpad__arrow arrow--right"></div>
+          <div class="dpad__arrow arrow--left">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'left')}}
+            ></button>
+          </div>
+          <div class="dpad__arrow arrow--right">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'right')}}
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -28,10 +38,20 @@
       </div>
       <div class="start-select">
         <div class="start-select__button button--start">
-          <div class="start-select__interior"></div>
+          <div class="start-select__interior">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'start')}}
+            ></button>
+          </div>
         </div>
         <div class="start-select__button button--select">
-          <div class="start-select__interior"></div>
+          <div class="start-select__interior">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'select')}}
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -39,12 +59,32 @@
       <div class="right-controls">
         <div class="right-controls__circle"></div>
         <div class="button-group button-group--top">
-          <div class="button-group__button button--x"></div>
-          <div class="button-group__button button--y"></div>
+          <div class="button-group__button button--x">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'x')}}
+            ></button>
+          </div>
+          <div class="button-group__button button--y">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'y')}}
+            ></button>
+          </div>
         </div>
         <div class="button-group button-group--bottom">
-          <div class="button-group__button button--a"></div>
-          <div class="button-group__button button--b"></div>
+          <div class="button-group__button button--a">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'a')}}
+            ></button>
+          </div>
+          <div class="button-group__button button--b">
+            <button
+              class="tepache-game-client-controller__button"
+              {{on 'click' (fn this.handleButtonClick 'b')}}
+            ></button>
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,14 @@ export default class TepacheGameClientControllerComponent extends Component {
   nes;
 
   @action
-  handleButtonClick(button) {
-    this.nes.sendButton(button);
+  async handleButtonClick(button) {
+    return await this.nes.request({
+      path: '/api/socket/tepache-session-captures',
+      method: 'POST',
+      payload: {
+        button,
+        gameSessionUrn: this.args.gameSessionModel.urn,
+      },
+    });
   }
 }
