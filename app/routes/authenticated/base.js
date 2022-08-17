@@ -52,6 +52,7 @@ export default class BaseRoute extends Route {
           return query(
             reference,
             where('urn', '==', magWestGameSessionUrn),
+            where('expiresAt', '>', new Date()),
             orderBy('expiresAt', 'desc')
           );
         },
