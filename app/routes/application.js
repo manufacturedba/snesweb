@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { getAnalytics, logEvent } from 'firebase/analytics';
+import { getAnalytics, setUserId, logEvent } from 'firebase/analytics';
 import config from 'tepacheweb/config/environment';
 
 export default class ApplicationRoute extends Route {
@@ -20,9 +20,18 @@ export default class ApplicationRoute extends Route {
   async beforeModel() {
     const analytics = getAnalytics();
     await this.session.setup();
-    this.remoteConfig.fetchConfig();
+
+    if (this.session.isAuthenticated) {
+      setUserId(analytics, this.session?.data?.authenticated?.user?.uid);
+    } else {
+      setUserId(analytics, null);
+    }
 
     logEvent(analytics, 'app_start');
+  }
+
+  async afterModel() {
+    return await this.remoteConfig.fetchConfig();
   }
 
   @action
