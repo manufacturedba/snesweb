@@ -20,25 +20,6 @@ export default class BaseIndexRoute extends Route {
   router;
 
   async model() {
-    // Look for any game sessions running for the selected game
-    // Status does not matter here
-    const magWestGameUrn = this.remoteConfig.getString('magwest_game_urn');
-
-    if (magWestGameUrn) {
-      const games = await this.store.query('tepache-game-session', {
-        isRealtime: true,
-
-        filter(reference) {
-          return query(
-            reference,
-            where('gameUrn', '==', magWestGameUrn),
-            where('expiresAt', '>', new Date()),
-            orderBy('expiresAt', 'desc')
-          );
-        },
-      });
-
-      return games.firstObject;
-    }
+    return this.modelFor('authenticated.base');
   }
 }

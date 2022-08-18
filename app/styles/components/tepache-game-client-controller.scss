@@ -1,19 +1,23 @@
 .tepache-game-client-controller {
-    width: 600px;
-    position: relative;
+    width: 800px;
+}
+
+.tepache-game-client-controller__svg {
+  pointer-events: none;
+}
+
+.tepache-game-client-controller__button {
+  pointer-events: stroke;
+}
+
+.tepache-game-client-controller__button:active {
+  visibility: hidden;
 }
 
 .tepache-game-client-controller__image {
     height: inherit;
     width: inherit;
     position: absolute;
-}
-
-.tepache-game-client-controller__button {
-    background: none;
-    border: 0;
-    height: 100%;
-    width: 100%;
 }
 
 .controller-container {

@@ -1,1 +1,9 @@
-{{inline-svg 'controller/optimized'}}
+<div
+  class="tepache-game-client-controller"
+  {{on 'click' this.handleButtonClick}}
+>
+  {{inline-svg
+    'controller/stacked-controller'
+    class='tepache-game-client-controller__svg'
+  }}
+</div>
