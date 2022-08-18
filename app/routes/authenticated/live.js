@@ -35,13 +35,17 @@ export default class MagwestLiveRoute extends Route {
       return this.router.transitionTo('authenticated.base.magwest');
     }
 
-    const hardwareInput = this.store.query('tepache-hardware-input', {
+    const today = new Date();
+    const lastHour = new Date(today.getTime() - 1000 * 60 * 60);
+
+    const hardwareInput = await this.store.query('tepache-hardware-input', {
       isRealtime: true,
 
       filter(reference) {
         return query(
           reference,
           where('gameSessionUrn', '==', gameSession.urn),
+          where('createdAt', '>', lastHour),
           orderBy('createdAt', 'desc'),
           limit(10)
         );
