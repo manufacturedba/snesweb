@@ -2,6 +2,9 @@
   class="tepache-game-client-controller"
   {{on 'mousedown' this.handleMouseDown}}
   {{on 'mouseup' this.handleMouseUp}}
+  {{on 'touchstart' this.handleMouseDown}}
+  {{on 'touchcancel' this.handleMouseUp}}
+  {{on 'touchend' this.handleMouseUp}}
 >
   {{inline-svg
     'controller/stacked-controller'
