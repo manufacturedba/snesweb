@@ -12,6 +12,9 @@ export default class TepacheGameClientControllerComponent extends Component {
 
   @action
   async handleMouseDown(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
     const target = event.target;
     const button = target.getAttribute(dataAttribute);
 
