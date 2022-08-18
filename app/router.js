@@ -12,9 +12,7 @@ Router.map(function () {
     this.route('base', { path: '/' }, function () {
       this.route('index', { path: '/' });
       this.route('about');
-      this.route('magwest', function () {
-        this.route('live');
-      });
+      this.route('magwest', function () {});
 
       this.route('games');
       this.route('game', { path: '/games/:game_urn' });
@@ -22,6 +20,7 @@ Router.map(function () {
       this.route('privacy');
       this.route('terms');
     });
+    this.route('live', { path: '/magwest/live' });
     this.route('construction');
     // TODO - This treats 404 scenarios as valid.
     this.route('404', { path: '/*path' });

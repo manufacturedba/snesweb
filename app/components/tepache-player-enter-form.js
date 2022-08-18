@@ -26,7 +26,7 @@ export default class TepachePlayerEnterFormComponent extends Component {
   async submit() {
     await this.playerSessionModel.save();
 
-    return this.router.transitionTo('authenticated.base.magwest.live');
+    return this.router.transitionTo('authenticated.live');
   }
 
   /**
