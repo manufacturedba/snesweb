@@ -19,7 +19,32 @@ export default class MagwestLiveRoute extends Route {
   router;
 
   async model() {
-    const { gameSession } = this.modelFor('authenticated.base.magwest') || {};
+    let { gameSession } = this.modelFor('authenticated.base') || {};
+
+    if (!gameSession) {
+      // Look for any game sessions running for the selected game
+      // Status does not matter here
+      const magWestGameUrn = this.remoteConfig.getString('magwest_game_urn');
+
+      if (magWestGameUrn) {
+        const gameSessions = await this.store.query('tepache-game-session', {
+          isRealtime: true,
+
+          filter(reference) {
+            return query(
+              reference,
+              where('gameUrn', '==', magWestGameUrn),
+              where('expiresAt', '>', new Date()),
+              orderBy('expiresAt', 'desc')
+            );
+          },
+        });
+
+        gameSession = gameSessions.firstObject;
+      } else {
+        return this.router.transitionTo('authenticated.base');
+      }
+    }
 
     if (!gameSession) {
       return this.router.transitionTo('authenticated.base');
@@ -52,10 +77,24 @@ export default class MagwestLiveRoute extends Route {
       },
     });
 
+    const log = await this.store.query('tepache-log', {
+      isRealtime: true,
+
+      filter(reference) {
+        return query(
+          reference,
+          where('createdAt', '>', lastHour),
+          orderBy('createdAt', 'desc'),
+          limit(10)
+        );
+      },
+    });
+
     return hash({
       playerSession,
       gameSession,
       hardwareInput,
+      log,
     });
   }
 }

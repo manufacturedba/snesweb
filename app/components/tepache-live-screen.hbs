@@ -1,16 +1,39 @@
 <div class="tepache-live-screen container justify-content-center">
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
-      <div class="col-6 d-none d-xl-block">
-        {{#if this.ovenPlayerConfig}}
-          <OvenPlayer @options={{this.ovenPlayerConfig}} />
-        {{/if}}
-      </div>
-      <div class="col-6 d-none d-xl-block">
-        <TepacheGameServerController
-          class="w-100"
-          @pressedState={{this.pressedState}}
-        />
+      <div class="col-12 d-none d-xl-block bg-black">
+        <div class="container">
+          <div class="row">
+            {{#if this.ovenPlayerConfig}}
+              <div class="col-7">
+                <OvenPlayer @options={{this.ovenPlayerConfig}} />
+              </div>
+            {{/if}}
+            <div class="col-5">
+              <div class="container">
+                <div class="row tepache-live-screen__controller-container">
+                  <div class="col-12">
+                    <TepacheGameServerController
+                      class="w-75 tepache-live-screen__controller"
+                      @pressedState={{this.pressedState}}
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <ul
+                    class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light text-white small text-monospace mb-2"
+                  >
+                    {{#each @logCollection as |log|}}
+                      <li class="text-truncate text-right align-right mb-2">
+                        {{log.message}}
+                      </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row tepache-live-screen__client-controller-container">
