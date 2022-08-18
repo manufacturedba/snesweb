@@ -806,6 +806,7 @@ m7nzXeVpzOjBNeV7ngN8HX99c9uifgRvp1dQusyF2/5HX5Re5aYraOufpm51q1vdDmT7f8qMZOJG
 43MCAAAAAElFTkSuQmCC
 "
        id="DPad-Base-Image"
+       class="tepache-game-client-controller__passthrough-base"
        x="112.18874"
        y="141.53949" />
   </g>
@@ -1563,8 +1564,8 @@ twJWmkgvarKLEX6f87y1EYv+eWqDMRF1tKMB/o8L8FMePFRDLM/zeBd59joMvkifbYId9iIPHC94
 Dw3N7WhHO9rRjna0ox3taEc72tGOdrSjHd/g+F8RLElv+9rzAwAAAABJRU5ErkJggg==
 "
        id="DPad-Up-Image"
-       data-tepache-game-client-controller-target="up"
-       class="tepache-game-client-controller__button tepache-game-client-controller__button--up invisible"
+       data-tepache-game-client-controller-destination="up"
+       class="tepache-game-client-controller__passthrough-button tepache-game-client-controller__button--up"
        x="112.189"
        y="141.539" />
   </g>
@@ -2260,8 +2261,8 @@ sL+b0+iAfz/OuOPfu4gq/jevrqH272TwZce1dxq0dtppp5122mmnnXbaaaeddtppp5122mmnnXba
 aaedn/f5b9T+T8L0JuukAAAAAElFTkSuQmCC
 "
        id="DPad-Down-Image"
-       data-tepache-game-client-controller-target="down"
-       class="tepache-game-client-controller__button tepache-game-client-controller__button--down invisible"
+       data-tepache-game-client-controller-destination="down"
+       class="tepache-game-client-controller__passthrough-button tepache-game-client-controller__button--down"
        x="112.189"
        y="141.539" />
   </g>
@@ -2994,8 +2995,8 @@ Wq5gLJQYSTaOhTQF5wXwZW3ypjDW8RdKJr2sssoqq6yyyiqrrLLKKusq1/8BPgM/aPd8oGsAAAAA
 SUVORK5CYII=
 "
        id="DPad-Left-Image"
-       data-tepache-game-client-controller-target="left"
-       class="tepache-game-client-controller__button tepache-game-client-controller__button--left invisible"
+       data-tepache-game-client-controller-destination="left"
+       class="tepache-game-client-controller__passthrough-button tepache-game-client-controller__button--left"
        x="112.189"
        y="141.539" />
   </g>
@@ -3711,8 +3712,8 @@ fAP89xLwldu8r4jlrwKkBvX7Bi/WYK/c9/eqw5ZEQOtea6utv8umULvX9WbRVltttdVWW2211VZb
 bbXV1nd+/Q8Qp6D9s+CvsQAAAABJRU5ErkJggg==
 "
        id="DPad-Right-Image"
-       data-tepache-game-client-controller-target="right"
-       class="tepache-game-client-controller__button tepache-game-client-controller__button--right invisible"
+       data-tepache-game-client-controller-destination="right"
+       class="tepache-game-client-controller__passthrough-button tepache-game-client-controller__button--right"
        x="112.189"
        y="141.539" />
   </g>
@@ -5119,6 +5120,8 @@ biUQ/MgAYYprGpyZ/Eo15m725f8DlH0G6EF0594AAAAASUVORK5CYII=
      style="display:inline">
     <circle
        style="opacity:0.99;fill:#000000;fill-opacity:0;stroke-width:4.99999;stroke-linecap:round;stroke-linejoin:round"
+       data-tepache-game-client-controller-target="left"
+       class="tepache-game-client-controller__pad tepache-game-client-controller__pad--left"
        id="DLeft-Button"
        cx="124.35413"
        cy="178.02679"
@@ -5129,6 +5132,8 @@ biUQ/MgAYYprGpyZ/Eo15m725f8DlH0G6EF0594AAAAASUVORK5CYII=
      style="display:inline">
     <circle
        style="opacity:0.99;fill:#000000;fill-opacity:0;stroke-width:4.99999;stroke-linecap:round;stroke-linejoin:round"
+       data-tepache-game-client-controller-target="right"
+       class="tepache-game-client-controller__pad tepache-game-client-controller__pad--right"
        id="DRight-Button"
        cx="171.22318"
        cy="176.89287"
@@ -5139,7 +5144,9 @@ biUQ/MgAYYprGpyZ/Eo15m725f8DlH0G6EF0594AAAAASUVORK5CYII=
      style="display:inline">
     <circle
        style="opacity:0.99;fill:#000000;fill-opacity:0;stroke-width:4.99999;stroke-linecap:round;stroke-linejoin:round"
+       data-tepache-game-client-controller-target="up"
        id="DUp-Button"
+       class="tepache-game-client-controller__pad tepache-game-client-controller__pad--up"
        cx="147.78865"
        cy="151.19049"
        r="17" />
@@ -5149,6 +5156,8 @@ biUQ/MgAYYprGpyZ/Eo15m725f8DlH0G6EF0594AAAAASUVORK5CYII=
      style="display:inline">
     <circle
        style="opacity:0.99;fill:#000000;fill-opacity:0;stroke-width:4.99999;stroke-linecap:round;stroke-linejoin:round"
+       data-tepache-game-client-controller-target="down"
+       class="tepache-game-client-controller__pad tepache-game-client-controller__pad--down"
        id="DDown-Button"
        cx="147.78865"
        cy="203.72919"

@@ -2,7 +2,8 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 
-const BUTTONS_RESULTING_IN_HIDE = ['y', 'a', 'b', 'x', 'start', 'select'];
+const BUTTONS_FOR_HIDE_TOGGLE = ['left', 'right', 'up', 'down'];
+
 const dataAttribute = 'data-tepache-game-client-controller-target';
 
 export default class TepacheGameClientControllerComponent extends Component {
@@ -10,10 +11,19 @@ export default class TepacheGameClientControllerComponent extends Component {
   nes;
 
   @action
-  async handleButtonClick(event) {
+  async handleMouseDown(event) {
     const target = event.target;
     const button = target.getAttribute(dataAttribute);
-    if (BUTTONS_RESULTING_IN_HIDE.includes(button)) {
+
+    if (button) {
+      if (BUTTONS_FOR_HIDE_TOGGLE.includes(button)) {
+        document
+          .querySelector(
+            `[data-tepache-game-client-controller-destination="${button}"]`
+          )
+          .classList.add('visible');
+      }
+
       return await this.nes.request({
         path: '/api/socket/tepache-session-captures',
         method: 'POST',
@@ -23,5 +33,16 @@ export default class TepacheGameClientControllerComponent extends Component {
         },
       });
     }
+  }
+
+  @action
+  async handleMouseUp() {
+    BUTTONS_FOR_HIDE_TOGGLE.forEach((buttonToRemove) => {
+      document
+        .querySelector(
+          `[data-tepache-game-client-controller-destination="${buttonToRemove}"]`
+        )
+        .classList.remove('visible');
+    });
   }
 }

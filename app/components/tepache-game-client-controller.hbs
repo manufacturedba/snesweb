@@ -1,6 +1,7 @@
 <div
   class="tepache-game-client-controller"
-  {{on 'click' this.handleButtonClick}}
+  {{on 'mousedown' this.handleMouseDown}}
+  {{on 'mouseup' this.handleMouseUp}}
 >
   {{inline-svg
     'controller/stacked-controller'

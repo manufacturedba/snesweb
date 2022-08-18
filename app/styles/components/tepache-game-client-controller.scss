@@ -7,11 +7,26 @@
 }
 
 .tepache-game-client-controller__button {
+  cursor: pointer;
   pointer-events: stroke;
 }
 
 .tepache-game-client-controller__button:active {
   visibility: hidden;
+}
+
+.tepache-game-client-controller__passthrough-base {
+  pointer-events: none;
+}
+
+.tepache-game-client-controller__passthrough-button {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tepache-game-client-controller__pad {
+  cursor: pointer;
+  pointer-events: all;
 }
 
 .tepache-game-client-controller__image {
