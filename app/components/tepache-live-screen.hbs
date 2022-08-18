@@ -1,12 +1,12 @@
 <div class="tepache-live-screen container justify-content-center">
   {{#if (is-active @gameSessionModel.state)}}
-    <div class="row">
-      <div class="col-6 d-none d-lg-block">
+    <div class="row d-none d-lg-block">
+      <div class="col-6">
         {{#if this.ovenPlayerConfig}}
           <OvenPlayer @options={{this.ovenPlayerConfig}} />
         {{/if}}
       </div>
-      <div class="col-6 d-none d-lg-block">
+      <div class="col-6">
         <TepacheGameServerController
           class="w-100"
           @pressedState={{this.pressedState}}
