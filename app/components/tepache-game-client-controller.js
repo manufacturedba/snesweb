@@ -11,6 +11,9 @@ export default class TepacheGameClientControllerComponent extends Component {
   nes;
 
   @action
+  /**
+   * @param {MouseEvent} event
+   */
   async handleMouseDown(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -20,6 +23,12 @@ export default class TepacheGameClientControllerComponent extends Component {
 
     if (button) {
       if (BUTTONS_FOR_HIDE_TOGGLE.includes(button)) {
+        document
+          .querySelector(
+            `[data-tepache-game-client-controller-destination-base]`
+          )
+          .classList.add('invisible');
+
         document
           .querySelector(
             `[data-tepache-game-client-controller-destination="${button}"]`
@@ -40,6 +49,10 @@ export default class TepacheGameClientControllerComponent extends Component {
 
   @action
   async handleMouseUp() {
+    document
+      .querySelector(`[data-tepache-game-client-controller-destination-base]`)
+      .classList.remove('invisible');
+
     BUTTONS_FOR_HIDE_TOGGLE.forEach((buttonToRemove) => {
       document
         .querySelector(
