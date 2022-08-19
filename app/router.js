@@ -12,6 +12,7 @@ Router.map(function () {
     this.route('base', { path: '/' }, function () {
       this.route('index', { path: '/' });
       this.route('about');
+      this.route('credits');
       this.route('magwest', function () {});
 
       this.route('games');

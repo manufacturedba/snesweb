@@ -1,4 +1,5 @@
 @use 'imports';
+@use 'tepache-mode-credits';
 @import "ember-bootstrap/bootstrap";
 @import 'bootstrap-backport';
 
@@ -55,3 +56,8 @@ html, body {
 .tepache-mode-construction__image {
     height: inherit;
  }
+
+.tepache-mode-credits__artist-profile-image {
+    border-radius: 2px;
+    max-height: 100px;
+}
