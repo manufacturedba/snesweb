@@ -4,11 +4,42 @@
     alt="controller base"
     src="/controller/controller-base.png"
   />
-  <img
-    class="tepache-game-server-controller__image"
-    alt="d base"
-    src="/controller/dpad-base.png"
-  />
+  {{#unless this.dpadPressed}}
+    <img
+      class="tepache-game-server-controller__image"
+      alt="d base"
+      src="/controller/dpad-base.png"
+    />
+  {{else}}
+    {{#if this.downDirectionPressed}}
+      <img
+        class="tepache-game-server-controller__image"
+        alt="dpad down"
+        src="/controller/dpad-down.png"
+      />
+    {{/if}}
+    {{#if this.leftDirectionPressed}}
+      <img
+        class="tepache-game-server-controller__image"
+        alt="dpad left"
+        src="/controller/dpad-left.png"
+      />
+    {{/if}}
+    {{#if this.rightDirectionPressed}}
+      <img
+        class="tepache-game-server-controller__image"
+        alt="dpad right"
+        src="/controller/dpad-right.png"
+      />
+    {{/if}}
+    {{#if this.upDirectionPressed}}
+      <img
+        class="tepache-game-server-controller__image"
+        alt="dpad up"
+        src="/controller/dpad-up.png"
+      />
+    {{/if}}
+  {{/unless}}
   {{#unless this.aButtonPressed}}
     <img
       class="tepache-game-server-controller__image"

@@ -25,6 +25,7 @@ export default class TepacheGameServerControllerComponent extends Component {
   get yButtonPressed() {
     return this.args.pressedState.y;
   }
+
   get startButtonPressed() {
     return this.args.pressedState.start;
   }
@@ -46,5 +47,14 @@ export default class TepacheGameServerControllerComponent extends Component {
 
   get downDirectionPressed() {
     return this.args.pressedState.down;
+  }
+
+  get dpadPressed() {
+    return (
+      this.leftDirectionPressed ||
+      this.rightDirectionPressed ||
+      this.upDirectionPressed ||
+      this.downDirectionPressed
+    );
   }
 }
