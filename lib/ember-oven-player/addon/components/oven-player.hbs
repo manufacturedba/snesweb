@@ -2,6 +2,7 @@
   ...attributes
   {{did-insert this.createPlayer}}
   {{will-destroy this.remove}}
+  {{on 'keydown' this.blockPausing capture='true'}}
 >
   {{#if @options}}
     <div class="ovenplayer__instance-wrapper"></div>
