@@ -71,6 +71,8 @@ export default class TepacheGameClientControllerComponent extends Component {
 
   @action
   async request(button) {
+    navigator?.vibrate(50); // vibrate for 50ms
+
     return await this.nes.request({
       path: '/api/socket/tepache-session-captures',
       method: 'POST',
@@ -153,6 +155,17 @@ export default class TepacheGameClientControllerComponent extends Component {
               if (lastButton !== key || now - throttleTime >= lastTime) {
                 lastTime = now;
                 lastButton = key;
+
+                try {
+                  activeGamepad?.vibrationActuator?.playEffect('dual-rumble', {
+                    startDelay: 0,
+                    duration: 50,
+                    weakMagnitude: 1.0,
+                    strongMagnitude: 0,
+                  });
+                } catch (error) {
+                  // noop
+                }
 
                 throttle(this, this.request, buttonMap[key], 200);
               }

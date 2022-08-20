@@ -1,9 +1,16 @@
 <div
   ...attributes
+  class="text-center"
   {{did-insert this.createPlayer}}
   {{will-destroy this.remove}}
   {{on 'keydown' this.blockPausing capture='true'}}
 >
+  {{#if this.inErrorState}}
+    <span
+      class="align-middle spinner-grow mx-auto text-danger"
+      role="status"
+    ></span>
+  {{/if}}
   {{#if @options}}
     <div class="ovenplayer__instance-wrapper"></div>
   {{/if}}
