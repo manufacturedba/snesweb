@@ -71,7 +71,7 @@ export default class TepacheGameClientControllerComponent extends Component {
 
   @action
   async request(button) {
-    navigator?.vibrate(50); // vibrate for 50ms
+    navigator?.vibrate(100); // vibrate for 100ms
 
     return await this.nes.request({
       path: '/api/socket/tepache-session-captures',
