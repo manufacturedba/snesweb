@@ -27,7 +27,7 @@ export default class TepacheLiveScreenComponent extends Component {
     if (this.currentPressedButton?.type === BUTTON_INTERACTIONS.BUTTON_PRESS) {
       return {
         ...initialPressedState,
-        [this.currentPressedButton.button.toLowerCase()]: true,
+        [this.currentPressedButton?.button?.toLowerCase()]: true,
       };
     }
 
@@ -35,9 +35,16 @@ export default class TepacheLiveScreenComponent extends Component {
   }
 
   get currentPressedButton() {
-    return this.args.hardwareInputCollection.find((hardwareInputModel) => {
-      return hardwareInputModel.createdAt.getTime() > Date.now() - 6000;
-    });
+    return this.args.hardwareInputCollection.reduce(
+      (current, hardwareInputModel) => {
+        if (hardwareInputModel.createdAt.getTime() > Date.now() - 6000) {
+          return hardwareInputModel;
+        }
+
+        return current;
+      },
+      null
+    );
   }
 
   get isPending() {

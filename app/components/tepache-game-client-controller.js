@@ -1,7 +1,8 @@
-import Component from '@glimmer/component';
-import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { cached, tracked } from '@glimmer/tracking';
+import { throttle } from '@ember/runloop';
 
 const BUTTONS_FOR_HIDE_TOGGLE = ['left', 'right', 'up', 'down'];
 
@@ -60,6 +61,26 @@ export default class TepacheGameClientControllerComponent extends Component {
     });
   }
 
+  @cached
+  get isLastPressFromPlayer() {
+    return (
+      this.args.currentPressedButton?.playerSessionUrn ===
+      this.args.playerSessionModel?.urn
+    );
+  }
+
+  @action
+  async request(button) {
+    return await this.nes.request({
+      path: '/api/socket/tepache-session-captures',
+      method: 'POST',
+      payload: {
+        button,
+        gameSessionUrn: this.args.gameSessionModel?.urn,
+      },
+    });
+  }
+
   @action
   /**
    * @param {MouseEvent} event
@@ -86,14 +107,7 @@ export default class TepacheGameClientControllerComponent extends Component {
           .classList.add('visible');
       }
 
-      return await this.nes.request({
-        path: '/api/socket/tepache-session-captures',
-        method: 'POST',
-        payload: {
-          button,
-          gameSessionUrn: this.args.gameSessionModel.urn,
-        },
-      });
+      return await throttle(this, this.request, button, 200);
     }
   }
 
@@ -140,14 +154,7 @@ export default class TepacheGameClientControllerComponent extends Component {
                 lastTime = now;
                 lastButton = key;
 
-                this.nes.request({
-                  path: '/api/socket/tepache-session-captures',
-                  method: 'POST',
-                  payload: {
-                    button: buttonMap[key],
-                    gameSessionUrn: this.args.gameSessionModel.urn,
-                  },
-                });
+                throttle(this, this.request, buttonMap[key], 200);
               }
             }
           }

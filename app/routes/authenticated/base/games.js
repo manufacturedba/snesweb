@@ -11,8 +11,6 @@ export default class BaseGamesRoute extends Route {
     return await this.store.query('tepache-game', {
       isRealtime: true,
 
-      queryId: 'active',
-
       filter(reference) {
         return query(reference, where('active', '==', true));
       },

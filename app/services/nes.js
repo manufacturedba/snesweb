@@ -25,7 +25,9 @@ export default class NesService extends Service {
     this.#callbacks.onHeartbeatTimeout = [];
     this.#callbacks.onError = [];
 
-    this.#client = new Client(host);
+    this.#client = new Client(host, {
+      timeout: 1000,
+    });
 
     this.#connectionRequest = this.#client.connect({
       auth: {
@@ -33,6 +35,8 @@ export default class NesService extends Service {
           authorization: `Basic ${this.session?.data?.authenticated?.user?.accessToken}`,
         },
       },
+      reconnect: true,
+      delay: 1000 * 6,
     });
 
     this.#client.onConnect = () => {
