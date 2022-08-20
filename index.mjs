@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 616;
     handler: {
       directory: {
         path: '.',
-        redirectToSlash: true,
+        redirectToSlash: false,
       },
     },
   });
