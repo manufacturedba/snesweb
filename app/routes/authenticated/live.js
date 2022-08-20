@@ -66,7 +66,7 @@ export default class MagwestLiveRoute extends Route {
     const hardwareInput = await this.store.query('tepache-hardware-input', {
       isRealtime: true,
 
-      queryId: 'hardware-input',
+      queryId: 'hardware-inputs',
       
       filter(reference) {
         return query(
