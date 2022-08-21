@@ -106,8 +106,8 @@ export default class MagwestLiveRoute extends Route {
     });
 
     const hardwareInput = await hardwareInputRequest;
-    const log = await logRequest;
     const sessionCapture = await sessionCaptureRequest;
+    const log = await logRequest;
 
     return hash({
       playerSession,
