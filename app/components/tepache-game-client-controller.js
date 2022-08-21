@@ -94,6 +94,8 @@ export default class TepacheGameClientControllerComponent extends Component {
     event.preventDefault();
     event.stopPropagation();
 
+    clearInterval(this.#depressButton);
+
     const target = event.target;
     const button = target.getAttribute(dataAttribute);
 
@@ -112,16 +114,18 @@ export default class TepacheGameClientControllerComponent extends Component {
           .classList.add('visible');
       }
 
-      throttle(this, this.request, button, 200);
+      throttle(this, this.request, button, throttleTime);
 
       this.#depressButton = setInterval(() => {
-        throttle(this, this.request, button, 200);
+        throttle(this, this.request, button, throttleTime);
       }, throttleTime);
     }
   }
 
   @action
   async handleMouseUp() {
+    clearInterval(this.#depressButton);
+
     document
       .querySelector(`[data-tepache-game-client-controller-destination-base]`)
       .classList.remove('invisible');
@@ -133,8 +137,6 @@ export default class TepacheGameClientControllerComponent extends Component {
         )
         .classList.remove('visible');
     });
-
-    clearInterval(this.#depressButton);
   }
 
   @action
@@ -176,7 +178,7 @@ export default class TepacheGameClientControllerComponent extends Component {
                   // noop
                 }
 
-                throttle(this, this.request, buttonMap[key], 200);
+                throttle(this, this.request, buttonMap[key], throttleTime);
               }
             }
           }
