@@ -61,36 +61,37 @@ export default class MagwestLiveRoute extends Route {
     }
 
     const today = new Date();
-    const lastHour = new Date(today.getTime() - 1000 * 60);
+    const lastMinute = new Date(today.getTime() - 1000 * 60);
 
-    const hardwareInput = await this.store.query('tepache-hardware-input', {
+    const hardwareInputRequest = this.store.query('tepache-hardware-input', {
       isRealtime: true,
 
-      queryId: 'hardware-inputs',
-      
       filter(reference) {
         return query(
           reference,
           where('gameSessionUrn', '==', gameSession.urn),
-          where('createdAt', '>', lastHour),
+          where('createdAt', '>', lastMinute),
           orderBy('createdAt', 'desc'),
           limit(4)
         );
       },
     });
 
-    const log = await this.store.query('tepache-log', {
+    const logRequest = this.store.query('tepache-log', {
       isRealtime: true,
 
       filter(reference) {
         return query(
           reference,
-          where('createdAt', '>', lastHour),
+          where('createdAt', '>', lastMinute),
           orderBy('createdAt', 'desc'),
           limit(6)
         );
       },
     });
+
+    const hardwareInput = await hardwareInputRequest;
+    const log = await logRequest;
 
     return hash({
       playerSession,
