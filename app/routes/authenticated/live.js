@@ -62,6 +62,7 @@ export default class MagwestLiveRoute extends Route {
 
     const today = new Date();
     const lastMinute = new Date(today.getTime() - 1000 * 60);
+    const lastHour = new Date(today.getTime() - 1000 * 60 * 60);
 
     const hardwareInputRequest = this.store.query('tepache-hardware-input', {
       isRealtime: true,
@@ -83,9 +84,9 @@ export default class MagwestLiveRoute extends Route {
       filter(reference) {
         return query(
           reference,
-          where('createdAt', '>', lastMinute),
+          where('createdAt', '>', lastHour),
           orderBy('createdAt', 'desc'),
-          limit(6)
+          limit(10)
         );
       },
     });

@@ -1,35 +1,37 @@
 <div class="tepache-live-screen container justify-content-center">
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
-      <div class="col-12 d-none d-xl-block bg-black">
+      <div class="col-12 d-none d-xl-block bg-black pt-4">
         <div class="container">
           <div class="row">
             {{#if this.ovenPlayerConfig}}
-              <div class="col-7">
+              <div class="col-6">
                 <OvenPlayer @options={{this.ovenPlayerConfig}} />
               </div>
             {{/if}}
-            <div class="col-5">
-              <div class="container">
-                <div class="row tepache-live-screen__controller-container">
-                  <div class="col-12">
-                    <TepacheGameServerController
-                      class="w-75 tepache-live-screen__controller"
-                      @pressedState={{this.pressedState}}
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <ul
-                    class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light text-white small text-monospace mb-2"
+            <div class="col-4 py-4">
+              <ul
+                class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light text-white small text-monospace mb-2"
+              >
+                {{#each @logCollection as |log|}}
+                  <li
+                    class="text-truncate text-right align-right mb-1
+                      {{if
+                        (eq log.referenceUrn @playerSessionModel.urn)
+                        'text-success'
+                      }}"
                   >
-                    {{#each @logCollection as |log|}}
-                      <li class="text-truncate text-right align-right mb-1">
-                        {{log.message}}
-                      </li>
-                    {{/each}}
-                  </ul>
-                </div>
+                    {{log.message}}
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+            <div class="col-2">
+              <div class="tepache-live-screen__controller-container">
+                <TepacheGameServerController
+                  class="w-100 tepache-live-screen__controller"
+                  @pressedState={{this.pressedState}}
+                />
               </div>
             </div>
           </div>

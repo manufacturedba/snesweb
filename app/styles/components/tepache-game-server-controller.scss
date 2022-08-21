@@ -4,7 +4,7 @@
 }
 
 .tepache-game-server-controller__image {
-    filter: opacity(0.5);
+    filter: hue-rotate(90deg);
     width: inherit;
     position: absolute;
 }
