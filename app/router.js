@@ -17,7 +17,7 @@ Router.map(function () {
       this.route('games');
       this.route('game', { path: '/games/:game_urn' });
 
-      this.route('credits');
+      this.route('credit');
       this.route('privacy');
       this.route('terms');
     });

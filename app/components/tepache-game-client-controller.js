@@ -45,6 +45,8 @@ export default class TepacheGameClientControllerComponent extends Component {
 
   #errorUnsubscribe;
 
+  #depressButton;
+
   constructor() {
     super(...arguments);
 
@@ -110,7 +112,11 @@ export default class TepacheGameClientControllerComponent extends Component {
           .classList.add('visible');
       }
 
-      return await throttle(this, this.request, button, 200);
+      throttle(this, this.request, button, 200);
+
+      this.#depressButton = setInterval(() => {
+        throttle(this, this.request, button, 200);
+      }, throttleTime);
     }
   }
 
@@ -127,6 +133,8 @@ export default class TepacheGameClientControllerComponent extends Component {
         )
         .classList.remove('visible');
     });
+
+    clearInterval(this.#depressButton);
   }
 
   @action
