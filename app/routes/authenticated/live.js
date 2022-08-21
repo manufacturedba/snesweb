@@ -86,19 +86,35 @@ export default class MagwestLiveRoute extends Route {
           reference,
           where('createdAt', '>', lastHour),
           orderBy('createdAt', 'desc'),
-          limit(10)
+          limit(5)
+        );
+      },
+    });
+
+    const sessionCaptureRequest = this.store.query('tepache-session-capture', {
+      isRealtime: true,
+
+      filter(reference) {
+        return query(
+          reference,
+          where('playerSessionUrn', '==', playerSession.urn),
+          where('createdAt', '>', lastHour),
+          orderBy('createdAt', 'desc'),
+          limit(5)
         );
       },
     });
 
     const hardwareInput = await hardwareInputRequest;
     const log = await logRequest;
+    const sessionCapture = await sessionCaptureRequest;
 
     return hash({
       playerSession,
       gameSession,
       hardwareInput,
       log,
+      sessionCapture,
     });
   }
 }

@@ -13,13 +13,17 @@
               <ul
                 class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light text-white small text-monospace mb-2"
               >
-                {{#each @logCollection as |log|}}
+                {{#each this.sortedMergedLogs as |log|}}
                   <li
+                    style="color: {{this.textColor}}"
                     class="text-truncate text-right align-right mb-1
                       {{if
                         (eq log.referenceUrn @playerSessionModel.urn)
                         'text-success'
-                      }}"
+                        this.textColor
+                      }}
+
+                      {{if log.secret 'text-muted'}}"
                   >
                     {{log.message}}
                   </li>

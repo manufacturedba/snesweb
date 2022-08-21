@@ -16,6 +16,20 @@ const initialPressedState = {
   down: false,
 };
 
+//stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+function stringToColor(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let colour = '#';
+  for (var i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xff;
+    colour += ('00' + value.toString(16)).substr(-2);
+  }
+  return colour;
+}
+
 export default class TepacheLiveScreenComponent extends Component {
   @service
   remoteConfig;
@@ -73,5 +87,26 @@ export default class TepacheLiveScreenComponent extends Component {
       controls: true,
       expandFullScreenUI: true,
     };
+  }
+
+  get formattedSessionCaptures() {
+    return this.args.sessionCaptureCollection.map(({ createdAt, button }) => {
+      return {
+        message: `You voted for ${button}`,
+        secret: true,
+        createdAt,
+      };
+    });
+  }
+
+  get sortedMergedLogs() {
+    return [
+      ...this.args.logCollection.toArray(),
+      ...this.formattedSessionCaptures,
+    ].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+  }
+
+  get textColor() {
+    return stringToColor(this.args.playerSessionModel.name);
   }
 }
