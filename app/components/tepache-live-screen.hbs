@@ -47,7 +47,7 @@
           {{/if}}
           <div class="p-2">
             <TepacheGameLog
-              class="font-weight-light tiny text-monospace"
+              class="font-weight-light small text-monospace"
               @playerSessionModel={{@playerSessionModel}}
               @sortedMergedLogs={{this.sortedMergedLogs}}
               @textColor={{this.textColor}}
@@ -61,7 +61,7 @@
             >
               <form.element
                 @size="sm"
-                @controlType="textarea"
+                @controlType="text"
                 @property="textarea" as |el|
               >
                 <el.control placeholder="Send button press as message" />

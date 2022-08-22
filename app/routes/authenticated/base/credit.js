@@ -10,8 +10,8 @@ export default class CreditRoute extends Route {
         description:
           "Alec Asperslag makes art and sometimes other things. A piece of Alec's soul was once locked into a puppet (is it still there?). Alec lacks the ability to self-describe. Find Alec on twitter or ArtStation.",
         links: [
-          'https://twitter.com/alecasperslag',
-          'https://www.artstation.com/alecasperslag',
+          'https://mobile.twitter.com/asperslaga',
+          'https://www.artstation.com/aaspersl',
         ],
       },
       {

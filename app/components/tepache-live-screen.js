@@ -71,7 +71,7 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @action
   submit() {
-    this.request(this.formModel?.textarea?.toLowerCase());
+    this.request(this.formModel?.textarea?.toLowerCase()?.trim());
   }
 
   get pressedState() {
