@@ -1,0 +1,15 @@
+<ul
+  style="color: {{@textColor}}"
+  class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light small text-monospace mb-2"
+>
+  {{#each @sortedMergedLogs as |log|}}
+    <li
+      class="text-truncate text-right align-right mb-1
+        {{if (eq log.referenceUrn @playerSessionModel.urn) 'text-success'}}
+
+        {{if log.secret 'text-muted'}}"
+    >
+      {{log.message}}
+    </li>
+  {{/each}}
+</ul>

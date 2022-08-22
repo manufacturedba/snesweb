@@ -9,25 +9,15 @@
                 <OvenPlayer @options={{this.ovenPlayerConfig}} />
               </div>
             {{/if}}
-            <div class="col-4 py-4">
+            <div class="col-4 py-4 text-white">
               <ul
                 class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light text-white small text-monospace mb-2"
               >
-                {{#each this.sortedMergedLogs as |log|}}
-                  <li
-                    style="color: {{this.textColor}}"
-                    class="text-truncate text-right align-right mb-1
-                      {{if
-                        (eq log.referenceUrn @playerSessionModel.urn)
-                        'text-success'
-                        this.textColor
-                      }}
-
-                      {{if log.secret 'text-muted'}}"
-                  >
-                    {{log.message}}
-                  </li>
-                {{/each}}
+                <TepacheGameLog
+                  @playerSessionModel={{@playerSessionModel}}
+                  @sortedMergedLogs={{this.sortedMergedLogs}}
+                  @textColor={{this.textColor}}
+                />
               </ul>
             </div>
             <div class="col-2">
@@ -54,16 +44,19 @@
         />
       </div>
       <div class="col-12 d-block d-sm-none">
-        {{#if this.ovenPlayerConfig}}
-          <OvenPlayer @options={{this.miniOvenPlayerConfig}} />
-        {{/if}}
+        <div class="bg-black">
+          {{#if this.ovenPlayerConfig}}
+            <OvenPlayer @options={{this.miniOvenPlayerConfig}} />
+          {{/if}}
+        </div>
         <div class="card mt-4 bg-dark text-light">
           <div class="card-body">
             <h5 class="display-6 card-title">
               Rotate your phone to get a controller!
             </h5>
             <p class="card-text text-warning">
-              Just be warned that you can't view video at the same time 😭
+              Be warned that you can't view video at the same time 😭 
+              Great for those with another device for viewing
             </p>
           </div>
         </div>
