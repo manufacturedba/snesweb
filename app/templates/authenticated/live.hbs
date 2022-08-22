@@ -1,4 +1,14 @@
 {{page-title 'Live'}}
+<BsNavbar @type="dark" @backgroundColor="dark">
+  <LinkTo @route="authenticated.base.index" class="navbar-brand">
+    <img
+      class="tepache-mode-base__icon tepache-mode-base__icon--live"
+      alt="painting of rotting pineapple character"
+      title="Rotting pineapple"
+      src="/its-tepache-bb.png"
+    />
+  </LinkTo>
+</BsNavbar>
 <TepacheLiveScreen
   @gameSessionModel={{@model.gameSession}}
   @playerSessionModel={{@model.playerSession}}
