@@ -90,7 +90,7 @@ export default class MagwestLiveRoute extends Route {
           reference,
           where('createdAt', '>', lastHour),
           orderBy('createdAt', 'desc'),
-          limit(9)
+          limit(10)
         );
       },
     });
@@ -106,7 +106,7 @@ export default class MagwestLiveRoute extends Route {
           where('playerSessionUrn', '==', playerSession.urn),
           where('createdAt', '>', lastHour),
           orderBy('createdAt', 'desc'),
-          limit(1)
+          limit(3)
         );
       },
     });
