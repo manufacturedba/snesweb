@@ -13,7 +13,7 @@
               <TepacheGameLog
                 class="font-weight-light text-monospace"
                 @playerSessionModel={{@playerSessionModel}}
-                @sortedMergedLogs={{this.sortedMergedLogs}}
+                @logs={{this.sortedMergedLogs}}
                 @textColor={{this.textColor}}
               />
             </div>
@@ -49,7 +49,7 @@
             <TepacheGameLog
               class="font-weight-light small text-monospace"
               @playerSessionModel={{@playerSessionModel}}
-              @sortedMergedLogs={{this.limitedSortedMergedLogs}}
+              @logs={{this.sortedMergedLogs}}
               @textColor={{this.textColor}}
             />
           </div>
@@ -57,6 +57,7 @@
             <BsForm
               @formLayout="vertical"
               @model={{this.formModel}}
+              @submitOnEnter={{true}}
               @onSubmit={{this.submit}} as |form|
             >
               <form.element

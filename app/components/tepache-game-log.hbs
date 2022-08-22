@@ -3,7 +3,7 @@
   class="tepache-live-screen__chat list-unstyled mb-2"
   ...attributes
 >
-  {{#each @sortedMergedLogs as |log|}}
+  {{#each @logs as |log|}}
     <li
       class="text-truncate text-right align-right mb-1
         {{if (eq log.referenceUrn @playerSessionModel.urn) 'text-success'}}

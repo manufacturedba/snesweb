@@ -1,9 +1,10 @@
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
 import { BUTTON_INTERACTIONS } from '../constants';
-import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { throttle } from '@ember/runloop';
 
 const initialPressedState = {
   a: false,
@@ -17,6 +18,8 @@ const initialPressedState = {
   up: false,
   down: false,
 };
+
+const throttleTime = 1000; // ms
 
 //stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 function stringToColor(str) {
@@ -71,7 +74,12 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @action
   submit() {
-    this.request(this.formModel?.textarea?.toLowerCase()?.trim());
+    return throttle(
+      this,
+      this.request,
+      this.formModel?.textarea?.toLowerCase()?.trim(),
+      throttleTime
+    );
   }
 
   get pressedState() {
@@ -136,15 +144,15 @@ export default class TepacheLiveScreenComponent extends Component {
     });
   }
 
+  get trimmedMergedLogs() {
+    return this.sortedMergedLogs && this.sortedMergedLogs.slice(0, 5);
+  }
+
   get sortedMergedLogs() {
     return [
       ...this.args.logCollection.toArray(),
       ...this.formattedSessionCaptures,
     ].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
-  }
-
-  get limitedSortedMergedLogs() {
-    return this.sortedMergedLogs?.slice(0, 4);
   }
 
   get textColor() {
