@@ -2,6 +2,8 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
 import { BUTTON_INTERACTIONS } from '../constants';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 const initialPressedState = {
   a: false,
@@ -36,6 +38,39 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @service('-firebase')
   firebase;
+
+  @tracked
+  formModel;
+
+  @service
+  nes;
+
+  constructor() {
+    super(...arguments);
+    this.formModel = {
+      textarea: '',
+    };
+  }
+
+  @action
+  async request(button) {
+    navigator?.vibrate(100); // vibrate for 100ms
+
+    return await this.nes.request({
+      path: '/api/socket/tepache-session-captures',
+      method: 'POST',
+      payload: {
+        button,
+        gameSessionUrn: this.args.gameSessionModel?.urn,
+        playerSessionUrn: this.args.playerSessionModel?.urn,
+      },
+    });
+  }
+
+  @action
+  submit() {
+    this.request(this.formModel?.textarea?.toLowerCase());
+  }
 
   get pressedState() {
     if (this.currentPressedButton?.type === BUTTON_INTERACTIONS.BUTTON_PRESS) {

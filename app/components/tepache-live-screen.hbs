@@ -1,4 +1,4 @@
-<div class="tepache-live-screen container justify-content-center">
+<div class="tepache-live-screen container-fluid justify-content-center">
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
       <div class="col-12 d-none d-xl-block bg-black pt-4">
@@ -10,15 +10,12 @@
               </div>
             {{/if}}
             <div class="col-4 py-4 text-white">
-              <ul
-                class="tepache-live-screen__chat list-unstyled text-uppercase font-weight-light text-white small text-monospace mb-2"
-              >
-                <TepacheGameLog
-                  @playerSessionModel={{@playerSessionModel}}
-                  @sortedMergedLogs={{this.sortedMergedLogs}}
-                  @textColor={{this.textColor}}
-                />
-              </ul>
+              <TepacheGameLog
+                class="font-weight-light text-monospace"
+                @playerSessionModel={{@playerSessionModel}}
+                @sortedMergedLogs={{this.sortedMergedLogs}}
+                @textColor={{this.textColor}}
+              />
             </div>
             <div class="col-2">
               <div class="tepache-live-screen__controller-container">
@@ -48,6 +45,32 @@
           {{#if this.ovenPlayerConfig}}
             <OvenPlayer @options={{this.miniOvenPlayerConfig}} />
           {{/if}}
+          <div class="p-2">
+            <TepacheGameLog
+              class="font-weight-light tiny text-monospace"
+              @playerSessionModel={{@playerSessionModel}}
+              @sortedMergedLogs={{this.sortedMergedLogs}}
+              @textColor={{this.textColor}}
+            />
+          </div>
+          <div class="container pb-3">
+            <BsForm
+              @formLayout="vertical"
+              @model={{this.formModel}}
+              @onSubmit={{this.submit}} as |form|
+            >
+              <form.element
+                @size="sm"
+                @controlType="textarea"
+                @property="textarea" as |el|
+              >
+                <el.control placeholder="Send button press as message" />
+              </form.element>
+              <form.submitButton @size="sm">
+                Submit
+              </form.submitButton>
+            </BsForm>
+          </div>
         </div>
         <div class="card mt-4 bg-dark text-light">
           <div class="card-body">
