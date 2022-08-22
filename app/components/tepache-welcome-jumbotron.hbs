@@ -1,17 +1,15 @@
 <div class="jumbotron text-white p-4 text-center">
   <h2 class="display-2">
-    <del>
-      MAGWEST 2022
-    </del>
+    Now playing Final Fantasy 4
   </h2>
   <p class="lead">
-    That's all folks! Thanks for playing!!
+    Welcome beta tester!
   </p>
   <div class="mt-4">
     <div class="d-inline mx-auto">
       {{#if this.isDisabled}}
         <BsTooltip @placement="top">
-          Reopening August 22nd
+          Game session expired
         </BsTooltip>
       {{/if}}
       <BsButton
@@ -20,7 +18,7 @@
         disabled={{this.isDisabled}}
         @onClick={{this.transitionToMagwest}}
       >
-        LET'S GO ANYWAY
+        LET'S GO
       </BsButton>
     </div>
   </div>
