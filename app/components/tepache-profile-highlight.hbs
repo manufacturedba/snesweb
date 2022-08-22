@@ -1,1 +1,35 @@
-{{yield}}
+<div class="card border-0">
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-auto">
+          <img
+            alt={{@imageAlt}}
+            class="tepache-mode-credits__artist-profile-image"
+            src={{@image}}
+          />
+        </div>
+        <div class="col-10 mt-2">
+          <h4>
+            {{@title}}
+          </h4>
+          <p class="lead text-justify">
+            <blockquote class="blockquote">
+              <p>
+                {{@description}}
+              </p>
+              {{#each @links as |link|}}
+                <p>
+                  <a href="{{link}}">
+                    {{link}}
+                  </a>
+                </p>
+              {{/each}}
+            </blockquote>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
