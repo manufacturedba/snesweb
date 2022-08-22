@@ -30,7 +30,7 @@ const buttonMap = {
   16: NOT_SUPPORTED,
 };
 
-const throttleTime = 200; // ms
+const throttleTime = 1000; // ms
 
 export default class TepacheGameClientControllerComponent extends Component {
   @service
@@ -117,7 +117,7 @@ export default class TepacheGameClientControllerComponent extends Component {
       throttle(this, this.request, button, throttleTime);
 
       this.#depressButton = setInterval(() => {
-        throttle(this, this.request, button, throttleTime);
+        this.request(button);
       }, throttleTime);
     }
   }
