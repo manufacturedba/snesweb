@@ -30,7 +30,7 @@ export default class NesService extends Service {
     this.#callbacks.onError = [];
 
     this.#client = new Client(host, {
-      timeout: 2000,
+      timeout: 4000,
     });
 
     this.#connectionRequest = this.#client.connect({

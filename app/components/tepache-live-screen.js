@@ -143,6 +143,10 @@ export default class TepacheLiveScreenComponent extends Component {
     ].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
   }
 
+  get limitedSortedMergedLogs() {
+    return this.sortedMergedLogs?.slice(0, 4);
+  }
+
   get textColor() {
     return stringToColor(this.args.playerSessionModel.name);
   }
