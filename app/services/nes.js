@@ -4,6 +4,8 @@ import { Client } from '@hapi/nes/lib/client';
 import { assert } from '@ember/debug';
 import { service } from '@ember/service';
 
+const RECONNECT_TIME = 1000 * 30; // 30 seconds
+
 export default class NesService extends Service {
   @service
   session;
@@ -13,6 +15,8 @@ export default class NesService extends Service {
   #connectionRequest;
 
   #callbacks = {};
+
+  #unsubscribe;
 
   constructor() {
     super(...arguments);
@@ -58,6 +62,20 @@ export default class NesService extends Service {
     this.#client.onError = (err) => {
       this.#callbacks.onError.forEach((callback) => callback(err));
     };
+
+    this.#unsubscribe = setInterval(() => {
+      if (!this.#client.id) {
+        this.#connectionRequest = this.#client.connect({
+          auth: {
+            headers: {
+              authorization: `Basic ${this.session?.data?.authenticated?.user?.accessToken}`,
+            },
+          },
+          reconnect: true,
+          delay: 1000 * 6,
+        });
+      }
+    }, RECONNECT_TIME);
   }
 
   async request(path, payload) {
@@ -112,4 +130,6 @@ export default class NesService extends Service {
       });
     };
   }
+
+  willDestroy() {}
 }
