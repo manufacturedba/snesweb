@@ -12,8 +12,6 @@ export default class BaseGameRoute extends Route {
 
   async model(params) {
     const games = await this.store.query('tepache-game', {
-      isRealtime: true,
-
       filter(reference) {
         return query(
           reference,

@@ -67,6 +67,8 @@ export default class MagwestLiveRoute extends Route {
     const hardwareInputRequest = this.store.query('tepache-hardware-input', {
       isRealtime: true,
 
+      queryId: 'live-tepache-hardware-input',
+
       filter(reference) {
         return query(
           reference,
@@ -81,6 +83,8 @@ export default class MagwestLiveRoute extends Route {
     const logRequest = this.store.query('tepache-log', {
       isRealtime: true,
 
+      queryId: 'live-tepache-log',
+
       filter(reference) {
         return query(
           reference,
@@ -93,6 +97,8 @@ export default class MagwestLiveRoute extends Route {
 
     const sessionCaptureRequest = this.store.query('tepache-session-capture', {
       isRealtime: true,
+
+      queryId: 'live-tepache-session-capture',
 
       filter(reference) {
         return query(

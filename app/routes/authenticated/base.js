@@ -46,8 +46,6 @@ export default class BaseRoute extends Route {
 
     if (magWestGameUrn) {
       const games = await this.store.query('tepache-game-session', {
-        isRealtime: true,
-
         filter(reference) {
           return query(
             reference,

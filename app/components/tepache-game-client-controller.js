@@ -93,7 +93,6 @@ export default class TepacheGameClientControllerComponent extends Component {
    * @param {MouseEvent} event
    */
   async handleMouseDown(event) {
-    event.preventDefault();
     event.stopPropagation();
 
     clearInterval(this.#depressButton);

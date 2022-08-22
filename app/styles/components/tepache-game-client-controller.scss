@@ -17,10 +17,14 @@
 
 .tepache-game-client-controller__button {
   cursor: pointer;
-  pointer-events: stroke;
+  pointer-events: all;
 }
 
 .tepache-game-client-controller__button:active {
+  visibility: hidden;
+}
+
+.tepache-game-client-controller__button:focus {
   visibility: hidden;
 }
 
