@@ -1,18 +1,17 @@
 <div class="jumbotron text-white p-4 text-center">
   <h2 class="display-2">
-    MAGWEST 2022
+    <del>
+      MAGWEST 2022
+    </del>
   </h2>
   <p class="lead">
-    Live from San Jose, CA
-  </p>
-  <p class="lead">
-    August 19 - 21st
+    That's all folks!
   </p>
   <div class="mt-4">
     <div class="d-inline mx-auto">
       {{#if this.isDisabled}}
         <BsTooltip @placement="top">
-          Disabled until MagWest
+          Reopening August 22nd
         </BsTooltip>
       {{/if}}
       <BsButton
@@ -21,7 +20,7 @@
         disabled={{this.isDisabled}}
         @onClick={{this.transitionToMagwest}}
       >
-        LET'S GO
+        LET'S GO ANYWAY
       </BsButton>
     </div>
   </div>
