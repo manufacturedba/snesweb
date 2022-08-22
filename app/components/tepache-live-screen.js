@@ -54,7 +54,9 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @action
   async request(button) {
-    navigator?.vibrate(100); // vibrate for 100ms
+    if (navigator && navigator.vibrate) {
+      navigator?.vibrate(100); // vibrate for 100ms
+    }
 
     return await this.nes.request({
       path: '/api/socket/tepache-session-captures',
