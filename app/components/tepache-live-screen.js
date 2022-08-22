@@ -19,7 +19,7 @@ const initialPressedState = {
   down: false,
 };
 
-const throttleTime = 1000; // ms
+const throttleTime = 500; // ms
 
 //stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 function stringToColor(str) {
