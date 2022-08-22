@@ -57,19 +57,29 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @action
   async request(button) {
+    if (!button) {
+      return;
+    }
+
     if (navigator && navigator.vibrate) {
       navigator?.vibrate(100); // vibrate for 100ms
     }
 
-    return await this.nes.request({
-      path: '/api/socket/tepache-session-captures',
-      method: 'POST',
-      payload: {
-        button,
-        gameSessionUrn: this.args.gameSessionModel?.urn,
-        playerSessionUrn: this.args.playerSessionModel?.urn,
-      },
-    });
+    try {
+      return await this.nes.request({
+        path: '/api/socket/tepache-session-captures',
+        method: 'POST',
+        payload: {
+          button,
+          gameSessionUrn: this.args.gameSessionModel?.urn,
+          playerSessionUrn: this.args.playerSessionModel?.urn,
+        },
+      });
+    } catch (error) {
+      if (error?.message?.includes('server disconnected')) {
+        this.nes.connect();
+      }
+    }
   }
 
   @action

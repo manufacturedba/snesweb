@@ -33,15 +33,7 @@ export default class NesService extends Service {
       timeout: 4000,
     });
 
-    this.#connectionRequest = this.#client.connect({
-      auth: {
-        headers: {
-          authorization: `Basic ${this.session?.data?.authenticated?.user?.accessToken}`,
-        },
-      },
-      reconnect: true,
-      delay: 1000 * 6,
-    });
+    this.connect();
 
     this.#client.onConnect = () => {
       this.#callbacks.onConnect.forEach((callback) => callback());
@@ -62,6 +54,30 @@ export default class NesService extends Service {
     this.#client.onError = (err) => {
       this.#callbacks.onError.forEach((callback) => callback(err));
     };
+  }
+
+  async request(path, payload) {
+    await this.#connectionRequest;
+    return await this.#client.request(path, payload);
+  }
+
+  get connected() {
+    return this.#client.id;
+  }
+
+  connect() {
+    clearInterval(this.#unsubscribe);
+
+    this.#connectionRequest = this.#client.connect({
+      auth: {
+        headers: {
+          authorization: `Basic ${this.session?.data?.authenticated?.user?.accessToken}`,
+        },
+      },
+      reconnect: true,
+      delay: 1000,
+      maxDelay: RECONNECT_TIME,
+    });
 
     this.#unsubscribe = setInterval(() => {
       if (!this.#client.id) {
@@ -72,19 +88,11 @@ export default class NesService extends Service {
             },
           },
           reconnect: true,
-          delay: 1000 * 6,
+          delay: 1000,
+          maxDelay: RECONNECT_TIME,
         });
       }
     }, RECONNECT_TIME);
-  }
-
-  async request(path, payload) {
-    await this.#connectionRequest;
-    return await this.#client.request(path, payload);
-  }
-
-  get connected() {
-    return this.#client.id;
   }
 
   onConnect(callback) {
@@ -131,5 +139,7 @@ export default class NesService extends Service {
     };
   }
 
-  willDestroy() {}
+  willDestroy() {
+    clearInterval(this.#unsubscribe);
+  }
 }
