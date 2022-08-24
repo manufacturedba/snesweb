@@ -86,12 +86,7 @@ export default class MagwestLiveRoute extends Route {
       queryId: 'live-tepache-log',
 
       filter(reference) {
-        return query(
-          reference,
-          where('createdAt', '>', lastHour),
-          orderBy('createdAt', 'desc'),
-          limit(4)
-        );
+        return query(reference, orderBy('createdAt', 'desc'), limit(4));
       },
     });
 
