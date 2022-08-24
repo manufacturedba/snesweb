@@ -1,13 +1,32 @@
 {{page-title 'Live'}}
-<BsNavbar @type="dark" @backgroundColor="dark">
-  <LinkTo @route="authenticated.base.index" class="navbar-brand">
-    <img
-      class="tepache-mode-base__icon tepache-mode-base__icon--live"
-      alt="painting of rotting pineapple character"
-      title="Rotting pineapple"
-      src="/its-tepache-bb.png"
-    />
-  </LinkTo>
+<BsNavbar
+  @type="dark"
+  @backgroundColor="dark"
+  @toggleBreakpoint={{null}} as |navbar|
+>
+  <div class="navbar-header">
+    <LinkTo @route="authenticated.base.index" class="navbar-brand">
+      <img
+        class="tepache-mode-base__icon tepache-mode-base__icon--live"
+        alt="painting of rotting pineapple character"
+        title="Rotting pineapple"
+        src="/its-tepache-bb.png"
+      />
+    </LinkTo>
+  </div>
+  <navbar.content>
+    <navbar.nav as |nav|>
+      <nav.item>
+        <span class="text-white">
+          Try texting
+          <a href="sms:+15302407571?&body=a" class="text-white">
+            530-240-7571
+          </a>
+          to play
+        </span>
+      </nav.item>
+    </navbar.nav>
+  </navbar.content>
 </BsNavbar>
 <TepacheLiveScreen
   @gameSessionModel={{@model.gameSession}}
