@@ -1,15 +1,15 @@
 <div class="tepache-live-screen container-fluid justify-content-center">
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
-      <div class="col-12 d-none d-xl-block bg-black pt-4">
+      <div class="col-12 bg-black pt-4">
         <div class="container">
           <div class="row">
             {{#if this.ovenPlayerConfig}}
-              <div class="col-6">
+              <div class="col-md-6 col-xs-12">
                 <OvenPlayer @options={{this.ovenPlayerConfig}} />
               </div>
             {{/if}}
-            <div class="col-4 py-4 text-white">
+            <div class="d-none d-xl-block col-4 py-4 text-white">
               <TepacheGameLog
                 class="font-weight-light text-monospace"
                 @playerSessionModel={{@playerSessionModel}}
@@ -17,7 +17,7 @@
                 @textColor={{this.textColor}}
               />
             </div>
-            <div class="col-2">
+            <div class="col-2 d-none d-xl-block">
               <div class="tepache-live-screen__controller-container">
                 <TepacheGameServerController
                   class="w-100 tepache-live-screen__controller"
@@ -40,11 +40,8 @@
           @currentPressedButton={{this.currentPressedButton}}
         />
       </div>
-      <div class="col-12 d-block d-sm-none">
+      <div class="col-12 d-block d-sm-none bg-black">
         <div class="bg-black">
-          {{#if this.ovenPlayerConfig}}
-            <OvenPlayer @options={{this.miniOvenPlayerConfig}} />
-          {{/if}}
           <div class="p-2">
             <TepacheGameLog
               class="font-weight-light small text-monospace"
