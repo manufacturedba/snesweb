@@ -24,7 +24,7 @@ export default class TepacheCastComponent extends Component {
     // Create new Castjs instance
 
     const receiver =
-      this.chromecastConfig.chromecast?.receiver ||
+      this.chromecastConfig?.receiver ||
       chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
 
     // eslint-disable-next-line no-undef
