@@ -55,4 +55,7 @@ module.exports = {
       extends: ['plugin:qunit/recommended'],
     },
   ],
+  globals: {
+    chrome: true,
+  },
 };
