@@ -48,7 +48,7 @@ export default class TepacheVideoPlayerComponent extends Component {
   }
 
   @action
-  onStateChange({ newstate }) {
+  onStateChanged({ newstate }) {
     if (newstate === 'playing') {
       this.cjs.play();
     }
