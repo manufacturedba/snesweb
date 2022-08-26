@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
 
-export default class TepacheCastComponent extends Component {
+export default class TepacheVideoPlayerComponent extends Component {
   @service
   remoteConfig;
 
@@ -20,7 +20,7 @@ export default class TepacheCastComponent extends Component {
   }
 
   @action
-  createCastHook(element) {
+  createCastHook() {
     // Create new Castjs instance
 
     const receiver =
@@ -28,10 +28,13 @@ export default class TepacheCastComponent extends Component {
       chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
 
     // eslint-disable-next-line no-undef
-    const cjs = new Castjs({
+    this.cjs = new Castjs({
       receiver,
     });
+  }
 
+  @action
+  cast() {
     // Optional metadata
     const metadata = {
       poster: this.chromecastConfig.poster || '',
@@ -39,11 +42,37 @@ export default class TepacheCastComponent extends Component {
       description: this.chromecastConfig.description || '',
     };
 
-    // Wait for user interaction
-    element.querySelector('.cast').addEventListener('click', () => {
-      if (cjs.available) {
-        cjs.cast(this.chromecastConfig.playlist || '', metadata);
-      }
-    });
+    if (this.cjs.available) {
+      this.cjs.cast(this.chromecastConfig.playlist || '', metadata);
+    }
+  }
+
+  @action
+  onStateChange({ newstate }) {
+    if (newstate === 'playing') {
+      this.cjs.play();
+    }
+
+    if (newstate === 'paused') {
+      this.cjs.pause();
+    }
+
+    if (newstate === 'error') {
+      this.cjs.stop();
+    }
+  }
+
+  @action
+  onMute(volume) {
+    if (!volume) {
+      this.cjs.mute();
+    } else {
+      this.cjs.volume(volume / 100);
+    }
+  }
+
+  @action
+  onVolumeChange(volume) {
+    this.cjs.volume(volume / 100);
   }
 }
