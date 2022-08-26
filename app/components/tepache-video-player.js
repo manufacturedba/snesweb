@@ -10,6 +10,8 @@ export default class TepacheVideoPlayerComponent extends Component {
   @service('-firebase')
   firebase;
 
+  #playing = false;
+
   get chromecastConfig() {
     const chromecastJSON = getValue(
       getRemoteConfig(this.firebase),
@@ -30,6 +32,17 @@ export default class TepacheVideoPlayerComponent extends Component {
     // eslint-disable-next-line no-undef
     this.cjs = new Castjs({
       receiver,
+      joinpolicy: 'origin_scoped',
+    });
+
+    this.cjs.on('connect', () => {
+      if (this.#playing) {
+        this.cjs.play();
+      }
+    });
+
+    this.cjs.on('error', (error) => {
+      console.error(error);
     });
   }
 
@@ -49,6 +62,8 @@ export default class TepacheVideoPlayerComponent extends Component {
 
   @action
   onStateChanged({ newstate }) {
+    this.#playing = newstate === 'playing';
+
     if (newstate === 'playing') {
       this.cjs.play();
     }
