@@ -101,7 +101,7 @@ export default class TepacheLiveScreenComponent extends Component {
   }
 
   @action
-  submit(event) {
+  submit() {
     return throttle(
       this,
       this.request,
@@ -124,7 +124,7 @@ export default class TepacheLiveScreenComponent extends Component {
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.lang = 'en-US';
-    recognition.interimResults = false;
+    recognition.interimResults = true;
     recognition.continuous = true;
     recognition.maxAlternatives = 12;
     recognition.onresult = (event) => {
