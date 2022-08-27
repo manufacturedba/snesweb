@@ -23,27 +23,29 @@ export default class TepacheVideoPlayerComponent extends Component {
 
   @action
   createCastHook() {
-    // Create new Castjs instance
+    if (window.chrome) {
+      // Create new Castjs instance
 
-    const receiver =
-      this.chromecastConfig?.receiver ||
-      chrome?.cast?.media?.DEFAULT_MEDIA_RECEIVER_APP_ID;
+      const receiver =
+        this.chromecastConfig?.receiver ||
+        chrome?.cast?.media?.DEFAULT_MEDIA_RECEIVER_APP_ID;
 
-    // eslint-disable-next-line no-undef
-    this.cjs = new Castjs({
-      receiver,
-      joinpolicy: 'origin_scoped',
-    });
+      // eslint-disable-next-line no-undef
+      this.cjs = new Castjs({
+        receiver,
+        joinpolicy: 'origin_scoped',
+      });
 
-    this.cjs.on('connect', () => {
-      if (this.#playing) {
-        this.cjs.play();
-      }
-    });
+      this.cjs.on('connect', () => {
+        if (this.#playing) {
+          this.cjs.play();
+        }
+      });
 
-    this.cjs.on('error', (error) => {
-      console.error(error);
-    });
+      this.cjs.on('error', (error) => {
+        console.error(error);
+      });
+    }
   }
 
   @action
@@ -55,39 +57,45 @@ export default class TepacheVideoPlayerComponent extends Component {
       description: this.chromecastConfig.description || '',
     };
 
-    if (this.cjs.available) {
+    if (this?.cjs?.available) {
       this.cjs.cast(this.chromecastConfig.playlist || '', metadata);
     }
   }
 
   @action
   onStateChanged({ newstate }) {
-    this.#playing = newstate === 'playing';
+    if (this.cjs) {
+      this.#playing = newstate === 'playing';
 
-    if (newstate === 'playing') {
-      this.cjs.play();
-    }
+      if (newstate === 'playing') {
+        this.cjs.play();
+      }
 
-    if (newstate === 'paused') {
-      this.cjs.pause();
-    }
+      if (newstate === 'paused') {
+        this.cjs.pause();
+      }
 
-    if (newstate === 'error') {
-      this.cjs.stop();
+      if (newstate === 'error') {
+        this.cjs.stop();
+      }
     }
   }
 
   @action
   onMute(volume) {
-    if (!volume) {
-      this.cjs.mute();
-    } else {
-      this.cjs.volume(volume / 100);
+    if (this.cjs) {
+      if (!volume) {
+        this.cjs.mute();
+      } else {
+        this.cjs.volume(volume / 100);
+      }
     }
   }
 
   @action
   onVolumeChange(volume) {
-    this.cjs.volume(volume / 100);
+    if (this.cjs) {
+      this.cjs.volume(volume / 100);
+    }
   }
 }
