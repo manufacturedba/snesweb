@@ -6,6 +6,19 @@ import { getRemoteConfig, getValue } from 'firebase/remote-config';
 import { BUTTON_INTERACTIONS } from '../constants';
 import { throttle } from '@ember/runloop';
 
+const allButtons = [
+  'a',
+  'b',
+  'x',
+  'y',
+  'left',
+  'right',
+  'up',
+  'down',
+  'start',
+  'select',
+];
+
 const initialPressedState = {
   a: false,
   b: false,
@@ -34,6 +47,11 @@ function stringToColor(str) {
   }
   return colour;
 }
+
+const RecognitionClass =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+const GrammarListClass =
+  window.SpeechGrammarList || window.webkitSpeechGrammarList;
 
 export default class TepacheLiveScreenComponent extends Component {
   @service
@@ -83,13 +101,43 @@ export default class TepacheLiveScreenComponent extends Component {
   }
 
   @action
-  submit() {
+  submit(event) {
     return throttle(
       this,
       this.request,
       this.formModel?.textarea?.toLowerCase()?.trim(),
       throttleTime
     );
+  }
+
+  @action
+  setupSpeechRecognition() {
+    const grammar =
+      '#JSGF V1.0; grammar commands; public <command> = a | b | x | y | up | down | left | right | start | select ;';
+
+    const recognition = new RecognitionClass();
+    const speechRecognitionList = new GrammarListClass();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.continuous = true;
+    recognition.maxAlternatives = 12;
+    recognition.onresult = (event) => {
+      const speechResult = Array.from(
+        event.results[event.results.length - 1]
+      ).reduce((result, match) => {
+        const normalizedMatch = match.transcript.trim().toLowerCase();
+
+        if (allButtons.includes(normalizedMatch)) {
+          return normalizedMatch;
+        }
+
+        return result;
+      }, '');
+      throttle(this, this.request, speechResult, throttleTime);
+    };
+    recognition.start();
   }
 
   get pressedState() {

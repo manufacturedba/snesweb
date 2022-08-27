@@ -1,4 +1,7 @@
-<div class="tepache-live-screen container-fluid justify-content-center">
+<div
+  class="tepache-live-screen container-fluid justify-content-center"
+  {{did-insert this.setupSpeechRecognition}}
+>
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row">
       <div class="col-12 bg-black pt-4">
@@ -70,15 +73,15 @@
             </BsForm>
           </div>
         </div>
-        <div class="card mt-4 bg-dark text-light">
+        <div class="card mt-4 bg-dark text-light mb-4">
           <div class="card-body">
             <h5 class="display-6 card-title">
-              Rotate your phone to get a controller!
+              Also try texting
+              <a href="sms:+15302407571?&body=up" class="text-white">
+                530-240-7571
+              </a>
+              to play
             </h5>
-            <p class="card-text text-warning">
-              Be warned that you can't view video at the same time 😭 
-              Great for those with another device for viewing
-            </p>
           </div>
         </div>
       </div>
