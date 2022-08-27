@@ -112,6 +112,10 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @action
   setupSpeechRecognition() {
+    if (!RecognitionClass || !GrammarListClass) {
+      return;
+    }
+
     const grammar =
       '#JSGF V1.0; grammar commands; public <command> = a | b | x | y | up | down | left | right | start | select ;';
 
