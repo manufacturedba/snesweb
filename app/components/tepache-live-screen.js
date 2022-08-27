@@ -127,6 +127,7 @@ export default class TepacheLiveScreenComponent extends Component {
     recognition.interimResults = true;
     recognition.continuous = true;
     recognition.maxAlternatives = 12;
+    recognition.start();
     recognition.onresult = (event) => {
       const speechResult = Array.from(
         event.results[event.results.length - 1]
@@ -141,7 +142,6 @@ export default class TepacheLiveScreenComponent extends Component {
       }, '');
       throttle(this, this.request, speechResult, throttleTime);
     };
-    recognition.start();
   }
 
   get pressedState() {
