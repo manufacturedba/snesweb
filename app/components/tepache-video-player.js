@@ -27,7 +27,7 @@ export default class TepacheVideoPlayerComponent extends Component {
 
     const receiver =
       this.chromecastConfig?.receiver ||
-      chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
+      chrome?.cast?.media?.DEFAULT_MEDIA_RECEIVER_APP_ID;
 
     // eslint-disable-next-line no-undef
     this.cjs = new Castjs({

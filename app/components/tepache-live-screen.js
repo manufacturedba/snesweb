@@ -127,7 +127,9 @@ export default class TepacheLiveScreenComponent extends Component {
     recognition.interimResults = true;
     recognition.continuous = true;
     recognition.maxAlternatives = 12;
-    recognition.start();
+    document.body.addEventListener('click', () => {
+      recognition.start();
+    });
     recognition.onresult = (event) => {
       const speechResult = Array.from(
         event.results[event.results.length - 1]
