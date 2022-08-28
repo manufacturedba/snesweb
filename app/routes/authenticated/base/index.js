@@ -1,10 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import {
-  query,
-  where,
-  orderBy,
-} from 'ember-cloud-firestore-adapter/firebase/firestore';
 
 /**
  * This route is used to display the main landing page for the site
