@@ -1,8 +1,13 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { query, where } from 'ember-cloud-firestore-adapter/firebase/firestore';
+import {
+  limit,
+  query,
+  where,
+} from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { orderBy } from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { getAnalytics, logEvent } from 'firebase/analytics';
+import { hash } from 'rsvp';
 
 export default class BaseRoute extends Route {
   @service
@@ -38,25 +43,41 @@ export default class BaseRoute extends Route {
       'authenticated.construction'
     );
   }
-
   async model() {
     // Look for any game sessions running for the selected game
     // Status does not matter here
     const magWestGameUrn = this.remoteConfig.getString('magwest_game_urn');
 
     if (magWestGameUrn) {
-      const games = await this.store.query('tepache-game-session', {
+      const games = await this.store.query('tepache-game', {
+        filter(reference) {
+          return query(
+            reference,
+            where('active', '==', true),
+            where('urn', '==', magWestGameUrn),
+            limit(1)
+          );
+        },
+      });
+
+      const gameSessions = await this.store.query('tepache-game-session', {
+        isRealTime: true,
+
         filter(reference) {
           return query(
             reference,
             where('gameUrn', '==', magWestGameUrn),
             where('expiresAt', '>', new Date()),
-            orderBy('expiresAt', 'desc')
+            orderBy('expiresAt', 'desc'),
+            limit(1)
           );
         },
       });
 
-      return games.firstObject;
+      return hash({
+        games,
+        gameSessions,
+      });
     }
   }
 }
