@@ -16,7 +16,7 @@ export default class BaseMagwestRoute extends Route {
   router;
 
   async model() {
-    const gameSession = this.modelFor('authenticated.base');
+    const { gameSession } = this.modelFor('authenticated.base');
 
     if (!gameSession) {
       return this.router.transitionTo('authenticated.base');
