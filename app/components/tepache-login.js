@@ -7,6 +7,7 @@ import 'firebaseui/dist/firebaseui.css';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { setUserId, getAnalytics, logEvent } from 'firebase/analytics';
+import { getRedirectResult } from 'firebase/auth';
 
 export default class TepacheLoginComponent extends Component {
   @service
@@ -14,6 +15,12 @@ export default class TepacheLoginComponent extends Component {
 
   @service
   router;
+
+  @service
+  identifiedUser;
+
+  @service
+  authui;
 
   get email() {
     return this.session?.data?.authenticated?.user?.email;
@@ -32,9 +39,15 @@ export default class TepacheLoginComponent extends Component {
           setUserId(analytics, authResult?.user?.uid);
           logEvent(analytics, 'login');
 
+          this.identifiedUser.fetchRole(authResult?.user?.uid);
+
           this.session
             .authenticate('authenticator:firebase', () => {
-              return authResult;
+              return {
+                user: authResult.user,
+                providerId: authResult.additionalUserInfo.providerId,
+                operationType: authResult.operationType,
+              };
             })
             .finally(() =>
               this.router.transitionTo('authenticated.base.index')
@@ -70,7 +83,7 @@ export default class TepacheLoginComponent extends Component {
       privacyPolicyUrl: 'https://tepachemode.com/privacy',
     };
     // The start method will wait until the DOM is loaded.
-    this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+    this.ui = this.authui.ui;
     this.ui.start(element.querySelector('[data-firebase-ui]'), uiConfig);
   }
 

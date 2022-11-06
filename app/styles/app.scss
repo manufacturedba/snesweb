@@ -1,8 +1,9 @@
 @use 'imports';
 @use 'tepache-mode-credits';
+@use 'text';
+@use 'overrides';
 @import "ember-bootstrap/bootstrap";
 @import 'bootstrap-backport';
-
 
 :root {
     --bs-body-font-size: 20px;

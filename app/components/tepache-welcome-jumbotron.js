@@ -29,7 +29,7 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
   }
 
   @action
-  transitionToMagwest() {
-    this.router.transitionTo('authenticated.base.magwest');
+  transitionToPlay() {
+    this.router.transitionTo('authenticated.base.play');
   }
 }

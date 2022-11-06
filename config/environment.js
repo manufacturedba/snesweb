@@ -1,6 +1,6 @@
 'use strict';
 
-const remoteConfig = require('../remote_config_defaults.json');
+const remoteConfig = require('../remote_config.json');
 
 module.exports = function (environment) {
   let ENV = {

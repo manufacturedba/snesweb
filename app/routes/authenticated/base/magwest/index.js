@@ -14,7 +14,7 @@ export default class MagwestRoute extends Route {
 
   async model() {
     const { gameSession, playerSession } = this.modelFor(
-      'authenticated.base.magwest'
+      'authenticated.base.play'
     );
 
     if (!gameSession) {

@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import { getAnalytics, setUserId, logEvent } from 'firebase/analytics';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 import config from 'tepacheweb/config/environment';
 import { getStorage, connectStorageEmulator } from 'firebase/storage';
 
@@ -18,27 +18,16 @@ export default class ApplicationRoute extends Route {
   @service
   remoteConfig;
 
-  async beforeModel() {
+  async model() {
+    const analytics = getAnalytics();
+
     if (config.storage?.emulator) {
       const host = config.storage.emulator.host;
       const port = config.storage.emulator.port;
       connectStorageEmulator(getStorage(), host, port);
     }
 
-    const analytics = getAnalytics();
-    await this.session.setup();
-
-    if (this.session.isAuthenticated) {
-      setUserId(analytics, this.session?.data?.authenticated?.user?.uid);
-    } else {
-      setUserId(analytics, null);
-    }
-
     logEvent(analytics, 'app_start');
-  }
-
-  async afterModel() {
-    return await this.remoteConfig.fetchConfig();
   }
 
   @action

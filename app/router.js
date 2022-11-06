@@ -12,16 +12,18 @@ Router.map(function () {
     this.route('base', { path: '/' }, function () {
       this.route('index', { path: '/' });
       this.route('about');
-      this.route('magwest', function () {});
-
+      this.route('magwest'); // Redirects to play now
+      this.route('play', function () {
+        this.route('live');
+      });
       this.route('games');
       this.route('game', { path: '/games/:game_urn' });
 
       this.route('credit');
       this.route('privacy');
       this.route('terms');
+      this.route('admin');
     });
-    this.route('live', { path: '/magwest/live' });
     this.route('construction');
     // TODO - This treats 404 scenarios as valid.
     this.route('404', { path: '/*path' });

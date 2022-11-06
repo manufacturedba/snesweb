@@ -20,14 +20,15 @@ export default class BaseRoute extends Route {
   store;
 
   @service
-  errorAlert;
+  remoteConfig;
 
   @service
-  remoteConfig;
+  identifiedUser;
 
   async beforeModel(transition) {
     const analytics = getAnalytics();
-    const activated = await this.remoteConfig.activate();
+    const activated = await this.remoteConfig.fetchAndActivate();
+
     logEvent(analytics, 'config_fetched', {
       activated,
     });
@@ -42,35 +43,36 @@ export default class BaseRoute extends Route {
       transition,
       'authenticated.construction'
     );
+
+    if (this.session?.data?.authenticated?.user) {
+      this.identifiedUser.fetchRole(this.session.data.authenticated.user.uid);
+    }
   }
+
   async model() {
     // Look for any game sessions running for the selected game
     // Status does not matter here
-    const magWestGameUrn = this.remoteConfig.getString('magwest_game_urn');
+    const gameSessionUrn = this.remoteConfig.getString('game_session_urn');
 
-    if (magWestGameUrn) {
-      const games = await this.store.query('tepache-game', {
-        filter(reference) {
-          return query(
-            reference,
-            where('active', '==', true),
-            where('urn', '==', magWestGameUrn),
-            limit(1)
-          );
-        },
-      });
-
+    if (gameSessionUrn) {
       const gameSessions = await this.store.query('tepache-game-session', {
         isRealTime: true,
 
         filter(reference) {
           return query(
             reference,
-            where('gameUrn', '==', magWestGameUrn),
-            where('expiresAt', '>', new Date()),
+            where('urn', '==', gameSessionUrn),
             orderBy('expiresAt', 'desc'),
             limit(1)
           );
+        },
+      });
+
+      const gameUrn = gameSessions.firstObject.gameUrn;
+
+      const games = await this.store.query('tepache-game', {
+        filter(reference) {
+          return query(reference, where('urn', '==', gameUrn), limit(1));
         },
       });
 

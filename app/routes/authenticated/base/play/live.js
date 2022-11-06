@@ -8,7 +8,7 @@ import {
 } from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { hash } from 'rsvp';
 
-export default class MagwestLiveRoute extends Route {
+export default class BasePlayLiveRoute extends Route {
   @service
   remoteConfig;
 
@@ -19,45 +19,15 @@ export default class MagwestLiveRoute extends Route {
   router;
 
   async model() {
-    let { gameSession } = this.modelFor('authenticated.base') || {};
+    let { gameSession, playerSession } =
+      this.modelFor('authenticated.base.play') || {};
 
-    if (!gameSession) {
-      // Look for any game sessions running for the selected game
-      // Status does not matter here
-      const magWestGameUrn = this.remoteConfig.getString('magwest_game_urn');
-
-      if (magWestGameUrn) {
-        const gameSessions = await this.store.query('tepache-game-session', {
-          isRealtime: true,
-
-          filter(reference) {
-            return query(
-              reference,
-              where('gameUrn', '==', magWestGameUrn),
-              where('expiresAt', '>', new Date()),
-              orderBy('expiresAt', 'desc')
-            );
-          },
-        });
-
-        gameSession = gameSessions.firstObject;
-      } else {
-        return this.router.transitionTo('authenticated.base');
-      }
-    }
-
-    if (!gameSession) {
+    if (!gameSession || gameSession.expiresAt < new Date()) {
       return this.router.transitionTo('authenticated.base');
     }
 
-    const playerSessions = await this.store.query('tepache-player-session', {
-      gameSessionUrn: gameSession.urn,
-    });
-
-    const playerSession = playerSessions.firstObject;
-
     if (!playerSession) {
-      return this.router.transitionTo('authenticated.base.magwest');
+      return this.router.transitionTo('authenticated.base.play');
     }
 
     const today = new Date();

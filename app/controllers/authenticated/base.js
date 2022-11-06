@@ -27,4 +27,8 @@ export default class BaseController extends Controller {
       console.error(e);
     }
   }
+
+  get showFooter() {
+    return this.router.currentRouteName !== 'authenticated.base.play.live';
+  }
 }

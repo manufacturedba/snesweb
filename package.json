@@ -12,13 +12,15 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
+    "emulate": "firebase emulators:start",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "node index.mjs",
+    "start": "node ./scripts/copy-config-to-temporary.mjs && node index.mjs",
+    "start:dev": "NODE_ENV=development ONLY_SEED_EMPTY=true && node ./scripts/copy-config-to-temporary.mjs && node ./scripts/seed-firestore.mjs && ember s",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test"
   },
