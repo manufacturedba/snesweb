@@ -9,9 +9,19 @@ module.exports = function emberCLIBuild(defaults) {
     'ember-simple-auth': {
       useSessionSetupMethod: true,
     },
+    sassOptions: {
+      includePaths: ['node_modules/bootstrap-icons/font'],
+    },
   });
 
   app.import('node_modules/ovenplayer/dist/ovenplayer.js');
+  app.import('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff', {
+    destDir: 'assets/fonts',
+  });
+  app.import('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2', {
+    destDir: 'assets/fonts',
+  });
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //

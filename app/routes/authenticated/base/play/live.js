@@ -34,6 +34,18 @@ export default class BasePlayLiveRoute extends Route {
     const lastMinute = new Date(today.getTime() - 1000 * 60);
     const lastHour = new Date(today.getTime() - 1000 * 60 * 60);
 
+    const gameRequest = this.store.query('tepache-game', {
+      isRealtime: true,
+
+      filter(reference) {
+        return query(
+          reference,
+          where('urn', '==', gameSession.gameUrn),
+          limit(1)
+        );
+      },
+    });
+
     const hardwareInputRequest = this.store.query('tepache-hardware-input', {
       isRealtime: true,
 
@@ -78,9 +90,11 @@ export default class BasePlayLiveRoute extends Route {
 
     const hardwareInput = await hardwareInputRequest;
     const sessionCapture = await sessionCaptureRequest;
+    const games = await gameRequest;
     const log = await logRequest;
 
     return hash({
+      game: games.firstObject,
       playerSession,
       gameSession,
       hardwareInput,

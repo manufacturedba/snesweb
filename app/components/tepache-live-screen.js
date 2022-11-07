@@ -61,11 +61,14 @@ export default class TepacheLiveScreenComponent extends Component {
   @service('-firebase')
   firebase;
 
+  @service
+  nes;
+
   @tracked
   formModel;
 
-  @service
-  nes;
+  @tracked
+  recentlyActivePlayerCount;
 
   #subscription;
 
@@ -226,10 +229,29 @@ export default class TepacheLiveScreenComponent extends Component {
     return stringToColor(this.args.playerSessionModel.name);
   }
 
+  async fetchHeartbeat() {
+    const response = await this.nes.request({
+      path: '/api/socket/heartbeat',
+      method: 'POST',
+      payload: {
+        playerSessionDocumentId: this.args.playerSessionModel.id,
+      },
+    });
+
+    this.recentlyActivePlayerCount =
+      response?.payload?.recentlyActivePlayerCount;
+  }
+
   @action
   heartbeat() {
-    this.#subscription = setInterval(() => {
-      this.args.playerSessionModel.save();
+    this.fetchHeartbeat();
+
+    this.#subscription = setInterval(async () => {
+      try {
+        this.fetchHeartbeat();
+      } catch (error) {
+        this.#subscription?.clearInterval();
+      }
     }, heartbeatTime);
   }
 
