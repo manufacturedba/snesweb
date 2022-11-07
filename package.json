@@ -20,7 +20,7 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "node index.mjs",
-    "start:dev": "NODE_ENV=development ONLY_SEED_EMPTY=true && node ./scripts/copy-config-to-temporary.mjs && node ./scripts/seed-firestore.mjs && ember s",
+    "start:dev": "NODE_ENV=development node ./scripts/copy-config-to-temporary.mjs && node ./scripts/seed-firestore.mjs && ember s",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test"
   },

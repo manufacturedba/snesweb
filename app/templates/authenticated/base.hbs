@@ -73,7 +73,10 @@
             </nav.item>
             <nav.item>
               {{#if this.identifiedUser.isAdmin}}
-                <nav.link-to @route="authenticated.base.admin" class="nav-link">
+                <nav.link-to
+                  @route="authenticated.base.admin"
+                  class="text-color-owner nav-link"
+                >
                   Admin
                 </nav.link-to>
               {{/if}}

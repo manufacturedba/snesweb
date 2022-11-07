@@ -33,6 +33,7 @@ const initialPressedState = {
 };
 
 const throttleTime = 500; // ms
+const heartbeatTime = 12 * 1000;
 
 //stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 function stringToColor(str) {
@@ -65,6 +66,8 @@ export default class TepacheLiveScreenComponent extends Component {
 
   @service
   nes;
+
+  #subscription;
 
   constructor() {
     super(...arguments);
@@ -221,5 +224,19 @@ export default class TepacheLiveScreenComponent extends Component {
 
   get textColor() {
     return stringToColor(this.args.playerSessionModel.name);
+  }
+
+  @action
+  heartbeat() {
+    this.#subscription = setInterval(() => {
+      this.args.playerSessionModel.save();
+    }, heartbeatTime);
+  }
+
+  @action
+  remove() {
+    super.willDestroy(...arguments);
+
+    this.#subscription?.clearInterval();
   }
 }
