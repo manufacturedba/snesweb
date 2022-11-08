@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { GAME_SESSION_STATE } from '../constants';
+import { GAME_SESSION_STATE } from '../../constants';
 
 export default class TepacheGameSessionsTableComponent extends Component {
   @tracked

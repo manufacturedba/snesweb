@@ -15,6 +15,9 @@ export default class AuthenticatedBaseAdminIndexRoute extends Route {
   @service
   remoteConfig;
 
+  @service
+  identifiedUser;
+
   async model() {
     // Look for any game sessions running for the selected game
     // Status does not matter here
@@ -51,6 +54,7 @@ export default class AuthenticatedBaseAdminIndexRoute extends Route {
         game: games.firstObject,
         gameSession: gameSession,
         playerSessions,
+        identifiedUser: this.identifiedUser,
       });
     }
   }

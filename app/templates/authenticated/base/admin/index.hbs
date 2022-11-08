@@ -8,14 +8,19 @@
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3">
     <div class="col mb-4">
-      <TepacheAdminActiveGameSessionCard
+      <Admin::TepacheActiveGameSessionCard
         @gameSessionModel={{@model.gameSession}}
         @gameModel={{@model.game}}
       />
     </div>
     <div class="col mb-4">
-      <TepacheAdminActivePlayerSessionCountCard
+      <Admin::TepacheActivePlayerSessionCountCard
         @playerSessionCollection={{@model.playerSessions}}
+      />
+    </div>
+    <div class="col mb-4">
+      <Admin::TepacheIdentifiedUserCard
+        @identifiedUser={{@model.identifiedUser}}
       />
     </div>
   </div>
