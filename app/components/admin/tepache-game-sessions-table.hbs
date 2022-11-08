@@ -10,45 +10,47 @@
     Active only
   </label>
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">
-        Name
-      </th>
-      <th scope="col">
-        Description
-      </th>
-      <th scope="col">
-        Created at
-      </th>
-      <th scope="col">
-        Expires at
-      </th>
-      <th scope="col">
-        State
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.processedGameSessionCollection as |gameSession|}}
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <th scope="row" class="text-truncate">
-          {{gameSession.name}}
+        <th scope="col">
+          Name
         </th>
-        <td class="text-truncate">
-          {{gameSession.description}}
-        </td>
-        <td>
-          {{short-date gameSession.createdAt}}
-        </td>
-        <td>
-          {{short-date gameSession.expiresAt}}
-        </td>
-        <td>
-          {{lowercase gameSession.state}}
-        </td>
+        <th scope="col">
+          Description
+        </th>
+        <th scope="col">
+          Created at
+        </th>
+        <th scope="col">
+          Expires at
+        </th>
+        <th scope="col">
+          State
+        </th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each this.processedGameSessionCollection as |gameSession|}}
+        <tr>
+          <th scope="row" class="text-truncate">
+            {{gameSession.name}}
+          </th>
+          <td class="text-truncate">
+            {{gameSession.description}}
+          </td>
+          <td>
+            {{short-date gameSession.createdAt}}
+          </td>
+          <td>
+            {{short-date gameSession.expiresAt}}
+          </td>
+          <td>
+            {{lowercase gameSession.state}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
