@@ -33,4 +33,7 @@ export default class TepacheGameSessionModel extends Model {
 
   @attr('timestamp')
   expiresAt;
+
+  @attr('timestamp')
+  createdAt;
 }

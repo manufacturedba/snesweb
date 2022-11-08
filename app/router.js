@@ -22,7 +22,10 @@ Router.map(function () {
       this.route('credit');
       this.route('privacy');
       this.route('terms');
-      this.route('admin');
+      this.route('admin', function () {
+        this.route('reports');
+        this.route('game-sessions');
+      });
     });
     this.route('construction');
     // TODO - This treats 404 scenarios as valid.

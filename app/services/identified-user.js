@@ -53,7 +53,7 @@ export default class IdentifiedUserService extends Service {
       return;
     }
 
-    this.store
+    return this.store
       .findRecord('tepache-admin', uid, {
         adapterOptions: {
           isRealtime: true,

@@ -6,50 +6,14 @@ import {
   where,
 } from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { orderBy } from 'ember-cloud-firestore-adapter/firebase/firestore';
-import { getAnalytics, logEvent } from 'firebase/analytics';
 import { hash } from 'rsvp';
 
-export default class BaseRoute extends Route {
-  @service
-  router;
-
-  @service
-  session;
-
+export default class AuthenticatedBaseAdminIndexRoute extends Route {
   @service
   store;
 
   @service
   remoteConfig;
-
-  @service
-  identifiedUser;
-
-  async beforeModel(transition) {
-    const analytics = getAnalytics();
-    const activated = await this.remoteConfig.fetchAndActivate();
-
-    logEvent(analytics, 'config_fetched', {
-      activated,
-    });
-
-    const live = this.remoteConfig.getBoolean('live');
-
-    if (!live) {
-      this.router.transitionTo('authenticated.construction');
-    }
-
-    this.session.requireAuthentication(
-      transition,
-      'authenticated.construction'
-    );
-
-    if (this.session?.data?.authenticated?.user) {
-      await this.identifiedUser.fetchRole(
-        this.session.data.authenticated.user.uid
-      );
-    }
-  }
 
   async model() {
     // Look for any game sessions running for the selected game
@@ -70,7 +34,12 @@ export default class BaseRoute extends Route {
         },
       });
 
-      const gameUrn = gameSessions.firstObject.gameUrn;
+      const gameSession = gameSessions.firstObject;
+      const gameUrn = gameSession.gameUrn;
+
+      const playerSessions = await this.store.query('tepache-player-session', {
+        gameSessionUrn: gameSession.urn,
+      });
 
       const games = await this.store.query('tepache-game', {
         filter(reference) {
@@ -79,8 +48,9 @@ export default class BaseRoute extends Route {
       });
 
       return hash({
-        games,
-        gameSessions,
+        game: games.firstObject,
+        gameSession: gameSession,
+        playerSessions,
       });
     }
   }

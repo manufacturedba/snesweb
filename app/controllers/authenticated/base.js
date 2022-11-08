@@ -22,7 +22,7 @@ export default class BaseController extends Controller {
 
       setUserId(analytics, null);
 
-      this.router.transitionTo('authenticated.index');
+      this.router.transitionTo('authenticated.base.index');
     } catch (e) {
       console.error(e);
     }

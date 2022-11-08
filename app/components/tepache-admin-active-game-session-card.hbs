@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    Active game session
+  </div>
+  <div class="card-body">
+    <h4 class="card-text">
+      {{@gameModel.title}}
+    </h4>
+    <p class="card-text">
+      {{@gameSessionModel.name}}
+    </p>
+    <p class="card-text">
+      <span class="badge rounded-pill bg-primary">
+        {{lowercase @gameSessionModel.state}}
+      </span>
+      <small class="text-muted">
+        Expires on
+        {{short-date @gameSessionModel.expiresAt}}
+      </small>
+    </p>
+  </div>
+</div>

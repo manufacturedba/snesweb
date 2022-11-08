@@ -258,7 +258,6 @@ export default class TepacheLiveScreenComponent extends Component {
   @action
   remove() {
     super.willDestroy(...arguments);
-
-    this.#subscription?.clearInterval();
+    clearInterval(this.#subscription);
   }
 }

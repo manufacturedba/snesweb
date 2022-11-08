@@ -1,2 +1,23 @@
-{{page-title "Admin"}}
-{{outlet}}
+{{page-title 'Admin'}}
+<div class="bg-dark p-4">
+  <BsNav @type="tabs" as |nav|>
+    <nav.item>
+      <nav.link-to @route="authenticated.base.admin.index">
+        Dashboard
+      </nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="authenticated.base.admin.game-sessions">
+        Game Sessions
+      </nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="authenticated.base.admin.reports">
+        Reports
+      </nav.link-to>
+    </nav.item>
+  </BsNav>
+  <div class="bg-white p-4">
+    {{outlet}}
+  </div>
+</div>
