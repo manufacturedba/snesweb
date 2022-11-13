@@ -70,18 +70,22 @@ export default class BaseRoute extends Route {
         },
       });
 
-      const gameUrn = gameSessions.firstObject.gameUrn;
+      if (gameSessions.firstObject) {
+        const gameUrn = gameSessions.firstObject.gameUrn;
 
-      const games = await this.store.query('tepache-game', {
-        filter(reference) {
-          return query(reference, where('urn', '==', gameUrn), limit(1));
-        },
-      });
+        const games = await this.store.query('tepache-game', {
+          filter(reference) {
+            return query(reference, where('urn', '==', gameUrn), limit(1));
+          },
+        });
 
-      return hash({
-        games,
-        gameSessions,
-      });
+        return hash({
+          games,
+          gameSessions,
+        });
+      } else {
+        throw new Error('No game session found');
+      }
     }
   }
 }
