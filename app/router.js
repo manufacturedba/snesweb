@@ -12,7 +12,6 @@ Router.map(function () {
     this.route('base', { path: '/' }, function () {
       this.route('index', { path: '/' });
       this.route('about');
-      this.route('magwest'); // Redirects to play now
       this.route('play', function () {
         this.route('live');
       });
