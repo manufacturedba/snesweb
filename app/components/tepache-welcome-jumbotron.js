@@ -14,6 +14,13 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
   @service
   remoteConfig;
 
+  get ovenPlayerConfig() {
+    const ovenPlayerConfigJSON =
+      this.remoteConfig.getString('ovenplayer_config');
+
+    return JSON.parse(ovenPlayerConfigJSON);
+  }
+
   get isDisabled() {
     const live = this.remoteConfig.getBoolean('live');
 
@@ -26,6 +33,10 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
     }
 
     return false;
+  }
+
+  get backgroundImage() {
+    return this.ovenPlayerConfig?.image;
   }
 
   @action

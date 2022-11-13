@@ -31,16 +31,6 @@ export default class ApplicationRoute extends Route {
   }
 
   @action
-  loading(transition) {
-    // eslint-disable-next-line ember/no-controller-access-in-routes
-    const controller = this.controllerFor('application');
-    controller.set('loading', true);
-    transition.promise.finally(() => {
-      controller.set('loading', false);
-    });
-  }
-
-  @action
   error(error) {
     console.error(error);
     this.errorAlert.set('Unrecoverable error has occurred');

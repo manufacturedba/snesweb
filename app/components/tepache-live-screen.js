@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
-import { BUTTON_INTERACTIONS } from '../constants';
+import { BUTTON_INTERACTIONS } from 'tepacheweb/constants';
 import { throttle } from '@ember/runloop';
 
 const allButtons = [

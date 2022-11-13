@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { hash } from 'rsvp';
-import { query, filter, limit } from '../../../utils/query';
+import { query, filter, limit } from 'tepacheweb/utils/query';
 
 export default class BasePlayRoute extends Route {
   @service

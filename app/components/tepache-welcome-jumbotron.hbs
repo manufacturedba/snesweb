@@ -1,26 +1,31 @@
-<div class="jumbotron text-white p-4 text-center">
-  <h2 class="display-2">
-    Now playing
-    {{@gameModel.title}}
-  </h2>
-  <p class="lead">
-    Welcome beta tester!
-  </p>
-  <div class="mt-4">
-    <div class="d-inline mx-auto">
-      {{#if this.isDisabled}}
-        <BsTooltip @placement="top">
-          Game session expired
-        </BsTooltip>
-      {{/if}}
-      <BsButton
-        @type="primary"
-        @size="lg"
-        disabled={{this.isDisabled}}
-        @onClick={{this.transitionToPlay}}
-      >
-        LET'S GO
-      </BsButton>
+<div
+  class="tepache-welcome-jumbotron"
+  style="background-image: url({{this.backgroundImage}})"
+>
+  <div class="jumbotron text-white p-4 text-center bg-dark bg-opacity-75">
+    <h2 class="display-2">
+      Now playing
+      {{@gameModel.title}}
+    </h2>
+    <p class="lead">
+      Welcome beta tester!
+    </p>
+    <div class="mt-4">
+      <div class="d-inline mx-auto">
+        {{#if this.isDisabled}}
+          <BsTooltip @placement="top">
+            Game session expired
+          </BsTooltip>
+        {{/if}}
+        <BsButton
+          @type="primary"
+          @size="lg"
+          disabled={{this.isDisabled}}
+          @onClick={{this.transitionToPlay}}
+        >
+          LET'S GO
+        </BsButton>
+      </div>
     </div>
   </div>
 </div>
