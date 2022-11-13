@@ -36,7 +36,7 @@
         <div class="lead my-1">
           {{@game.title}}
         </div>
-        <div class="mx-2 mb-2">
+        <div class="mx-2 mb-1">
           <i class="bi bi-person-video"></i>
           {{this.recentlyActivePlayerCount}}
         </div>
@@ -57,7 +57,7 @@
         <div class="">
           <div class="p-2">
             <TepacheGameLog
-              class="font-weight-light small text-monospace"
+              class="tiny text-monospace"
               @playerSessionModel={{@playerSessionModel}}
               @logs={{this.sortedMergedLogs}}
               @textColor={{this.textColor}}
