@@ -43,7 +43,7 @@
       </div>
     </div>
     <div
-      class="row tepache-live-screen__client-controller-container justify-content-center"
+      class="row tepache-live-screen__client-controller-container bg-dark justify-content-center"
     >
       <div class="col-xl-5 col-11 mt-4 d-none d-sm-block">
         <TepacheGameClientController
@@ -54,7 +54,7 @@
         />
       </div>
       <div class="col-12 d-block d-sm-none bg-black">
-        <div class="bg-black">
+        <div class="">
           <div class="p-2">
             <TepacheGameLog
               class="font-weight-light small text-monospace"
@@ -63,7 +63,11 @@
               @textColor={{this.textColor}}
             />
           </div>
-          <div class="container pb-3">
+        </div>
+      </div>
+      <div class="col-12 d-block d-sm-none bg-dark">
+        <div>
+          <div class="container py-3">
             <BsForm
               @formLayout="vertical"
               @model={{this.formModel}}
@@ -81,18 +85,6 @@
                 Submit
               </form.submitButton>
             </BsForm>
-          </div>
-        </div>
-        <div class="card mt-4 bg-dark text-light mb-4">
-          <div class="card-body">
-            <h5 class="display-6 card-title">
-              <a href="sms:+15302407571?&body=up" class="text-white">
-                530-240-7571
-              </a>
-            </h5>
-            <p class="card-text">
-              Try texting the number above to play
-            </p>
           </div>
         </div>
       </div>
