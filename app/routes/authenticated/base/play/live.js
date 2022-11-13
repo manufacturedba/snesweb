@@ -68,7 +68,7 @@ export default class BasePlayLiveRoute extends Route {
       queryId: 'live-tepache-log',
 
       filter(reference) {
-        return query(reference, orderBy('createdAt', 'desc'), limit(4));
+        return query(reference, orderBy('createdAt', 'desc'), limit(100));
       },
     });
 
