@@ -42,6 +42,7 @@ export default class AuthenticatedBaseAdminIndexRoute extends Route {
 
       const playerSessions = await this.store.query('tepache-player-session', {
         gameSessionUrn: gameSession.urn,
+        uid: this.identifiedUser.uid,
       });
 
       const games = await this.store.query('tepache-game', {

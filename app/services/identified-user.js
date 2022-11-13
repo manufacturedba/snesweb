@@ -41,11 +41,19 @@ export default class IdentifiedUserService extends Service {
   get user() {
     const userImpl = this.session?.data?.authenticated?.user;
 
-    if (!userImpl?.isAnonymous) {
-      return userImpl;
-    }
+    return userImpl || null;
+  }
 
-    return null;
+  get isAnonymous() {
+    return this.user?.isAnonymous;
+  }
+
+  get identified() {
+    return this.user && !this.user?.isAnonymous;
+  }
+
+  get uid() {
+    return this.user?.uid;
   }
 
   fetchRole(uid) {

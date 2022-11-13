@@ -10,13 +10,20 @@ export default class BasePlayRoute extends Route {
   @service
   router;
 
+  @service
+  identifiedUser;
+
   async model() {
     const { gameSessions } = this.modelFor('authenticated.base');
     const gameSession = gameSessions.firstObject;
-
+    const uid = this.identifiedUser.uid;
     const playerSessions = await this.store.query('tepache-player-session', {
       query() {
-        return query(filter('gameSessionUrn', '==', gameSession.urn), limit(1));
+        return query(
+          filter('gameSessionUrn', '==', gameSession.urn),
+          filter('uid', '==', uid),
+          limit(1)
+        );
       },
     });
 
