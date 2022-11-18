@@ -14,9 +14,14 @@
 }
 
 /* Global style covering only route level */
-html, body {
+html {
     height: 100%;
     --bs-body-bg: #ffffff;
+}
+
+body {
+    min-height: 100%;
+    padding-bottom: 60px;
 }
 
 .ember-view, .tepache-mode {
