@@ -5,3 +5,15 @@
     width: 200px !important;
     overflow: hidden;
   }
+
+a.dark-mode {
+  color: #BBBBBB;
+}
+
+a.dark-mode:visited {
+  color: #CCCCCC;
+}
+
+a.dark-mode:hover {
+  color: #DDDDDD;
+}

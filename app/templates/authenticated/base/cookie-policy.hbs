@@ -1,0 +1,31 @@
+{{page-title "Cookie policy"}}
+<div class="container">
+  <div class="jumbotron mt-5 p-5 bg-white jumbotron-fluid">
+    <h1 class="display-6">Cookie policy</h1>
+    <p class="">
+        Cookies on this site may be used to identify users across sessions and analyze traffic. Cookies are used to improve the user experience and to analyze how the website is used. Cookies are also used to provide a personalized experience over usage. Cookies are not used to identify anyone personally.
+    </p>
+    <p class="lead">
+        Cookies are small text files that are stored on your computer or mobile device when you visit a website. 
+        Cookies are widely used to make websites work, or work more efficiently, as well as to provide information to the owners of the site. 
+    </p>
+    <p class="lead">
+        To learn more about cookies, including how to see what cookies have been set and how to manage and delete them, visit <a href="https://allaboutcookies.org">allaboutcookies.org</a>.
+    </p>
+    {{#if this.cookieConsent.permissionGranted}}
+      <p class="lead">
+        You have consented to the use of cookies on this site.
+      </p>
+        <BsButton class="me-4" @size="sm" @type="dark"
+            {{on 'click' this.rejectCookies}}
+        >Disable cookies</BsButton>
+    {{else}}
+      <p class="lead">
+        You have <b>not</b> consented to the use of cookies on this site.
+      </p>
+      <BsButton class="me-4" @size="sm" @type="info"
+            {{on 'click' this.acceptCookies}}
+        >Enable cookies</BsButton>
+    {{/if}}
+  </div>
+</div>

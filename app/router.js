@@ -25,6 +25,7 @@ Router.map(function () {
         this.route('reports');
         this.route('game-sessions');
       });
+      this.route('cookie-policy');
     });
     this.route('construction');
     // TODO - This treats 404 scenarios as valid.

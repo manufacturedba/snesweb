@@ -9,5 +9,8 @@
     {{else}}
       {{outlet}}
     {{/if}}
+    {{#unless this.cookieConsent.exists}}
+      <TepacheCookieConsentBanner />
+    {{/unless}}
   </div>
 </div>

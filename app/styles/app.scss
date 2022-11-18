@@ -13,13 +13,14 @@
     --connected-color: rgb(251, 190, 190);
 }
 
-html {
-    height: 100%;
-}
-
 /* Global style covering only route level */
 html, body {
+    height: 100%;
     --bs-body-bg: #ffffff;
+}
+
+.ember-view, .tepache-mode {
+    height: 100%;
 }
 
 .tepache-mode-base {

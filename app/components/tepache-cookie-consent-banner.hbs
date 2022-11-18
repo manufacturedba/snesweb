@@ -1,0 +1,17 @@
+<div class="tepache-cookie-consent-banner">
+    <div>
+        <span>This website uses cookies to identify users across sessions and analyze traffic.</span>
+        
+        <LinkTo @route="authenticated.base.cookie-policy" class="dark-mode">
+        Learn more
+        </LinkTo>
+    </div>
+    <div>
+        <BsButton class="me-4" @size="sm" @type="info"
+            {{on 'click' this.acceptCookies}}
+        >Accept</BsButton>
+        <BsButton @size="sm" @type="dark"
+            {{on 'click' this.rejectCookies}}
+        >Reject</BsButton>
+    </div>
+</div>

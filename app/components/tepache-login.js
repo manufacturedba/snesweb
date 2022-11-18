@@ -7,7 +7,6 @@ import 'firebaseui/dist/firebaseui.css';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { setUserId, getAnalytics, logEvent } from 'firebase/analytics';
-import { getRedirectResult } from 'firebase/auth';
 
 export default class TepacheLoginComponent extends Component {
   @service

@@ -1,0 +1,20 @@
+.tepache-cookie-consent-banner { 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3000;
+    background-color: #4F43AE;
+    color: #FFFFFF;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.00938em;
+    text-transform: none;
+    box-sizing: border-box;
+}
