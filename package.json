@@ -48,6 +48,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-cloud-firestore-adapter": "^2.2.2",
+    "ember-cookies": "^0.5.2",
     "ember-data": "~4.3.0",
     "ember-export-application-global": "^2.0.1",
     "ember-fetch": "^8.1.1",
