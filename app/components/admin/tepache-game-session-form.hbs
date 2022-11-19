@@ -1,7 +1,7 @@
 <BsForm
   @formLayout="vertical"
   @model={{this.intermediateModel}}
-  @onSubmit={{this.submit}} as |form|
+  @onSubmit={{this.saveGameSession}} as |form|
 >
   <form.element @controlType="text" @label="URN" @property="urn" as |el|>
     <el.control placeholder="URN" required disabled />
@@ -29,9 +29,8 @@
   <form.element
     @controlType="radio"
     @label="Game state"
-    @property="radio"
+    @property="state"
     @options={{this.gameSessionStateOptions}}
-    @optionLabelPath="label"
   />
   <form.element
     @controlType="datetime-local"
@@ -47,7 +46,14 @@
   >
     <el.control placeholder="Created on" required disabled />
   </form.element>
-  <form.submitButton>
-    Submit
+  <form.submitButton disabled={{form.isSubmitting}}>
+    Save changes
   </form.submitButton>
+  {{#if form.isSubmitting}}
+    <div class="position-absolute spinner-grow" role="status">
+      <span class="visually-hidden">
+        Loading...
+      </span>
+    </div>
+  {{/if}}
 </BsForm>
