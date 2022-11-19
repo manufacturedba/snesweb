@@ -1,12 +1,15 @@
 {{page-title 'Credits'}}
-<div class="tepache-mode-credits bg-white">
-  {{#each @model as |profile|}}
-    <TepacheProfileHighlight
-      @imageAlt={{profile.imageAlt}}
-      @image={{profile.image}}
-      @title={{profile.title}}
-      @description={{profile.description}}
-      @links={{profile.links}}
-    />
-  {{/each}}
+<div class="tepache-mode-credits">
+  <div class="jumbotron p-3 bg-white jumbotron-fluid">
+    <h1 class="display-6">Team Members</h1>
+    {{#each @model as |profile|}}
+      <TepacheProfileHighlight
+        @imageAlt={{profile.imageAlt}}
+        @image={{profile.image}}
+        @title={{profile.title}}
+        @description={{profile.description}}
+        @links={{profile.links}}
+      />
+    {{/each}}
+  </div>
 </div>

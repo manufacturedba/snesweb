@@ -2,7 +2,7 @@
   <BsForm
     @formLayout="horizontal"
     @model={{this.playerSessionModel}}
-    @onSubmit={{this.submit}} as |form|
+    @onSubmit={{this.submitToEnterRoom}} as |form|
   >
     <form.element
       @size="lg"

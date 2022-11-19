@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-
+import { getAnalytics, logEvent } from 'firebase/analytics';
 /**
  * @class TepacheWelcomeJumbotron
  * @extends Ember.Component
@@ -41,6 +41,7 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
 
   @action
   transitionToPlay() {
+    logEvent(getAnalytics(), 'play_button_clicked');
     this.router.transitionTo('authenticated.base.play');
   }
 }
