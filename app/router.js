@@ -8,7 +8,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('authenticated', { path: '' }, function () {
+  this.route('authenticated', { path: '/' }, function () {
     this.route('base', { path: '/' }, function () {
       this.route('index', { path: '/' });
       this.route('about');
@@ -24,6 +24,7 @@ Router.map(function () {
       this.route('admin', function () {
         this.route('reports');
         this.route('game-sessions');
+        this.route('game-session', { path: '/game-sessions/:game_session_id' });
       });
       this.route('cookie-policy');
     });

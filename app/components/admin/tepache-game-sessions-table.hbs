@@ -35,7 +35,12 @@
       {{#each this.processedGameSessionCollection as |gameSession|}}
         <tr>
           <th scope="row" class="text-truncate">
-            {{gameSession.name}}
+            <LinkTo
+              @route="authenticated.base.admin.game-session"
+              @model={{gameSession.id}}
+            >
+              {{gameSession.name}}
+            </LinkTo>
           </th>
           <td class="text-truncate">
             {{gameSession.description}}

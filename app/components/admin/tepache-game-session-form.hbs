@@ -1,0 +1,53 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.intermediateModel}}
+  @onSubmit={{this.submit}} as |form|
+>
+  <form.element @controlType="text" @label="URN" @property="urn" as |el|>
+    <el.control placeholder="URN" required disabled />
+  </form.element>
+  <form.element @controlType="text" @label="Name" @property="name" as |el|>
+    <el.control placeholder="Name" required />
+  </form.element>
+  <form.element
+    @controlType="textarea"
+    @label="Description"
+    @property="description" as |el|
+  >
+    <el.control placeholder="Description" />
+  </form.element>
+  <form.element @controlType="text" @label="Logo" @property="logo" as |el|>
+    <el.control placeholder="Logo URL" />
+  </form.element>
+  <form.element
+    @controlType="text"
+    @label="Game URN"
+    @property="gameUrn" as |el|
+  >
+    <el.control placeholder="Game URN" required />
+  </form.element>
+  <form.element
+    @controlType="radio"
+    @label="Game state"
+    @property="radio"
+    @options={{this.gameSessionStateOptions}}
+    @optionLabelPath="label"
+  />
+  <form.element
+    @controlType="datetime-local"
+    @label="Expires on"
+    @property="expiresAt" as |el|
+  >
+    <el.control placeholder="Expires on" required />
+  </form.element>
+  <form.element
+    @controlType="datetime-local"
+    @label="Created on"
+    @property="createdAt" as |el|
+  >
+    <el.control placeholder="Created on" required disabled />
+  </form.element>
+  <form.submitButton>
+    Submit
+  </form.submitButton>
+</BsForm>
