@@ -25,6 +25,7 @@ Router.map(function () {
         this.route('reports');
         this.route('game-sessions');
         this.route('game-session', { path: '/game-sessions/:game_session_id' });
+        this.route('game-session-new', { path: '/game-sessions/new' });
       });
       this.route('cookie-policy');
     });

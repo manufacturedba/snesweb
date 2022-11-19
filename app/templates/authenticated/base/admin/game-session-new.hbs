@@ -1,0 +1,14 @@
+{{page-title 'New game session'}}
+<div>
+  <p>
+    <BsButton
+      @type="info"
+      @size="sm"
+      disabled={{this.isDisabled}}
+      @onClick={{this.transitionBack}}
+    >
+      Back
+    </BsButton>
+  </p>
+  <Admin::TepacheGameSessionForm @gameSessionModel={{@model}} />
+</div>

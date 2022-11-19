@@ -1,14 +1,31 @@
-<div class="form-check">
-  <Input
-    id="activeCheck"
-    class="form-check-input"
-    @type="checkbox"
-    @checked={{this.showActiveOnly}}
-    {{on 'input' this.toggleActiveOnly}}
-  />
-  <label class="form-check-label" for="activeCheck">
-    Active only
-  </label>
+<div class="d-flex justify-content-between">
+  <div class="form-check">
+    <Input
+      id="activeCheck"
+      class="form-check-input"
+      @type="checkbox"
+      @checked={{this.showActiveOnly}}
+      {{on 'input' this.toggleActiveOnly}}
+    />
+    <label class="form-check-label" for="activeCheck">
+      Active only
+    </label>
+  </div>
+  <div>
+    <div class="d-inline mx-auto">
+      <BsTooltip @placement="top">
+        Adding feature coming soon
+      </BsTooltip>
+      <BsButton
+        @type="primary"
+        @onClick={{this.createNewGameSession}}
+        disabled
+        aria-label="Add game session"
+      >
+        <i class="bi bi-plus-lg"></i>
+      </BsButton>
+    </div>
+  </div>
 </div>
 <div class="table-responsive">
   <table class="table">

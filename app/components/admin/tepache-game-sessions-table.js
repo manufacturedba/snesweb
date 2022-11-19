@@ -1,12 +1,16 @@
+import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { GAME_SESSION_STATE } from 'tepacheweb/constants';
 import { getAnalytics, logEvent } from 'firebase/analytics';
+import { GAME_SESSION_STATE } from 'tepacheweb/constants';
 
 export default class TepacheGameSessionsTableComponent extends Component {
   @tracked
   showActiveOnly = true;
+
+  @service
+  router;
 
   get processedGameSessionCollection() {
     return this.args.gameSessionCollection
@@ -25,5 +29,11 @@ export default class TepacheGameSessionsTableComponent extends Component {
   toggleActiveOnly() {
     logEvent(getAnalytics(), 'toggle_active_only');
     this.showActiveOnly = !this.showActiveOnly;
+  }
+
+  @action
+  createNewGameSession() {
+    logEvent(getAnalytics(), 'create_new_game_session');
+    this.router.transitionTo('authenticated.base.admin.game-session-new');
   }
 }
