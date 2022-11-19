@@ -1,7 +1,11 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { hash } from 'rsvp';
-import { query, filter, limit } from 'tepacheweb/utils/query';
+import {
+  query,
+  where,
+  limit,
+} from 'ember-cloud-firestore-adapter/firebase/firestore';
 
 export default class BasePlayRoute extends Route {
   @service
@@ -18,10 +22,11 @@ export default class BasePlayRoute extends Route {
     const gameSession = gameSessions.firstObject;
     const uid = this.identifiedUser.uid;
     const playerSessions = await this.store.query('tepache-player-session', {
-      query() {
+      filter(reference) {
         return query(
-          filter('gameSessionUrn', '==', gameSession.urn),
-          filter('uid', '==', uid),
+          reference,
+          where('gameSessionUrn', '==', gameSession.urn),
+          where('uid', '==', uid),
           limit(1)
         );
       },

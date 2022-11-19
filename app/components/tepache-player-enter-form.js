@@ -3,6 +3,10 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { getAnalytics, logEvent } from 'firebase/analytics';
 
+function randomExtension() {
+  return Math.round(Math.random() * 10000);
+}
+
 export default class TepachePlayerEnterFormComponent extends Component {
   @service
   store;
@@ -13,6 +17,14 @@ export default class TepachePlayerEnterFormComponent extends Component {
   @action
   async submitToEnterRoom() {
     logEvent(getAnalytics(), 'submit_player_enter_form');
+
+    if (!this.playerSessionModel.name) {
+      logEvent(getAnalytics(), 'submit_player_enter_form_anonymous');
+      this.playerSessionModel.name = `Anonymous${randomExtension()}`;
+    } else {
+      logEvent(getAnalytics(), 'submit_player_enter_form_named');
+    }
+
     await this.playerSessionModel.save();
 
     return this.router.transitionTo('authenticated.base.play.live');

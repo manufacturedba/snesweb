@@ -7,7 +7,6 @@ import {
 } from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { orderBy } from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { hash } from 'rsvp';
-import { query as apiQuery, filter } from 'tepacheweb/utils/query';
 
 export default class AuthenticatedBaseAdminIndexRoute extends Route {
   @service
@@ -42,8 +41,11 @@ export default class AuthenticatedBaseAdminIndexRoute extends Route {
       const gameUrn = gameSession.gameUrn;
 
       const playerSessions = await this.store.query('tepache-player-session', {
-        query() {
-          return apiQuery(filter('gameSessionUrn', '==', gameSession.urn));
+        filter(reference) {
+          return query(
+            reference,
+            where('gameSessionUrn', '==', gameSession.urn)
+          );
         },
       });
 
