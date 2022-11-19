@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { getAnalytics, setUserId } from 'firebase/analytics';
+import { getAnalytics, logEvent, setUserId } from 'firebase/analytics';
 
 export default class BaseController extends Controller {
   @service
@@ -15,6 +15,7 @@ export default class BaseController extends Controller {
 
   @action
   async invalidateSession() {
+    logEvent(getAnalytics(), 'logout');
     try {
       await this.session.invalidate();
 

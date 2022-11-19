@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 export default class TepacheVideoPlayerComponent extends Component {
   @service
@@ -50,6 +51,7 @@ export default class TepacheVideoPlayerComponent extends Component {
 
   @action
   cast() {
+    logEvent(getAnalytics(), 'cast_video');
     // Optional metadata
     const metadata = {
       poster: this.chromecastConfig.poster || '',
@@ -68,14 +70,17 @@ export default class TepacheVideoPlayerComponent extends Component {
       this.#playing = newstate === 'playing';
 
       if (newstate === 'playing') {
+        logEvent(getAnalytics(), 'play_video');
         this.cjs.play();
       }
 
       if (newstate === 'paused') {
+        logEvent(getAnalytics(), 'pause_video');
         this.cjs.pause();
       }
 
       if (newstate === 'error') {
+        logEvent(getAnalytics(), 'error_video');
         this.cjs.stop();
       }
     }
@@ -85,8 +90,10 @@ export default class TepacheVideoPlayerComponent extends Component {
   onMute(volume) {
     if (this.cjs) {
       if (!volume) {
+        logEvent(getAnalytics(), 'mute_video');
         this.cjs.mute();
       } else {
+        logEvent(getAnalytics(), 'unmute_video');
         this.cjs.volume(volume / 100);
       }
     }
@@ -95,6 +102,7 @@ export default class TepacheVideoPlayerComponent extends Component {
   @action
   onVolumeChange(volume) {
     if (this.cjs) {
+      logEvent(getAnalytics(), 'volume_video');
       this.cjs.volume(volume / 100);
     }
   }

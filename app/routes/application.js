@@ -32,6 +32,7 @@ export default class ApplicationRoute extends Route {
 
   @action
   error(error) {
+    logEvent(getAnalytics(), 'error', { error });
     console.error(error);
     this.errorAlert.set('Unrecoverable error has occurred');
 

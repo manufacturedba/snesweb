@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 export default class TepachePlayerEnterFormComponent extends Component {
   @service
@@ -11,6 +12,7 @@ export default class TepachePlayerEnterFormComponent extends Component {
 
   @action
   async submit() {
+    logEvent(getAnalytics(), 'submit_player_enter_form');
     await this.playerSessionModel.save();
 
     return this.router.transitionTo('authenticated.base.play.live');

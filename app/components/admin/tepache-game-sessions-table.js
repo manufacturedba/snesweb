@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { GAME_SESSION_STATE } from 'tepacheweb/constants';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 export default class TepacheGameSessionsTableComponent extends Component {
   @tracked
@@ -22,6 +23,7 @@ export default class TepacheGameSessionsTableComponent extends Component {
 
   @action
   toggleActiveOnly() {
+    logEvent(getAnalytics(), 'toggle_active_only');
     this.showActiveOnly = !this.showActiveOnly;
   }
 }
