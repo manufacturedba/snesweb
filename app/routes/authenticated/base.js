@@ -56,8 +56,11 @@ export default class BaseRoute extends Route {
     // Status does not matter here
     const gameSessionUrn = this.remoteConfig.getString('game_session_urn');
 
+    let gameSessions;
+    let games;
+
     if (gameSessionUrn) {
-      const gameSessions = await this.store.query('tepache-game-session', {
+      gameSessions = await this.store.query('tepache-game-session', {
         isRealTime: true,
 
         filter(reference) {
@@ -73,19 +76,17 @@ export default class BaseRoute extends Route {
       if (gameSessions.firstObject) {
         const gameUrn = gameSessions.firstObject.gameUrn;
 
-        const games = await this.store.query('tepache-game', {
+        games = await this.store.query('tepache-game', {
           filter(reference) {
             return query(reference, where('urn', '==', gameUrn), limit(1));
           },
         });
-
-        return hash({
-          games,
-          gameSessions,
-        });
-      } else {
-        throw new Error('No game session found');
       }
     }
+
+    return hash({
+      games,
+      gameSessions,
+    });
   }
 }
