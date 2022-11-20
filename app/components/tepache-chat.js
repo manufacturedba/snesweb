@@ -4,7 +4,7 @@ import { getRemoteConfig, getValue } from 'firebase/remote-config';
 import PubNub from 'pubnub';
 import { action } from '@ember/object';
 import { TrackedAsyncData } from 'ember-async-data';
-import { tracked, cached } from '@glimmer/tracking';
+import { cached } from '@glimmer/tracking';
 import { schedule } from '@ember/runloop';
 
 function scrollToBottomOfChat() {
