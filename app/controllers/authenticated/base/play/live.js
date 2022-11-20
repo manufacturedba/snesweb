@@ -6,6 +6,6 @@ export default class AuthenticatedBasePlayLiveController extends Controller {
   remoteConfig;
 
   get enableChatV2() {
-    return true || this.remoteConfig.getBoolean('enable_chat_v2');
+    return this.remoteConfig.getBoolean('enable_chat_v2');
   }
 }
