@@ -11,4 +11,11 @@ export default class TepacheChatInputComponent extends Component {
     this.args.onMessage(this.messageText);
     this.messageText = '';
   }
+
+  @action
+  handleEnter(event) {
+    if (event.key === 'Enter') {
+      this.message();
+    }
+  }
 }

@@ -107,7 +107,7 @@ export default class TepacheChatComponent extends Component {
       count: 40,
     });
 
-    storedMessages.channels[this.args.channel].forEach((message) => {
+    storedMessages?.channels[this.args.channel]?.forEach((message) => {
       this.store.createRecord('tepache-chat-message', {
         ...message,
         publisher: message.uuid,

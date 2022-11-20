@@ -19,7 +19,7 @@ export default class AuthenticatedBasePlayLiveRoute extends Route {
   router;
 
   async model() {
-    const enableChatV2 = this.remoteConfig.getBoolean('enable_chat_v2');
+    const enableChatV2 = true || this.remoteConfig.getBoolean('enable_chat_v2');
 
     let { gameSession, playerSession } =
       this.modelFor('authenticated.base.play') || {};
