@@ -53,6 +53,7 @@ export default class AdminTepacheGameSessionFormComponent extends Component {
     this.args.gameSessionModel.description = this.intermediateModel.description;
     this.args.gameSessionModel.logo = this.intermediateModel.logo;
     this.args.gameSessionModel.gameUrn = this.intermediateModel.gameUrn;
+    this.args.gameSessionModel.gameId = this.intermediateModel.gameId;
     this.args.gameSessionModel.createdAt = new Date(
       this.intermediateModel.createdAt
     );
