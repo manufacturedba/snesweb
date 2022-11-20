@@ -1,4 +1,4 @@
-<div class="tepache-mode-base text-dark mb-5">
+<div class="tepache-mode-base text-dark mb-5 h-100">
   <BsNavbar
     @toggleBreakpoint={{null}}
     @type="dark"
@@ -28,7 +28,7 @@
       </navbar.nav>
     </navbar.content>
   </BsNavbar>
-  <main>
+  <main class="h-100">
     {{outlet}}
   </main>
   {{#if this.showFooter}}

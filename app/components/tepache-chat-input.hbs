@@ -1,0 +1,20 @@
+<div class="input-group mb-3">
+  <Input
+    @type="text"
+    maxlength="120"
+    @value={{this.messageText}}
+    class="form-control"
+    placeholder="Talk about it"
+    aria-label="Talk about it"
+    aria-describedby="button-message"
+  />
+  <button
+    class="btn btn-info"
+    type="button"
+    id="button-message"
+    disabled={{not this.messageText}}
+    {{on 'click' this.message}}
+  >
+    Message
+  </button>
+</div>

@@ -1,0 +1,38 @@
+<div
+  class="tepache-chat h-100 row d-flex flex-column bg-dark flex-nowrap"
+  {{did-insert this.subscribeToGameSessionChannel}}
+>
+  <div
+    class="tepache-chat__header d-none d-lg-flex text-center text-white border-bottom sticky-top bg-dark"
+  >
+    <h2 class="display-7 p-2">
+      Chat
+    </h2>
+  </div>
+  <div
+    class="tepache-chat__message-container text-white small d-flex flex-shrink-1 flex-column p-3"
+    data-list-container-selector
+  >
+    {{#if this.processedMessages.isResolved}}
+      <ul class="list-group list-group-flush tepache-chat__message-list-group">
+        {{#each this.processedMessages.value as |message|}}
+          <li class="list-group-item tepache-chat__message-list-item">
+            <span style="color: {{string-to-random-color message.publisher}}">
+              {{message.publisher}}
+              :
+            </span>
+            {{message.message}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+  <div class="justify-content-end flex-grow-1 flex-column p-3 d-none d-sm-flex">
+    <TepacheChatInput @onMessage={{this.message}} />
+  </div>
+  <div
+    class="d-flex justify-content-end flex-grow-1 flex-column p-3 d-sm-none bg-dark fixed-bottom"
+  >
+    <TepacheChatInput @onMessage={{this.message}} />
+  </div>
+</div>

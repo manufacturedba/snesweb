@@ -1,0 +1,29 @@
+@import 'bootstrap';
+
+.tepache-chat {
+    max-height: 720px;
+}
+
+@include media-breakpoint-down(md) {
+    .tepache-chat {
+        max-height: 100%;
+    }
+}
+
+.tepache-chat__message-container {
+    overflow-y: scroll;
+}
+
+.tepache-chat__message-list-group {
+    --bs-list-group-bg: var(--bs-dark);
+}
+
+.tepache-chat__message-list-item {
+    --bs-list-group-border-width: 0;
+    --bs-list-group-color: var(--bs-white-rgb);
+    --bs-list-group-bg: var(--bs-dark);
+}
+
+.tepache-chat__message-item:hover {
+    opacity: 0.8;
+}
