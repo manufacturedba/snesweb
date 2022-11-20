@@ -6,7 +6,7 @@
   {{#each @logs as |log|}}
     <li
       class="text-truncate text-right align-right mb-1
-        {{if (eq log.referenceUrn @playerSessionModel.urn) 'text-success'}}
+        {{if (eq log.referenceUrn @playerSessionModel.id) 'text-success'}}
 
         {{if log.secret 'text-muted'}}"
     >

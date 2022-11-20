@@ -29,12 +29,14 @@ export default class AdminTepacheGameSessionFormComponent extends Component {
       : new Date();
 
     this.intermediateModel = {
+      id: this.args.gameSessionModel.id,
       urn: this.args.gameSessionModel.urn,
       state: this.args.gameSessionModel.state,
       name: this.args.gameSessionModel.name,
       description: this.args.gameSessionModel.description,
       logo: this.args.gameSessionModel.logo,
       gameUrn: this.args.gameSessionModel.gameUrn,
+      gameId: this.args.gameSessionModel.gameId,
       createdAt: createDateTimeLocalString(createdAt),
       expiresAt: createDateTimeLocalString(expiresAt),
     };

@@ -10,14 +10,24 @@ export default class TepacheGameSessionModel extends Model {
   @attr('string')
   logo;
 
+  /**
+   * @deprecated
+   */
   @attr('string')
   urn;
 
   /**
    * @type {String[]}
+   * @deprecated
    */
   @attr('string')
   gameUrn;
+
+  /**
+   * @type {String[]}
+   */
+  @attr('string')
+  gameId;
 
   /**
    * @type {Boolean}

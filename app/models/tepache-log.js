@@ -5,6 +5,12 @@ export default class TepacheLogModel extends Model {
   message;
 
   @attr('string')
+  referenceId;
+
+  /**
+   * @deprecated
+   */
+  @attr('string')
   referenceUrn;
 
   @attr('timestamp')

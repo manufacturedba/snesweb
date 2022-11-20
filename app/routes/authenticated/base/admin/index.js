@@ -1,11 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import {
-  limit,
-  query,
-  where,
-} from 'ember-cloud-firestore-adapter/firebase/firestore';
-import { orderBy } from 'ember-cloud-firestore-adapter/firebase/firestore';
+import { query, where } from 'ember-cloud-firestore-adapter/firebase/firestore';
 import { hash } from 'rsvp';
 
 export default class AuthenticatedBaseAdminIndexRoute extends Route {
@@ -21,42 +16,35 @@ export default class AuthenticatedBaseAdminIndexRoute extends Route {
   async model() {
     // Look for any game sessions running for the selected game
     // Status does not matter here
-    const gameSessionUrn = this.remoteConfig.getString('game_session_urn');
+    const gameSessionId = this.remoteConfig.getString('game_session_id');
 
-    if (gameSessionUrn) {
-      const gameSessions = await this.store.query('tepache-game-session', {
-        isRealTime: true,
+    if (gameSessionId) {
+      const gameSession = await this.store.findRecord(
+        'tepache-game-session',
+        gameSessionId,
+        {
+          adapterOptions: {
+            isRealTime: true,
+          },
+        }
+      );
 
-        filter(reference) {
-          return query(
-            reference,
-            where('urn', '==', gameSessionUrn),
-            orderBy('expiresAt', 'desc'),
-            limit(1)
-          );
-        },
-      });
-
-      const gameSession = gameSessions.firstObject;
-      const gameUrn = gameSession.gameUrn;
+      const gameId = gameSession.gameId;
 
       const playerSessions = await this.store.query('tepache-player-session', {
         filter(reference) {
-          return query(
-            reference,
-            where('gameSessionUrn', '==', gameSession.urn)
-          );
+          return query(reference, where('gameSessionId', '==', gameSession.id));
         },
       });
 
-      const games = await this.store.query('tepache-game', {
-        filter(reference) {
-          return query(reference, where('urn', '==', gameUrn), limit(1));
+      const game = await this.store.query('tepache-game', gameId, {
+        adapterOptions: {
+          isRealTime: true,
         },
       });
 
       return hash({
-        game: games.firstObject,
+        game: game,
         gameSession: gameSession,
         playerSessions,
         identifiedUser: this.identifiedUser,

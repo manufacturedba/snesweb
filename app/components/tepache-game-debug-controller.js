@@ -30,7 +30,7 @@ export default class TepacheGameClientControllerComponent extends Component {
       method: 'POST',
       payload: {
         button,
-        gameSessionUrn: this.args.gameSessionModel.urn,
+        gameSessionId: this.args.gameSessionModel.id,
       },
     });
   }

@@ -3,6 +3,9 @@
   @model={{this.intermediateModel}}
   @onSubmit={{this.saveGameSession}} as |form|
 >
+  <form.element @controlType="text" @label="ID" @property="id" as |el|>
+    <el.control placeholder="ID" required disabled />
+  </form.element>
   <form.element @controlType="text" @label="URN" @property="urn" as |el|>
     <el.control placeholder="URN" required disabled />
   </form.element>
@@ -19,12 +22,15 @@
   <form.element @controlType="text" @label="Logo" @property="logo" as |el|>
     <el.control placeholder="Logo URL" />
   </form.element>
+  <form.element @controlType="text" @label="Game ID" @property="gameId" as |el|>
+    <el.control placeholder="Game ID" required />
+  </form.element>
   <form.element
     @controlType="text"
     @label="Game URN"
     @property="gameUrn" as |el|
   >
-    <el.control placeholder="Game URN" required />
+    <el.control placeholder="Game URN" required disabled />
   </form.element>
   <form.element
     @controlType="radio"

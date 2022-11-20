@@ -95,8 +95,8 @@ export default class TepacheLiveScreenComponent extends Component {
         method: 'POST',
         payload: {
           button,
-          gameSessionUrn: this.args.gameSessionModel?.urn,
-          playerSessionUrn: this.args.playerSessionModel?.urn,
+          gameSessionId: this.args.gameSessionModel?.id,
+          playerSessionId: this.args.playerSessionModel?.id,
         },
       });
     } catch (error) {

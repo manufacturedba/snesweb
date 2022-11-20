@@ -54,39 +54,36 @@ export default class BaseRoute extends Route {
   async model() {
     // Look for any game sessions running for the selected game
     // Status does not matter here
-    const gameSessionUrn = this.remoteConfig.getString('game_session_urn');
+    const gameSessionId = this.remoteConfig.getString('game_session_id');
 
-    let gameSessions;
-    let games;
+    let gameSession;
+    let game;
 
-    if (gameSessionUrn) {
-      gameSessions = await this.store.query('tepache-game-session', {
-        isRealTime: true,
+    if (gameSessionId) {
+      gameSession = await this.store.findRecord(
+        'tepache-game-session',
+        gameSessionId,
+        {
+          adapterOptions: {
+            isRealTime: true,
+          },
+        }
+      );
 
-        filter(reference) {
-          return query(
-            reference,
-            where('urn', '==', gameSessionUrn),
-            orderBy('expiresAt', 'desc'),
-            limit(1)
-          );
-        },
-      });
+      if (gameSession) {
+        const gameId = gameSession.gameId;
 
-      if (gameSessions.firstObject) {
-        const gameUrn = gameSessions.firstObject.gameUrn;
-
-        games = await this.store.query('tepache-game', {
-          filter(reference) {
-            return query(reference, where('urn', '==', gameUrn), limit(1));
+        game = await this.store.findRecord('tepache-game', gameId, {
+          adapterOptions: {
+            isRealTime: true,
           },
         });
       }
     }
 
     return hash({
-      games,
-      gameSessions,
+      game,
+      gameSession,
     });
   }
 }

@@ -66,8 +66,8 @@ export default class TepacheGameClientControllerComponent extends Component {
   @cached
   get isLastPressFromPlayer() {
     return (
-      this.args.currentPressedButton?.playerSessionUrn ===
-      this.args.playerSessionModel?.urn
+      this.args.currentPressedButton?.playerSessionId ===
+      this.args.playerSessionModel?.id
     );
   }
 
@@ -82,8 +82,8 @@ export default class TepacheGameClientControllerComponent extends Component {
       method: 'POST',
       payload: {
         button,
-        gameSessionUrn: this.args.gameSessionModel?.urn,
-        playerSessionUrn: this.args.playerSessionModel?.urn,
+        gameSessionId: this.args.gameSessionModel?.id,
+        playerSessionId: this.args.playerSessionModel?.id,
       },
     });
   }

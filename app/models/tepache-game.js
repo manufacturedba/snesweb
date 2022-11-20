@@ -8,6 +8,9 @@ export default class TepacheGameModel extends Model {
   @attr('string')
   title;
 
+  /**
+   * @deprecated
+   */
   @attr('string')
   urn;
 

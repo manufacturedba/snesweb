@@ -18,14 +18,13 @@ export default class BasePlayRoute extends Route {
   identifiedUser;
 
   async model() {
-    const { gameSessions } = this.modelFor('authenticated.base');
-    const gameSession = gameSessions.firstObject;
+    const { gameSession } = this.modelFor('authenticated.base');
     const uid = this.identifiedUser.uid;
     const playerSessions = await this.store.query('tepache-player-session', {
       filter(reference) {
         return query(
           reference,
-          where('gameSessionUrn', '==', gameSession.urn),
+          where('gameSessionId', '==', gameSession.id),
           where('uid', '==', uid),
           limit(1)
         );
@@ -40,7 +39,8 @@ export default class BasePlayRoute extends Route {
 
     if (!playerSession) {
       playerSession = this.store.createRecord('tepache-player-session', {
-        gameSessionUrn: gameSession.urn,
+        gameSessionId: gameSession.id,
+        uid,
       });
     }
 
