@@ -27,17 +27,13 @@ const auth = getAuth();
       return;
     }
 
-    const gameUrn = `urn:tepache-game:${faker.random.numeric(5)}`;
-    const gameSessionUrn = `urn:tepache-game-session:${faker.random.numeric(
-      5
-    )}`;
+    const gameSessionId = `${faker.random.numeric(5)}`;
 
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     const expiresAt = Timestamp.fromDate(tomorrow);
 
-    await db.collection('tepacheGames').add({
-      urn: gameUrn,
+    const gameModel = await db.collection('tepacheGames').add({
       title: faker.lorem.word(),
       description: faker.lorem.sentence(),
       active: true,
@@ -46,23 +42,26 @@ const auth = getAuth();
       playModes: ['TEAM', 'ADMIN_CONTROL'],
     });
 
-    await db.collection('tepacheGameSessions').add({
-      urn: gameSessionUrn,
-      name: faker.lorem.word(),
-      description: faker.lorem.sentence(),
-      logo: faker.internet.avatar(),
-      gameUrn,
-      state: 'ACTIVE',
-      stateHistory: [
-        {
-          state: 'ACTIVE',
-          at: Timestamp.now(),
-        },
-      ],
-      playMode: 'ADMIN_CONTROL',
-      expiresAt,
-      createdAt: Timestamp.now(),
-    });
+    await db
+      .collection('tepacheGameSessions')
+      .doc(gameSessionId)
+      .set({
+        urn: gameSessionId,
+        name: faker.lorem.word(),
+        description: faker.lorem.sentence(),
+        logo: faker.internet.avatar(),
+        gameId: gameModel.id,
+        state: 'ACTIVE',
+        stateHistory: [
+          {
+            state: 'ACTIVE',
+            at: Timestamp.now(),
+          },
+        ],
+        playMode: 'ADMIN_CONTROL',
+        expiresAt,
+        createdAt: Timestamp.now(),
+      });
 
     allUsers.users.forEach((user) => {
       db.collection('tepacheAdmins').doc(user.uid).set({
@@ -72,7 +71,7 @@ const auth = getAuth();
 
     const config = JSON.parse(readFileSync(configFile, 'utf8'));
 
-    config.game_session_urn = gameSessionUrn;
+    config.game_session_urn = gameSessionId;
 
     writeFileSync(configFile, JSON.stringify(config, null, 2), 'utf8');
 
