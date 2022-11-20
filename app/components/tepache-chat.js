@@ -35,6 +35,7 @@ export default class TepacheChatComponent extends Component {
     super(...arguments);
 
     this.#pubnub = new PubNub(this.config);
+    this.subscribeToGameSessionChannel();
   }
 
   get pubNubConfig() {
