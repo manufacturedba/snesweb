@@ -92,7 +92,8 @@
     "bootstrap-icons": "^1.9.1",
     "firebase-admin": "^11.0.0",
     "firebaseui": "^6.0.1",
-    "ovenplayer": "^0.10.23"
+    "ovenplayer": "^0.10.23",
+    "pubnub": "^7.2.1"
   },
   "ember-addon": {
     "paths": [
