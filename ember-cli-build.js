@@ -10,11 +10,16 @@ module.exports = function emberCLIBuild(defaults) {
       useSessionSetupMethod: true,
     },
     sassOptions: {
-      includePaths: ['node_modules/bootstrap-icons/font'],
+      includePaths: [
+        'node_modules/bootstrap-icons/font',
+        'node_modules/bootstrap/scss',
+      ],
     },
   });
 
   app.import('node_modules/ovenplayer/dist/ovenplayer.js');
+  app.import('node_modules/pubnub/dist/web/pubnub.js');
+
   app.import('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff', {
     destDir: 'assets/fonts',
   });
