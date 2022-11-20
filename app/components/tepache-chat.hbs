@@ -1,4 +1,7 @@
-<div class="tepache-chat h-100 row d-flex flex-column bg-dark flex-nowrap">
+<div
+  class="tepache-chat h-100 row d-flex flex-column bg-dark flex-nowrap"
+  {{did-insert this.subscribeToGameSessionChannel}}
+>
   <div
     class="tepache-chat__header d-none d-lg-flex text-center text-white border-bottom sticky-top bg-dark"
   >
@@ -13,13 +16,15 @@
     {{#if this.processedMessages.isResolved}}
       <ul class="list-group list-group-flush tepache-chat__message-list-group">
         {{#each this.processedMessages.value as |message|}}
-          <li class="list-group-item tepache-chat__message-list-item">
-            <span style="color: {{string-to-random-color message.publisher}}">
-              {{message.publisher}}
-              :
-            </span>
-            {{message.message}}
-          </li>
+          {{#if message.publisher}}
+            <li class="list-group-item tepache-chat__message-list-item">
+              <span style="color: {{string-to-random-color message.publisher}}">
+                {{message.publisher}}
+                :
+              </span>
+              {{message.message}}
+            </li>
+          {{/if}}
         {{/each}}
       </ul>
     {{/if}}

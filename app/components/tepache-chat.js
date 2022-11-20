@@ -35,7 +35,6 @@ export default class TepacheChatComponent extends Component {
     super(...arguments);
 
     this.#pubnub = new PubNub(this.config);
-    this.subscribeToGameSessionChannel();
   }
 
   get pubNubConfig() {
@@ -70,17 +69,22 @@ export default class TepacheChatComponent extends Component {
             subscribedChannel,
             timeToken,
           }) => {
-            const playerSession = await this.store.findRecord(
-              'tepache-player-session',
-              publisher
-            );
-            return {
-              channel,
-              message,
-              publisher: playerSession.name,
-              subscribedChannel,
-              timeToken,
-            };
+            let playerSession;
+            try {
+              playerSession = await this.store.findRecord(
+                'tepache-player-session',
+                publisher
+              );
+              return {
+                channel,
+                message,
+                publisher: playerSession.name,
+                subscribedChannel,
+                timeToken,
+              };
+            } catch (error) {
+              return {};
+            }
           }
         )
       ),
