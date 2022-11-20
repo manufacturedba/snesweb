@@ -1,9 +1,17 @@
 {{page-title 'Live'}}
-<TepacheLiveScreen
-  @game={{@model.game}}
-  @gameSessionModel={{@model.gameSession}}
-  @playerSessionModel={{@model.playerSession}}
-  @hardwareInputCollection={{@model.hardwareInput}}
-  @logCollection={{@model.log}}
-  @sessionCaptureCollection={{@model.sessionCapture}}
-/>
+{{#if @enableChatV2}}
+  <TepacheLiveScreenV2
+    @game={{@model.game}}
+    @gameSessionModel={{@model.gameSession}}
+    @playerSessionModel={{@model.playerSession}}
+  />
+{{else}}
+  <TepacheLiveScreen
+    @game={{@model.game}}
+    @gameSessionModel={{@model.gameSession}}
+    @playerSessionModel={{@model.playerSession}}
+    @hardwareInputCollection={{@model.hardwareInput}}
+    @logCollection={{@model.log}}
+    @sessionCaptureCollection={{@model.sessionCapture}}
+  />
+{{/if}}

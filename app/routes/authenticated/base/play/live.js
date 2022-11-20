@@ -19,6 +19,8 @@ export default class BasePlayLiveRoute extends Route {
   router;
 
   async model() {
+    const enableChatV2 = await this.remoteConfig.get('enable_chat_v2');
+
     let { gameSession, playerSession } =
       this.modelFor('authenticated.base.play') || {};
 
@@ -44,54 +46,67 @@ export default class BasePlayLiveRoute extends Route {
       }
     );
 
-    const hardwareInputRequest = this.store.query('tepache-hardware-input', {
-      isRealtime: true,
+    if (enableChatV2) {
+      const game = await gameRequest;
 
-      filter(reference) {
-        return query(
-          reference,
-          where('gameSessionId', '==', gameSession.id),
-          where('createdAt', '>', lastMinute),
-          orderBy('createdAt', 'desc'),
-          limit(4)
-        );
-      },
-    });
+      return hash({
+        game,
+        playerSession,
+        gameSession,
+      });
+    } else {
+      const hardwareInputRequest = this.store.query('tepache-hardware-input', {
+        isRealtime: true,
 
-    const logRequest = this.store.query('tepache-log', {
-      isRealtime: true,
+        filter(reference) {
+          return query(
+            reference,
+            where('gameSessionId', '==', gameSession.id),
+            where('createdAt', '>', lastMinute),
+            orderBy('createdAt', 'desc'),
+            limit(4)
+          );
+        },
+      });
 
-      filter(reference) {
-        return query(reference, orderBy('createdAt', 'desc'), limit(100));
-      },
-    });
+      const logRequest = this.store.query('tepache-log', {
+        isRealtime: true,
 
-    const sessionCaptureRequest = this.store.query('tepache-session-capture', {
-      isRealtime: true,
+        filter(reference) {
+          return query(reference, orderBy('createdAt', 'desc'), limit(100));
+        },
+      });
 
-      filter(reference) {
-        return query(
-          reference,
-          where('playerSessionId', '==', playerSession.id),
-          where('createdAt', '>', lastHour),
-          orderBy('createdAt', 'desc'),
-          limit(2)
-        );
-      },
-    });
+      const sessionCaptureRequest = this.store.query(
+        'tepache-session-capture',
+        {
+          isRealtime: true,
 
-    const hardwareInput = await hardwareInputRequest;
-    const sessionCapture = await sessionCaptureRequest;
-    const game = await gameRequest;
-    const log = await logRequest;
+          filter(reference) {
+            return query(
+              reference,
+              where('playerSessionId', '==', playerSession.id),
+              where('createdAt', '>', lastHour),
+              orderBy('createdAt', 'desc'),
+              limit(2)
+            );
+          },
+        }
+      );
 
-    return hash({
-      game,
-      playerSession,
-      gameSession,
-      hardwareInput,
-      log,
-      sessionCapture,
-    });
+      const hardwareInput = await hardwareInputRequest;
+      const sessionCapture = await sessionCaptureRequest;
+      const game = await gameRequest;
+      const log = await logRequest;
+
+      return hash({
+        game,
+        playerSession,
+        gameSession,
+        hardwareInput,
+        log,
+        sessionCapture,
+      });
+    }
   }
 }
