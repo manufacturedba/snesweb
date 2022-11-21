@@ -108,7 +108,7 @@ export default class TepacheChatComponent extends Component {
   @action
   async subscribeToGameSessionChannel() {
     const storedMessages = await this.#pubnub.fetchMessages({
-      channels: [this.args.channel],
+      channels: [`chat.${this.args.channel}`],
       count: 40,
     });
 
@@ -120,7 +120,7 @@ export default class TepacheChatComponent extends Component {
     });
 
     this.#pubnub.subscribe({
-      channels: [this.args.channel],
+      channels: [`chat.${this.args.channel}`],
       withPresence: true,
     });
 
