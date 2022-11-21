@@ -104,6 +104,7 @@ export default class TepacheChatComponent extends Component {
 
   @action
   async unsubscribeFromGameSessionChannel() {
+    this.store.unloadAll('tepache-chat-message');
     this.#pubnub.unsubscribeAll();
   }
 
@@ -123,7 +124,7 @@ export default class TepacheChatComponent extends Component {
         publisher: playerSession.name,
       });
     } catch (error) {
-      console.error('Error fetching player session', error);
+      console.warn('Unable fetching player session for chat ID', error);
     }
   }
 }
