@@ -14,21 +14,22 @@
     class="tepache-chat__message-container text-white small d-flex flex-shrink-1 flex-column p-3"
     data-list-container-selector
   >
-    {{#if this.processedMessages.isResolved}}
-      <ul class="list-group list-group-flush tepache-chat__message-list-group">
-        {{#each this.processedMessages.value as |message|}}
-          {{#if message.publisher}}
-            <li class="list-group-item tepache-chat__message-list-item">
-              <span style="color: {{string-to-random-color message.publisher}}">
-                {{message.publisher}}
-                :
-              </span>
-              {{message.message}}
-            </li>
-          {{/if}}
-        {{/each}}
-      </ul>
-    {{/if}}
+    <ul class="list-group list-group-flush tepache-chat__message-list-group">
+      {{#each this.messages as |message|}}
+        {{#if message.publisher}}
+          <li
+            class="list-group-item tepache-chat__message-list-item"
+            {{did-insert this.scrollToBottom}}
+          >
+            <span style="color: {{string-to-random-color message.publisher}}">
+              {{message.publisher}}
+              :
+            </span>
+            {{message.message}}
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
   </div>
   <div class="justify-content-end flex-grow-1 flex-column p-3 d-none d-sm-flex">
     <TepacheChatInput @onMessage={{this.message}} />

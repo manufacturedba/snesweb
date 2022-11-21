@@ -3,23 +3,15 @@ import Component from '@glimmer/component';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
 import PubNub from 'pubnub';
 import { action } from '@ember/object';
-import { TrackedAsyncData } from 'ember-async-data';
-import { cached } from '@glimmer/tracking';
-import { schedule } from '@ember/runloop';
+import { scheduleOnce } from '@ember/runloop';
 import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
 
 function scrollToBottomOfChat() {
-  schedule('afterRender', this, () => {
-    requestAnimationFrame(() => {
-      const listGroup = document.querySelector(
-        '[data-list-container-selector]'
-      );
+  const listGroup = document.querySelector('[data-list-container-selector]');
 
-      listGroup.scrollTo({
-        top: listGroup.scrollHeight,
-        behavior: 'smooth',
-      });
-    });
+  listGroup.scrollTo({
+    top: listGroup.scrollHeight,
+    behavior: 'smooth',
   });
 }
 
@@ -58,41 +50,6 @@ export default class TepacheChatComponent extends Component {
     return this.store.peekAll('tepache-chat-message');
   }
 
-  @cached
-  get processedMessages() {
-    return new TrackedAsyncData(
-      Promise.all(
-        this.messages.map(
-          async ({
-            channel,
-            message,
-            publisher,
-            subscribedChannel,
-            timeToken,
-          }) => {
-            let playerSession;
-            try {
-              playerSession = await this.store.findRecord(
-                'tepache-player-session',
-                publisher
-              );
-              return {
-                channel,
-                message,
-                publisher: playerSession.name,
-                subscribedChannel,
-                timeToken,
-              };
-            } catch (error) {
-              return {};
-            }
-          }
-        )
-      ),
-      this
-    );
-  }
-
   @action
   async message(text) {
     try {
@@ -115,10 +72,7 @@ export default class TepacheChatComponent extends Component {
 
     storedMessages?.channels[`chat.${this.args.channel}`]?.forEach(
       (message) => {
-        this.store.createRecord('tepache-chat-message', {
-          ...message,
-          publisher: message.publisher || message.uuid,
-        });
+        this.recordChatMessage(message);
       }
     );
 
@@ -128,13 +82,10 @@ export default class TepacheChatComponent extends Component {
     });
 
     this.#pubnub.addListener({
-      message: (message) => {
-        scrollToBottomOfChat();
-        this.store.createRecord('tepache-chat-message', message);
+      message: async (message) => {
+        this.recordChatMessage(message);
       },
     });
-
-    scrollToBottomOfChat();
   }
 
   @action
@@ -142,5 +93,25 @@ export default class TepacheChatComponent extends Component {
     this.#pubnub.unsubscribe({
       channels: [`chat.${this.args.channel}`],
     });
+  }
+
+  @action
+  scrollToBottom() {
+    scheduleOnce('afterRender', scrollToBottomOfChat);
+  }
+
+  async recordChatMessage(message) {
+    try {
+      const playerSession = await this.store.findRecord(
+        'tepache-player-session',
+        message.publisher || message.uuid
+      );
+      this.store.createRecord('tepache-chat-message', {
+        ...message,
+        publisher: playerSession.name,
+      });
+    } catch (error) {
+      console.error('Error fetching player session', error);
+    }
   }
 }
