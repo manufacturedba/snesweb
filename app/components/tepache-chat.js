@@ -5,6 +5,7 @@ import PubNub from 'pubnub';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
+import { tracked } from '@glimmer/tracking';
 
 function scrollToBottomOfChat() {
   const listGroup = document.querySelector('[data-list-container-selector]');
@@ -24,10 +25,21 @@ export default class TepacheChatComponent extends Component {
 
   #pubnub;
 
+  @tracked
+  lastAdminMessage;
+
   constructor() {
     super(...arguments);
 
     this.#pubnub = new PubNub(this.config);
+  }
+
+  get chatChannel() {
+    return `chat.${this.args.channel}`;
+  }
+
+  get adminChannel() {
+    return `admin.${this.args.channel}`;
   }
 
   get pubNubConfig() {
@@ -66,24 +78,26 @@ export default class TepacheChatComponent extends Component {
   @action
   async subscribeToGameSessionChannel() {
     const storedMessages = await this.#pubnub.fetchMessages({
-      channels: [`chat.${this.args.channel}`],
+      channels: [this.chatChannel, this.adminChannel],
       count: PUBNUB_HISTORY_LIMIT,
     });
 
-    storedMessages?.channels[`chat.${this.args.channel}`]?.forEach(
-      (message) => {
-        this.recordChatMessage(message);
-      }
-    );
+    storedMessages?.channels[this.chatChannel]?.forEach((message) => {
+      this.recordChatMessage(message);
+    });
 
     this.#pubnub.subscribe({
-      channels: [`chat.${this.args.channel}`],
+      channels: [this.chatChannel, this.adminChannel],
       withPresence: true,
     });
 
     this.#pubnub.addListener({
       message: async (message) => {
-        this.recordChatMessage(message);
+        if (message.channel === this.chatChannel) {
+          this.recordChatMessage(message);
+        } else if (message.channel === this.adminChannel) {
+          this.lastAdminMessage = message;
+        }
       },
     });
   }
@@ -91,7 +105,7 @@ export default class TepacheChatComponent extends Component {
   @action
   async unsubscribeFromGameSessionChannel() {
     this.#pubnub.unsubscribe({
-      channels: [`chat.${this.args.channel}`],
+      channels: [this.chatChannel, this.adminChannel],
     });
   }
 
