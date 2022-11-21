@@ -104,9 +104,7 @@ export default class TepacheChatComponent extends Component {
 
   @action
   async unsubscribeFromGameSessionChannel() {
-    this.#pubnub.unsubscribe({
-      channels: [this.chatChannel, this.adminChannel],
-    });
+    this.#pubnub.unsubscribeAll();
   }
 
   @action
