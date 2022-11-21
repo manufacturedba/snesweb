@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import { TrackedAsyncData } from 'ember-async-data';
 import { cached } from '@glimmer/tracking';
 import { schedule } from '@ember/runloop';
+import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
 
 function scrollToBottomOfChat() {
   schedule('afterRender', this, () => {
@@ -109,7 +110,7 @@ export default class TepacheChatComponent extends Component {
   async subscribeToGameSessionChannel() {
     const storedMessages = await this.#pubnub.fetchMessages({
       channels: [`chat.${this.args.channel}`],
-      count: 40,
+      count: PUBNUB_HISTORY_LIMIT,
     });
 
     storedMessages?.channels[`chat.${this.args.channel}`]?.forEach(
@@ -134,5 +135,12 @@ export default class TepacheChatComponent extends Component {
     });
 
     scrollToBottomOfChat();
+  }
+
+  @action
+  async unsubscribeFromGameSessionChannel() {
+    this.#pubnub.unsubscribe({
+      channels: [`chat.${this.args.channel}`],
+    });
   }
 }
