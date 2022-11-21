@@ -97,7 +97,7 @@ export default class TepacheChatComponent extends Component {
     try {
       await this.#pubnub.publish({
         message: text,
-        channel: this.args.channel,
+        channel: `chat.${this.args.channel}`,
         storeInHistory: true,
       });
     } catch (status) {
