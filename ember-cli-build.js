@@ -15,6 +15,9 @@ module.exports = function emberCLIBuild(defaults) {
         'node_modules/bootstrap/scss',
       ],
     },
+    svg: {
+      optimize: false,
+    },
   });
 
   app.import('node_modules/ovenplayer/dist/ovenplayer.js');
