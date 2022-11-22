@@ -2,10 +2,15 @@
   <div class="row h-100">
     {{#if (is-active @gameSessionModel.state)}}
       {{#if this.ovenPlayerConfig}}
-        <div class="col-lg-9 col-xs-12 bg-dark sticky-top">
-          <TepacheVideoPlayer @options={{this.ovenPlayerConfig}} />
+        <div
+          class="col-lg-9 col-xs-12 bg-dark sticky-top d-flex flex-nowrap flex-column"
+        >
+          <TepacheVideoPlayer
+            @options={{this.ovenPlayerConfig}}
+            class="flex-grow-1"
+          />
           <div
-            class="tepache-live-screen-v2__metadata d-flex bg-dark text-white py-2 px-4 border-bottom"
+            class="tepache-live-screen-v2__metadata d-flex flex-grow-0 bg-dark text-white py-2 px-4 border-bottom"
           >
             <TepacheThumbnail
               @thumbnail={{@game.logo}}
