@@ -42,14 +42,30 @@ export default class CookieConsentService extends Service {
   accept() {
     this.granted = true;
     this.interacted = true;
-    this.cookies.write(consentNamespace, true);
+    const now = new Date();
+    now.setFullYear(now.getFullYear() + 1);
+
+    this.cookies.write(consentNamespace, true, {
+      domain: '.tepachemode.com',
+      expires: now,
+      path: '/',
+    });
+
     setAnalyticsCollectionEnabled(getAnalytics(), true);
   }
 
   reject() {
     this.granted = false;
     this.interacted = true;
-    this.cookies.write(consentNamespace, false);
+
+    const now = new Date();
+    now.setFullYear(now.getFullYear() + 1);
+
+    this.cookies.write(consentNamespace, false, {
+      domain: '.tepachemode.com',
+      expires: now,
+      path: '/',
+    });
     this.cookies.clear(cookieNamespace);
     setAnalyticsCollectionEnabled(getAnalytics(), false);
   }
