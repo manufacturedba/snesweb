@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
 import { tracked } from '@glimmer/tracking';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 function scrollToBottomOfChat() {
   const listGroup = document.querySelector('[data-list-container-selector]');
@@ -33,10 +34,13 @@ export default class TepacheChatComponent extends Component {
 
   @action
   async message(text) {
+    logEvent(getAnalytics(), 'send_message', {
+      channel: this.args.chatChannel,
+    });
     try {
       await this.pubnub.publish({
         message: text,
-        channel: `chat.${this.args.channel}`,
+        channel: this.args.chatChannel,
         storeInHistory: true,
       });
     } catch (status) {

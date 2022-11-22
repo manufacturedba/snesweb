@@ -1,7 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
-import { cached, tracked } from '@glimmer/tracking';
+import { tracked } from '@glimmer/tracking';
 
 export default class TepacheLiveScreenV2Component extends Component {
   @service
