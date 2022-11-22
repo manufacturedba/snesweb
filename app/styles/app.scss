@@ -37,6 +37,12 @@ body {
     height: 60px;
 }
 
+@include media-breakpoint-down(md) {
+    .tepache-mode-base__icon {
+        height: 30px;
+    }    
+}
+
 .tepache-mode-base__icon--live {
     height: 40px;
 }
