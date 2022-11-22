@@ -2,11 +2,45 @@
   <div class="row h-100">
     {{#if (is-active @gameSessionModel.state)}}
       {{#if this.ovenPlayerConfig}}
-        <div class="col-lg-9 col-xs-12 bg-black sticky-top">
+        <div class="col-lg-9 col-xs-12 bg-dark sticky-top">
           <TepacheVideoPlayer @options={{this.ovenPlayerConfig}} />
+          <div
+            class="tepache-live-screen-v2__metadata d-flex bg-dark text-white py-2 px-4 border-bottom"
+          >
+            <TepacheThumbnail
+              @thumbnail={{@game.logo}}
+              class="tepache-live-screen-v2__thumbnail me-4"
+            />
+            <div>
+              <div class="lead mt-1 mb-2">
+                <span class="me-1">
+                  {{@game.title}}
+                </span>
+                <div class="badge bg-success tiny">
+                  {{@gameSessionModel.state}}
+                </div>
+              </div>
+              <div class="mx-2 mb-1 small">
+                <span class="me-2">
+                  <i class="bi bi-person-video"></i>
+                  {{this.totalOccupancy}}
+                </span>
+                <span class="me-2">
+                  <i class="bi bi-calendar-event"></i>
+                  {{short-date @gameSessionModel.createdAt}}
+                </span>
+                <span class="me-2">
+                  <i class="bi bi-check2-square"></i>
+                  Chat mode
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-3 col-xs-12 bg-black">
+        <div class="col-lg-3 col-xs-12 bg-dark">
           <TepacheChat
+            @chatChannel={{this.chatChannel}}
+            @adminChannel={{this.adminChannel}}
             @channel={{@gameSessionModel.id}}
             @userId={{@playerSessionModel.id}}
           />

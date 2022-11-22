@@ -1,23 +1,25 @@
-{{#if @thumbnail}}
-  {{#if this.imageUrl.isResolved}}
+<div ...attributes>
+  {{#if @thumbnail}}
+    {{#if this.imageUrl.isResolved}}
+      <img
+        src={{this.imageUrl.value}}
+        alt="..."
+        decoding="async"
+        loading="lazy"
+        class="tepache-thumbnail__image img-thumbnail"
+      />
+    {{/if}}
+    {{#if this.imageUrl.isPending}}
+      <div class="tepache-thumbnail__image img-thumbnail">
+        <div class="spinner-border text-primary" role="status"></div>
+      </div>
+    {{/if}}
+  {{else}}
     <img
-      src={{this.imageUrl.value}}
-      alt="..."
-      decoding="async"
-      loading="lazy"
-      class="tepache-thumbnail__image img-thumbnail"
+      class="tepache-thumbnail__image img-thumbnail tepache-thumbnail__image--ghost"
+      src="/its-tepache-bb.png"
+      alt="Pineapple character"
+      decoding="sync"
     />
   {{/if}}
-  {{#if this.imageUrl.isPending}}
-    <div class="tepache-thumbnail__image img-thumbnail">
-      <div class="spinner-border text-primary" role="status"></div>
-    </div>
-  {{/if}}
-{{else}}
-  <img
-    class="tepache-thumbnail__image img-thumbnail tepache-thumbnail__image--ghost"
-    src="/its-tepache-bb.png"
-    alt="Pineapple character"
-    decoding="sync"
-  />
-{{/if}}
+</div>

@@ -6,8 +6,19 @@ import { TrackedAsyncData } from 'ember-async-data';
 export default class TepacheThumbnailComponent extends Component {
   @cached
   get imageUrl() {
-    const imageReference = ref(getStorage(), this.args.thumbnail);
+    const isValidUrl = (urlString) => {
+      try {
+        return Boolean(new URL(urlString));
+      } catch (e) {
+        return false;
+      }
+    };
 
-    return new TrackedAsyncData(getDownloadURL(imageReference), this);
+    if (isValidUrl(this.args.thumbnail)) {
+      return new TrackedAsyncData(this.args.thumbnail, this);
+    } else {
+      const imageReference = ref(getStorage(), this.args.thumbnail);
+      return new TrackedAsyncData(getDownloadURL(imageReference), this);
+    }
   }
 }

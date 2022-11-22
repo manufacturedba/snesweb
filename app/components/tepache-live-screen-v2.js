@@ -1,6 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { getRemoteConfig, getValue } from 'firebase/remote-config';
+import { cached, tracked } from '@glimmer/tracking';
 
 export default class TepacheLiveScreenV2Component extends Component {
   @service
@@ -9,13 +10,36 @@ export default class TepacheLiveScreenV2Component extends Component {
   @service('-firebase')
   firebase;
 
-  get pubNubConfig() {
-    const pubNubConfigJSON = getValue(
-      getRemoteConfig(this.firebase),
-      'pubnub_config'
-    ).asString();
+  @service
+  pubnub;
 
-    return JSON.parse(pubNubConfigJSON);
+  @tracked
+  totalOccupancy = 0;
+
+  constructor() {
+    super(...arguments);
+
+    this.pubnub.setUserId(this.args.playerSessionModel.id);
+    this.hereNow();
+  }
+
+  hereNow() {
+    return this.pubnub.hereNow(
+      {
+        channels: [this.chatChannel],
+      },
+      (status, response) => {
+        this.totalOccupancy = response?.totalOccupancy;
+      }
+    );
+  }
+
+  get chatChannel() {
+    return `chat.${this.args.gameSessionModel.id}`;
+  }
+
+  get adminChannel() {
+    return `admin.${this.args.gameSessionModel.id}`;
   }
 
   get ovenPlayerConfig() {

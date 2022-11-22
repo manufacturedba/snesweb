@@ -1,7 +1,5 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { getRemoteConfig, getValue } from 'firebase/remote-config';
-import PubNub from 'pubnub';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
@@ -23,40 +21,11 @@ export default class TepacheChatComponent extends Component {
   @service
   store;
 
-  #pubnub;
+  @service
+  pubnub;
 
   @tracked
   lastAdminMessage;
-
-  constructor() {
-    super(...arguments);
-
-    this.#pubnub = new PubNub(this.config);
-  }
-
-  get chatChannel() {
-    return `chat.${this.args.channel}`;
-  }
-
-  get adminChannel() {
-    return `admin.${this.args.channel}`;
-  }
-
-  get pubNubConfig() {
-    const pubNubConfigJSON = getValue(
-      getRemoteConfig(this.firebase),
-      'pubnub_config'
-    ).asString();
-
-    return JSON.parse(pubNubConfigJSON);
-  }
-
-  get config() {
-    return {
-      ...this.pubNubConfig,
-      userId: this.args.userId,
-    };
-  }
 
   get messages() {
     return this.store.peekAll('tepache-chat-message');
@@ -65,7 +34,7 @@ export default class TepacheChatComponent extends Component {
   @action
   async message(text) {
     try {
-      await this.#pubnub.publish({
+      await this.pubnub.publish({
         message: text,
         channel: `chat.${this.args.channel}`,
         storeInHistory: true,
@@ -77,25 +46,25 @@ export default class TepacheChatComponent extends Component {
 
   @action
   async subscribeToGameSessionChannel() {
-    const storedMessages = await this.#pubnub.fetchMessages({
-      channels: [this.chatChannel, this.adminChannel],
+    const storedMessages = await this.pubnub.fetchMessages({
+      channels: [this.args.chatChannel, this.args.adminChannel],
       count: PUBNUB_HISTORY_LIMIT,
     });
 
-    storedMessages?.channels[this.chatChannel]?.forEach((message) => {
+    storedMessages?.channels[this.args.chatChannel]?.forEach((message) => {
       this.recordChatMessage(message);
     });
 
-    this.#pubnub.subscribe({
-      channels: [this.chatChannel, this.adminChannel],
+    this.pubnub.subscribe({
+      channels: [this.args.chatChannel, this.args.adminChannel],
       withPresence: true,
     });
 
-    this.#pubnub.addListener({
+    this.pubnub.addListener({
       message: async (message) => {
-        if (message.channel === this.chatChannel) {
+        if (message.channel === this.args.chatChannel) {
           this.recordChatMessage(message);
-        } else if (message.channel === this.adminChannel) {
+        } else if (message.channel === this.args.adminChannel) {
           this.lastAdminMessage = message;
         }
       },
@@ -105,7 +74,7 @@ export default class TepacheChatComponent extends Component {
   @action
   async unsubscribeFromGameSessionChannel() {
     this.store.unloadAll('tepache-chat-message');
-    this.#pubnub.unsubscribeAll();
+    this.pubnub.unsubscribeAll();
   }
 
   @action
