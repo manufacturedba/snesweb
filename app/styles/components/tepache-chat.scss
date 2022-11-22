@@ -23,8 +23,9 @@
     --bs-list-group-border-width: 0;
     --bs-list-group-color: var(--bs-white-rgb);
     --bs-list-group-bg: var(--bs-dark);
-
-    line-height: 0.5em;
+    --bs-list-group-item-padding-y: 0;
+    --bs-list-group-item-padding-x: 0;
+    line-height: 1.5em;
 }
 
 .tepache-chat__message-list-item:hover {

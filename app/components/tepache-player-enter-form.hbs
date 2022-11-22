@@ -10,7 +10,7 @@
       @label="Enter a name or go anonymous"
       @property="name" as |el|
     >
-      <el.control placeholder="Anonymous" />
+      <el.control maxlength="36" placeholder="Anonymous" />
     </form.element>
     <form.submitButton @type="primary" @size="lg">
       ENTER THE ROOM

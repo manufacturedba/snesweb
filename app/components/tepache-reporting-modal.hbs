@@ -1,0 +1,48 @@
+<BsModal
+  class="text-dark"
+  @open={{@open}}
+  @onShow={{this.onShow}}
+  @fade={{true}}
+  @backdrop={{true}}
+  @backdropClose={{true}} as |modal|
+>
+  <modal.header>
+    <h4 class="modal-title">
+      Report an issue
+    </h4>
+  </modal.header>
+  <modal.body>
+    <BsForm
+      @formLayout="vertical"
+      @model={{this.record}}
+      @onSubmit={{modal.submit}} as |form|
+    >
+      <form.element
+        @controlType="email"
+        @label="Email (optional)"
+        @property="email" as |el|
+      >
+        <el.control placeholder="Email" />
+      </form.element>
+      <form.element
+        @controlType="textarea"
+        @label="Description of problem"
+        @property="description" as |el|
+      >
+        <el.control placeholder="Description" required />
+      </form.element>
+    </BsForm>
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{modal.close}}>
+      Cancel
+    </BsButton>
+    <BsButton
+      @type="success"
+      disabled={{not this.record.description}}
+      {{on 'click' (fn this.submitReport modal)}}
+    >
+      Submit
+    </BsButton>
+  </modal.footer>
+</BsModal>

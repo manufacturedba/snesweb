@@ -3,5 +3,30 @@
   Reports
 </h1>
 <p>
-  Coming soon
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            Email
+          </th>
+          <th scope="col">
+            Description
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each @model as |report|}}
+          <tr>
+            <th scope="row" class="text-truncate">
+              {{report.email}}
+            </th>
+            <td class="text-truncate">
+              {{report.description}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </p>
