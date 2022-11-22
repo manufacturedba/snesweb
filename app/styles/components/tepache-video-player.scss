@@ -1,4 +1,12 @@
+@import 'bootstrap';
+
 .tepache-video-player {
     height: 100%;
     max-height: 620px;
+}
+
+@include media-breakpoint-down(md) {
+    .tepache-video-player {
+        max-height: 180px;
+    }
 }
