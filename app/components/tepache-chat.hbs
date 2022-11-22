@@ -14,7 +14,9 @@
     class="tepache-chat__message-container text-white small d-flex flex-shrink-1 flex-column p-3"
     data-list-container-selector
   >
-    <ul class="list-group list-group-flush tepache-chat__message-list-group">
+    <ul
+      class="list-group list-group-flush tepache-chat__message-list-group pb-4"
+    >
       {{#each this.messages as |message|}}
         {{#if message.publisher}}
           <li
