@@ -21,6 +21,15 @@ const PORT = process.env.PORT || 616;
 
   await server.register(inert);
 
+  // Chromecast receiver
+  server.route({
+    method: 'GET',
+    path: '/receiver',
+    handler: {
+      file: 'receiver.html',
+    },
+  });
+
   server.route({
     method: 'GET',
     path: '/{param*}',
