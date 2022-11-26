@@ -40,3 +40,6 @@ firestore-debug.log
 ui-debug.log
 firebase-debug.log
 .firebase/
+
+# OSX
+.DS_Store
