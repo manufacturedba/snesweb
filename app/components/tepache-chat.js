@@ -2,7 +2,6 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
-import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
 import { tracked } from '@glimmer/tracking';
 import { getAnalytics, logEvent } from 'firebase/analytics';
 
@@ -25,9 +24,10 @@ export default class TepacheChatComponent extends Component {
   @service
   pubnub;
 
-  get messages() {
-    return this.store.peekAll('tepache-chat-message');
-  }
+  @tracked
+  disableScrollDown = false;
+
+  initialScrollCompleted = false;
 
   @action
   async message(text) {
@@ -47,6 +47,20 @@ export default class TepacheChatComponent extends Component {
 
   @action
   scrollToBottom() {
-    scheduleOnce('afterRender', scrollToBottomOfChat);
+    if (!this.disableScrollDown || !this.initialScrollCompleted) {
+      scheduleOnce('afterRender', scrollToBottomOfChat);
+      this.initialScrollCompleted = true;
+    }
+  }
+
+  @action
+  onIntersectingTop() {
+    this.disableScrollDown = true;
+    this.args.onIntersectingTop?.();
+  }
+
+  @action
+  onExitingTop() {
+    this.disableScrollDown = false;
   }
 }

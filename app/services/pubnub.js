@@ -52,4 +52,8 @@ export default class PubnubService extends Service {
   fetchMessages(option) {
     return this.#instance.fetchMessages(option);
   }
+
+  messageCounts(option) {
+    return this.#instance.messageCounts(option);
+  }
 }

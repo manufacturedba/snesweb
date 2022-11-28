@@ -13,7 +13,12 @@
     <ul
       class="list-group list-group-flush tepache-chat__message-list-group pb-5"
     >
-      {{#each this.messages as |message|}}
+      <li
+        class="list-group-item tepache-chat__message-list-item"
+        {{did-intersect onEnter=this.onIntersectingTop onExit=this.onExitingTop
+        }}
+      ></li>
+      {{#each @messages as |message|}}
         {{#if message.publisher}}
           <li
             class="list-group-item tepache-chat__message-list-item"

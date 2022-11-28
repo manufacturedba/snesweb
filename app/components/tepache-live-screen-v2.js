@@ -24,6 +24,8 @@ export default class TepacheLiveScreenV2Component extends Component {
   @tracked
   lastAdminMessage = {};
 
+  fetchMorePending = false;
+
   constructor() {
     super(...arguments);
 
@@ -59,16 +61,13 @@ export default class TepacheLiveScreenV2Component extends Component {
     return JSON.parse(ovenPlayerConfigJSON);
   }
 
+  get messages() {
+    return this.store.peekAll('tepache-chat-message')?.sortBy('timetoken');
+  }
+
   @action
   async subscribeToGameSessionChannel() {
-    const storedMessages = await this.pubnub.fetchMessages({
-      channels: [this.chatChannel, this.adminChannel],
-      count: PUBNUB_HISTORY_LIMIT,
-    });
-
-    storedMessages?.channels[this.chatChannel]?.forEach((message) => {
-      this.recordChatMessage(message);
-    });
+    await this.loadMessages();
 
     this.pubnub.subscribe({
       channels: [this.chatChannel, this.adminChannel],
@@ -84,6 +83,11 @@ export default class TepacheLiveScreenV2Component extends Component {
         }
       },
     });
+
+    if (this.fetchMorePending) {
+      this.fetchMoreMessages();
+      this.fetchMorePending = false;
+    }
   }
 
   @action
@@ -92,12 +96,29 @@ export default class TepacheLiveScreenV2Component extends Component {
     this.pubnub.unsubscribeAll();
   }
 
+  @action
+  async fetchMoreMessages() {
+    if (this.messages.length) {
+      const messageCount = await this.pubnub.messageCounts({
+        channels: [this.chatChannel],
+        channelTimetokens: [this.messages.firstObject.timetoken],
+      });
+
+      if (messageCount.channels[this.chatChannel] > 0) {
+        this.loadMessages(this.messages.firstObject.timetoken);
+      }
+    } else {
+      this.fetchMorePending = true;
+    }
+  }
+
   async recordChatMessage(message) {
     try {
       const playerSession = await this.store.findRecord(
         'tepache-player-session',
         message.publisher || message.uuid
       );
+
       this.store.createRecord('tepache-chat-message', {
         ...message,
         publisher: playerSession.name,
@@ -105,5 +126,22 @@ export default class TepacheLiveScreenV2Component extends Component {
     } catch (error) {
       console.warn('Unable fetching player session for chat ID', error);
     }
+  }
+
+  async loadMessages(startToken) {
+    const options = {
+      channels: [this.chatChannel],
+      count: PUBNUB_HISTORY_LIMIT,
+    };
+
+    if (startToken) {
+      options.start = startToken;
+    }
+
+    const storedMessages = await this.pubnub.fetchMessages(options);
+
+    storedMessages?.channels[this.chatChannel]?.forEach((message) => {
+      this.recordChatMessage(message);
+    });
   }
 }
