@@ -32,12 +32,8 @@ export default class ApplicationRoute extends Route {
 
   @action
   error(error) {
-    logEvent(getAnalytics(), 'error', { error });
+    logEvent(getAnalytics(), 'fatal_error', { error });
     console.error(error);
-    this.errorAlert.set('Unrecoverable error has occurred');
-
-    if (config.redirectAfterError) {
-      this.router.replaceWith('authenticated.construction');
-    }
+    return true;
   }
 }
