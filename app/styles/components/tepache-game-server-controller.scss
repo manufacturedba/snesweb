@@ -1,10 +1,14 @@
-.tepache-game-server-controller {
-    width: 600px;
+
+.tepache-game-server-controller__wrapper {
     position: relative;
+    width: 100%;
 }
 
 .tepache-game-server-controller__image {
     filter: hue-rotate(90deg);
+    height: inherit;
     width: inherit;
     position: absolute;
+    top: 0;
+    left: 0;
 }

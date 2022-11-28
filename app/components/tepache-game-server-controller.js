@@ -1,52 +1,43 @@
 import Component from '@glimmer/component';
-import { assert } from '@ember/debug';
 
 export default class TepacheGameServerControllerComponent extends Component {
-  constructor() {
-    super(...arguments);
-    assert(
-      'TepacheGameServerControllerComponent requires a `pressedState` argument',
-      this.args.pressedState
-    );
-  }
-
   get aButtonPressed() {
-    return this.args.pressedState.a;
+    return this.args.pressedState === 'a';
   }
 
   get bButtonPressed() {
-    return this.args.pressedState.b;
+    return this.args.pressedState === 'b';
   }
 
   get xButtonPressed() {
-    return this.args.pressedState.x;
+    return this.args.pressedState === 'x';
   }
 
   get yButtonPressed() {
-    return this.args.pressedState.y;
+    return this.args.pressedState === 'y';
   }
 
   get startButtonPressed() {
-    return this.args.pressedState.start;
+    return this.args.pressedState === 'start';
   }
   get selectButtonPressed() {
-    return this.args.pressedState.select;
+    return this.args.pressedState === 'select';
   }
 
   get leftDirectionPressed() {
-    return this.args.pressedState.left;
+    return this.args.pressedState === 'left';
   }
 
   get rightDirectionPressed() {
-    return this.args.pressedState.right;
+    return this.args.pressedState === 'right';
   }
 
   get upDirectionPressed() {
-    return this.args.pressedState.up;
+    return this.args.pressedState === 'up';
   }
 
   get downDirectionPressed() {
-    return this.args.pressedState.down;
+    return this.args.pressedState === 'down';
   }
 
   get dpadPressed() {

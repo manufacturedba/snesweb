@@ -57,5 +57,11 @@
       </div>
     </div>
   </div>
+  <div>
+    <TepacheGameServerController
+      class="tepache-metadata__controller"
+      @pressedState={{@lastAdminMessage.userMetadata.button}}
+    />
+  </div>
   <TepacheReportingModal @open={{this.reportingModalOpen}} />
 </div>

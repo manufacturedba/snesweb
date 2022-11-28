@@ -1,4 +1,8 @@
-<div class="tepache-live-screen-v2 bg-dark container-fluid h-100">
+<div
+  class="tepache-live-screen-v2 bg-dark container-fluid h-100"
+  {{will-destroy this.unsubscribeFromGameSessionChannel}}
+  {{did-insert this.subscribeToGameSessionChannel}}
+>
   <div class="row h-100">
     {{#if (is-active @gameSessionModel.state)}}
       {{#if this.ovenPlayerConfig}}
@@ -13,14 +17,15 @@
             @game={{@game}}
             @gameSessionModel={{@gameSessionModel}}
             @totalOccupancy={{this.totalOccupancy}}
+            @lastAdminMessage={{this.lastAdminMessage}}
           />
         </div>
         <div class="col-lg-3 col-xs-12 bg-dark">
           <TepacheChat
             @chatChannel={{this.chatChannel}}
-            @adminChannel={{this.adminChannel}}
             @channel={{@gameSessionModel.id}}
             @userId={{@playerSessionModel.id}}
+            @lastAdminMessage={{this.lastAdminMessage}}
           />
         </div>
       {{/if}}

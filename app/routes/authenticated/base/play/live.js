@@ -26,7 +26,7 @@ export default class AuthenticatedBasePlayLiveRoute extends Route {
       return this.router.transitionTo('authenticated.base');
     }
 
-    if (!playerSession) {
+    if (!playerSession || !playerSession.name) {
       return this.router.transitionTo('authenticated.base.play');
     }
 

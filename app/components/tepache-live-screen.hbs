@@ -1,7 +1,9 @@
 <div
   class="tepache-live-screen container-fluid justify-content-center"
   {{will-destroy this.remove}}
+  {{will-destroy this.unsubscribeFromGameSessionChannel}}
   {{did-insert this.heartbeat}}
+  {{did-insert this.subscribeToGameSessionChannel}}
 >
   {{#if (is-active @gameSessionModel.state)}}
     <div class="row sticky-top">
