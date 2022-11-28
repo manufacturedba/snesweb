@@ -9,6 +9,10 @@
         <div
           class="col-lg-9 col-xs-12 bg-dark sticky-top d-flex flex-nowrap flex-column"
         >
+          <TepacheGameServerController
+            class="tepache-live-screen-v2__controller"
+            @pressedState={{this.lastAdminMessage.userMetadata.button}}
+          />
           <TepacheVideoPlayer
             @options={{this.ovenPlayerConfig}}
             class="flex-grow-1 border-end"
@@ -17,7 +21,6 @@
             @game={{@game}}
             @gameSessionModel={{@gameSessionModel}}
             @totalOccupancy={{this.totalOccupancy}}
-            @lastAdminMessage={{this.lastAdminMessage}}
           />
         </div>
         <div class="col-lg-3 col-xs-12 bg-dark">

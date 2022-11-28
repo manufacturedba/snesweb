@@ -1,3 +1,4 @@
+@import 'bootstrap';
 
 .tepache-live-screen-v2 {
     --bs-border-color: rgba(255, 255, 255, 0.1);
@@ -7,4 +8,18 @@
     width: 4rem;
     height: 4rem;
     overflow: hidden;
+}
+
+.tepache-live-screen-v2__controller {
+    width: 300px;
+    right: 15px;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+}
+
+@include media-breakpoint-down(md) {
+    .tepache-live-screen-v2__controller {
+        width: 100px;
+    }
 }

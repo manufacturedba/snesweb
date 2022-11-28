@@ -86,13 +86,13 @@ export default class TepacheLiveScreenV2Component extends Component {
         if (message.channel === this.chatChannel) {
           this.recordChatMessage(message);
         } else if (message.channel === this.adminChannel) {
+          debugger;
           this.lastAdminMessage = message;
         }
       },
     });
 
     if (this.fetchMorePending) {
-      debugger;
       this.fetchMoreMessages();
       this.fetchMorePending = false;
     }
