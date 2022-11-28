@@ -68,6 +68,10 @@ export default class TepacheLiveScreenV2Component extends Component {
     return this.store.peekAll('tepache-chat-message')?.sortBy('timetoken');
   }
 
+  get filteredMessages() {
+    return this.messages?.filterBy('publisher');
+  }
+
   @action
   async subscribeToGameSessionChannel() {
     await this.loadMessages();
@@ -120,7 +124,10 @@ export default class TepacheLiveScreenV2Component extends Component {
 
     try {
       if (this.missingPlayerIds[playerId]) {
-        return;
+        return this.store.createRecord('tepache-chat-message', {
+          ...message,
+          publisher: '',
+        });
       }
 
       const playerSession = await this.store.findRecord(
@@ -128,7 +135,7 @@ export default class TepacheLiveScreenV2Component extends Component {
         playerId
       );
 
-      this.store.createRecord('tepache-chat-message', {
+      return this.store.createRecord('tepache-chat-message', {
         ...message,
         publisher: playerSession.name,
       });

@@ -19,18 +19,16 @@
         }}
       ></li>
       {{#each @messages as |message|}}
-        {{#if message.publisher}}
-          <li
-            class="list-group-item tepache-chat__message-list-item"
-            {{did-insert this.scrollToBottom}}
-          >
-            <span style="color: {{string-to-random-color message.publisher}}">
-              {{message.publisher}}
-              :
-            </span>
-            {{message.message}}
-          </li>
-        {{/if}}
+        <li
+          class="list-group-item tepache-chat__message-list-item"
+          {{did-insert this.scrollToBottom}}
+        >
+          <span style="color: {{string-to-random-color message.publisher}}">
+            {{message.publisher}}
+            :
+          </span>
+          {{message.message}}
+        </li>
       {{/each}}
     </ul>
   </div>

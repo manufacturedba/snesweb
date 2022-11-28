@@ -22,7 +22,7 @@
         </div>
         <div class="col-lg-3 col-xs-12 bg-dark">
           <TepacheChat
-            @messages={{this.messages}}
+            @messages={{this.filteredMessages}}
             @chatChannel={{this.chatChannel}}
             @channel={{@gameSessionModel.id}}
             @userId={{@playerSessionModel.id}}
