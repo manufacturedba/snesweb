@@ -30,7 +30,7 @@ const buttonMap = {
   16: NOT_SUPPORTED,
 };
 
-const throttleTime = 300; // ms
+const throttleTime = 1000; // ms
 
 export default class TepacheGameClientControllerComponent extends Component {
   @service
@@ -61,14 +61,6 @@ export default class TepacheGameClientControllerComponent extends Component {
     this.#errorUnsubscribe = this.nes.onError(() => {
       this.socketConnected = false;
     });
-  }
-
-  @cached
-  get isLastPressFromPlayer() {
-    return (
-      this.args.currentPressedButton?.playerSessionId ===
-      this.args.playerSessionModel?.id
-    );
   }
 
   @action
