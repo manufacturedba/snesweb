@@ -32,6 +32,13 @@
     line-height: 1.5em;
 }
 
+.tepache-chat__message-list-item--detector {
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 300px;
+}
+
 .tepache-chat__message-list-item:hover {
     background:rgba(0, 0, 0, 0.1);
 }

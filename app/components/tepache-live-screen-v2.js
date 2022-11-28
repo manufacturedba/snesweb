@@ -92,6 +92,7 @@ export default class TepacheLiveScreenV2Component extends Component {
     });
 
     if (this.fetchMorePending) {
+      debugger;
       this.fetchMoreMessages();
       this.fetchMorePending = false;
     }
@@ -157,8 +158,12 @@ export default class TepacheLiveScreenV2Component extends Component {
 
     const storedMessages = await this.pubnub.fetchMessages(options);
 
-    storedMessages?.channels[this.chatChannel]?.forEach((message) => {
-      this.recordChatMessage(message);
-    });
+    const messages = storedMessages.channels[this.chatChannel];
+
+    if (messages?.length) {
+      return Promise.all(
+        messages.map((message) => this.recordChatMessage(message))
+      );
+    }
   }
 }

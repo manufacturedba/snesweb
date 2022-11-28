@@ -11,16 +11,17 @@
     data-list-container-selector
   >
     <ul
-      class="list-group list-group-flush tepache-chat__message-list-group pb-5"
+      class="list-group list-group-flush tepache-chat__message-list-group position-relative pb-5"
     >
       <li
-        class="list-group-item tepache-chat__message-list-item"
+        class="list-group-item tepache-chat__message-list-item tepache-chat__message-list-item--detector position-absolute"
         {{did-intersect onEnter=this.onIntersectingTop onExit=this.onExitingTop
         }}
       ></li>
       {{#each @messages as |message|}}
         <li
           class="list-group-item tepache-chat__message-list-item"
+          data-list-scroll-detector
           {{did-insert this.scrollToBottom}}
         >
           <span style="color: {{string-to-random-color message.publisher}}">
