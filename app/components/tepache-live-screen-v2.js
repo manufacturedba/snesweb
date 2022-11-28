@@ -26,11 +26,14 @@ export default class TepacheLiveScreenV2Component extends Component {
 
   fetchMorePending = false;
 
+  missingPlayerIds = null;
+
   constructor() {
     super(...arguments);
 
     this.pubnub.setUserId(this.args.playerSessionModel.id);
     this.hereNow();
+    this.missingPlayerIds = {};
   }
 
   hereNow() {
@@ -113,10 +116,16 @@ export default class TepacheLiveScreenV2Component extends Component {
   }
 
   async recordChatMessage(message) {
+    const playerId = message.publisher || message.uuid;
+
     try {
+      if (this.missingPlayerIds[playerId]) {
+        return;
+      }
+
       const playerSession = await this.store.findRecord(
         'tepache-player-session',
-        message.publisher || message.uuid
+        playerId
       );
 
       this.store.createRecord('tepache-chat-message', {
@@ -124,6 +133,7 @@ export default class TepacheLiveScreenV2Component extends Component {
         publisher: playerSession.name,
       });
     } catch (error) {
+      this.missingPlayerIds[playerId] = true;
       console.warn('Unable fetching player session for chat ID', error);
     }
   }
