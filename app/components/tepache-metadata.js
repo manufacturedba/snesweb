@@ -10,4 +10,9 @@ export default class TepacheMetadataComponent extends Component {
   report() {
     this.reportingModalOpen = true;
   }
+
+  @action
+  toggleChat() {
+    this.args.toggleChat();
+  }
 }

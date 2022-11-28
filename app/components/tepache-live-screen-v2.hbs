@@ -21,18 +21,30 @@
             @game={{@game}}
             @gameSessionModel={{@gameSessionModel}}
             @totalOccupancy={{this.totalOccupancy}}
+            @toggleChat={{this.toggleChat}}
           />
         </div>
-        <div class="col-lg-3 col-xs-12 bg-dark">
-          <TepacheChat
-            @messages={{this.filteredMessages}}
-            @chatChannel={{this.chatChannel}}
-            @channel={{@gameSessionModel.id}}
-            @userId={{@playerSessionModel.id}}
-            @lastAdminMessage={{this.lastAdminMessage}}
-            @onIntersectingTop={{this.fetchMoreMessages}}
-          />
-        </div>
+        {{#if this.showChat}}
+          <div class="col-lg-3 col-xs-12 bg-dark">
+            <TepacheChat
+              @messages={{this.filteredMessages}}
+              @chatChannel={{this.chatChannel}}
+              @channel={{@gameSessionModel.id}}
+              @userId={{@playerSessionModel.id}}
+              @lastAdminMessage={{this.lastAdminMessage}}
+              @onIntersectingTop={{this.fetchMoreMessages}}
+            />
+          </div>
+        {{else}}
+          <div class="d-lg-none my-4">
+            <TepacheGameClientController
+              class="w-100"
+              @gameSessionModel={{@gameSessionModel}}
+              @playerSessionModel={{@playerSessionModel}}
+              @currentPressedButton={{this.currentPressedButton}}
+            />
+          </div>
+        {{/if}}
       {{/if}}
     {{/if}}
     {{#if (is-paused @gameSessionModel.state)}}

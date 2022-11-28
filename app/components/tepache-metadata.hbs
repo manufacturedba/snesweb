@@ -56,6 +56,19 @@
           <i class="bi bi-check2-square"></i>
           Chat mode
         </span>
+        <div class="form-check form-switch d-md-none">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="controllerSwitchCheck"
+            checked={{false}}
+            {{on 'change' this.toggleChat}}
+          />
+          <label class="form-check-label" for="controllerSwitchCheck">
+            <i class="bi bi-controller"></i>
+          </label>
+        </div>
       </div>
     </div>
   </div>

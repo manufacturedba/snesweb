@@ -28,6 +28,9 @@ export default class TepacheLiveScreenV2Component extends Component {
 
   missingPlayerIds = null;
 
+  @tracked
+  showChat = true;
+
   constructor() {
     super(...arguments);
 
@@ -86,7 +89,6 @@ export default class TepacheLiveScreenV2Component extends Component {
         if (message.channel === this.chatChannel) {
           this.recordChatMessage(message);
         } else if (message.channel === this.adminChannel) {
-          debugger;
           this.lastAdminMessage = message;
         }
       },
@@ -165,5 +167,10 @@ export default class TepacheLiveScreenV2Component extends Component {
         messages.map((message) => this.recordChatMessage(message))
       );
     }
+  }
+
+  @action
+  toggleChat() {
+    this.showChat = !this.showChat;
   }
 }
