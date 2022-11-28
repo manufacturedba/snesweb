@@ -7,7 +7,7 @@
   >
     <LinkTo @route="authenticated.base.index" class="navbar-brand">
       <img
-        class="tepache-mode-base__icon"
+        class="tepache-mode-base__icon me-4"
         alt="painting of rotting pineapple character"
         title="Rotting pineapple"
         src="/its-tepache-bb.png"
@@ -15,6 +15,16 @@
     </LinkTo>
     <navbar.content>
       <navbar.nav as |nav|>
+        <nav.item>
+          <a href="https://discord.gg/zuQ7Jp6zA6" class="me-4 text-white">
+            <i class="bi bi-discord"></i>
+          </a>
+        </nav.item>
+        <nav.item>
+          <a href="https://github.com/tepachemode" class="me-4 text-white">
+            <i class="bi bi-github"></i>
+          </a>
+        </nav.item>
         <nav.item>
           {{#if this.identifiedUser.identified}}
             <BsButton
