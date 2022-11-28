@@ -1,16 +1,16 @@
 <div
-  class="tepache-live-screen-v2__metadata border-end d-flex flex-grow-0 bg-dark text-white py-2 px-4 border-bottom border-top"
+  class="tepache-live-screen-v2__metadata border-end d-flex flex-grow-0 bg-dark text-white py-2 px-2 border-bottom border-top"
 >
   <div class="flex-shrink-1 flex-grow-0">
     <LinkTo @route="authenticated.base.game" @model={{@game.id}}>
       <TepacheThumbnail
         @thumbnail={{@game.logo}}
-        class="tepache-live-screen-v2__thumbnail flex-shrink-0 border border-primary rounded-circle me-4"
+        class="tepache-live-screen-v2__thumbnail flex-shrink-0 border border-primary rounded-circle me-2"
       />
     </LinkTo>
   </div>
   <div class="flex-grow-1 flex-shrink-1">
-    <div class="small mt-1 mb-2 d-flex justify-content-between">
+    <div class="small mt-1 mb-1 d-flex justify-content-between">
       <div class="flex-grow-1">
         <span class="me-1">
           {{@game.title}}
@@ -54,7 +54,7 @@
             Chat messages sent to console
           </BsTooltip>
           <i class="bi bi-check2-square"></i>
-          Chat mode
+          Chat
         </span>
         <div class="form-check form-switch d-md-none">
           <input
