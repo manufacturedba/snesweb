@@ -11,7 +11,7 @@
 }
 
 .tepache-live-screen-v2__controller {
-    opacity: 0.5;
+    opacity: 0.4;
     width: 300px;
     right: 15px;
     position: absolute;
@@ -28,7 +28,7 @@
 
 @include media-breakpoint-down(md) {
     .tepache-live-screen-v2__controller {
-        width: 200px;
+        width: 150px;
     }
 
     .tepache-live-screen-v2__controller--enlarged {
