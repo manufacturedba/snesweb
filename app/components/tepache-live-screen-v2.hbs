@@ -10,8 +10,13 @@
           class="col-lg-9 col-xs-12 bg-dark sticky-top d-flex flex-nowrap flex-column"
         >
           <TepacheGameServerController
-            class="tepache-live-screen-v2__controller"
+            class="tepache-live-screen-v2__controller
+              {{if
+                this.controllerEnlarged
+                'tepache-live-screen-v2__controller--enlarged'
+              }}"
             @pressedState={{this.lastAdminMessage.userMetadata.button}}
+            {{on 'click' this.toggleControllerEnlarged}}
           />
           <TepacheVideoPlayer
             @options={{this.ovenPlayerConfig}}

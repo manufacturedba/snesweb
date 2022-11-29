@@ -16,10 +16,20 @@
     position: absolute;
     top: 0;
     z-index: 1000;
+    transition: width 1s ease-in-out;
+    cursor: pointer;
+}
+
+.tepache-live-screen-v2__controller--enlarged {
+    width: 100%;
 }
 
 @include media-breakpoint-down(md) {
     .tepache-live-screen-v2__controller {
-        width: 100px;
+        width: 150px;
+    }
+
+    .tepache-live-screen-v2__controller--enlarged {
+        width: 100%;
     }
 }
