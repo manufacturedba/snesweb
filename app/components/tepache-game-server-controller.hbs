@@ -5,83 +5,71 @@
       alt="controller base"
       src="/controller/controller-base.png"
     />
-    {{#unless this.dpadPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="d base"
-        src="/controller/dpad-base.png"
-      />
-    {{else}}
-      {{#if this.downDirectionPressed}}
-        <img
-          class="tepache-game-server-controller__image"
-          alt="dpad down"
-          src="/controller/dpad-down.png"
-        />
-      {{/if}}
-      {{#if this.leftDirectionPressed}}
-        <img
-          class="tepache-game-server-controller__image"
-          alt="dpad left"
-          src="/controller/dpad-left.png"
-        />
-      {{/if}}
-      {{#if this.rightDirectionPressed}}
-        <img
-          class="tepache-game-server-controller__image"
-          alt="dpad right"
-          src="/controller/dpad-right.png"
-        />
-      {{/if}}
-      {{#if this.upDirectionPressed}}
-        <img
-          class="tepache-game-server-controller__image"
-          alt="dpad up"
-          src="/controller/dpad-up.png"
-        />
-      {{/if}}
-    {{/unless}}
-    {{#unless this.aButtonPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="a button"
-        src="/controller/a-up.png"
-      />
-    {{/unless}}
-    {{#unless this.bButtonPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="b button"
-        src="/controller/b-up.png"
-      />
-    {{/unless}}
-    {{#unless this.xButtonPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="x button"
-        src="/controller/x-up.png"
-      />
-    {{/unless}}
-    {{#unless this.yButtonPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="y button"
-        src="/controller/y-up.png"
-      />
-    {{/unless}}
-    {{#unless this.startButtonPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="start button"
-        src="/controller/start-up.png"
-      />
-    {{/unless}}
-    {{#unless this.selectButtonPressed}}
-      <img
-        class="tepache-game-server-controller__image"
-        alt="select button"
-        src="/controller/select-up.png"
-      />
-    {{/unless}}
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.dpadPressed 'invisible'}}"
+      alt="d base"
+      src="/controller/dpad-base.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{unless this.downDirectionPressed 'invisible'}}"
+      alt="dpad down"
+      src="/controller/dpad-down.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{unless this.leftDirectionPressed 'invisible'}}"
+      alt="dpad left"
+      src="/controller/dpad-left.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{unless this.rightDirectionPressed 'invisible'}}"
+      alt="dpad right"
+      src="/controller/dpad-right.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{unless this.upDirectionPressed 'invisible'}}"
+      alt="dpad up"
+      src="/controller/dpad-up.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.aButtonPressed 'invisible'}}"
+      alt="a button"
+      src="/controller/a-up.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.bButtonPressed 'invisible'}}"
+      alt="b button"
+      src="/controller/b-up.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.xButtonPressed 'invisible'}}"
+      alt="x button"
+      src="/controller/x-up.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.yButtonPressed 'invisible'}}"
+      alt="y button"
+      src="/controller/y-up.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.startButtonPressed 'invisible'}}"
+      alt="start button"
+      src="/controller/start-up.png"
+    />
+    <img
+      class="tepache-game-server-controller__image
+        {{if this.selectButtonPressed 'invisible'}}"
+      alt="select button"
+      src="/controller/select-up.png"
+    />
   </div>
 </div>
