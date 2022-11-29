@@ -11,25 +11,28 @@
 }
 
 .tepache-live-screen-v2__controller {
+    opacity: 0.5;
     width: 300px;
     right: 15px;
     position: absolute;
     top: 0;
     z-index: 1000;
-    transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out, opacity 1s ease-in;
     cursor: pointer;
 }
 
 .tepache-live-screen-v2__controller--enlarged {
     width: 100%;
+    opacity: 1;
 }
 
 @include media-breakpoint-down(md) {
     .tepache-live-screen-v2__controller {
-        width: 150px;
+        width: 125px;
     }
 
     .tepache-live-screen-v2__controller--enlarged {
         width: 100%;
+        opacity: 1;
     }
 }

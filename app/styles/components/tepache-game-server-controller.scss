@@ -13,6 +13,12 @@
     left: 0;
 	transform: scale(1);
 	animation: pulse 3s infinite;
+	transition: opacity 0.5s ease-out, filter 0.1s ease-out;
+}
+
+.tepache-game-server-controller__image--invisible {
+	opacity: 0;
+	filter: hue-rotate(0deg) blur(.5rem);;
 }
 
 @keyframes pulse {
