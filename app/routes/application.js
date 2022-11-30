@@ -36,4 +36,9 @@ export default class ApplicationRoute extends Route {
     console.error(error);
     return true;
   }
+
+  @action
+  loading() {
+    return true;
+  }
 }

@@ -54,11 +54,11 @@ export default class TepacheLiveScreenV2Component extends Component {
   }
 
   get chatChannel() {
-    return `chat.${this.args.gameSessionModel.id}`;
+    return `chat.${this.args?.gameSessionModel?.id}`;
   }
 
   get adminChannel() {
-    return `admin.${this.args.gameSessionModel.id}`;
+    return `admin.${this.args?.gameSessionModel?.id}`;
   }
 
   get ovenPlayerConfig() {
