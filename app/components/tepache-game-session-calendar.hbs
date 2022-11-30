@@ -1,0 +1,12 @@
+<div
+  class="jumbotron text-white text-center bg-opacity-75 d-flex justify-content-center"
+  ...attributes
+>
+  <PowerCalendarRange
+    class="tepache-game-session-calendar__power-calendar text-dark"
+    @selected={{this.range}} as |calendar|
+  >
+    <calendar.Nav />
+    <calendar.Days />
+  </PowerCalendarRange>
+</div>

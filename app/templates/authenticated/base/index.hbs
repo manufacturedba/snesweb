@@ -1,6 +1,9 @@
-<div class="bg-dark">
-  <TepacheWelcomeJumbotron
-    @gameModel={{@model.game}}
-    @gameSessionModel={{@model.gameSession}}
-  />
+<div class="pb-5">
+  <div class="bg-dark">
+    <TepacheWelcomeJumbotron
+      @gameModel={{@model.game}}
+      @gameSessionModel={{@model.gameSession}}
+    />
+  </div>
+  <TepacheGameSessionCalendar @gameSessionModel={{@model.gameSession}} />
 </div>

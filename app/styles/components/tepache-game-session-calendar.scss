@@ -1,0 +1,18 @@
+@import "../ember-power-calendar";
+@import 'bootstrap';
+
+.tepache-game-session-calendar__power-calendar {
+    @include ember-power-calendar($cell-size: 55px);
+}
+
+@include media-breakpoint-down(lg) {
+    .tepache-game-session-calendar__power-calendar {
+        @include ember-power-calendar($cell-size: 50px);
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .tepache-game-session-calendar__power-calendar {
+        @include ember-power-calendar($cell-size: 40px);
+    }
+}
