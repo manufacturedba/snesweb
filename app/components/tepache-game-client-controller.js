@@ -46,7 +46,7 @@ const BUTTON_TIMING_PRIORITY = [
   'r',
 ];
 
-const throttleTime = 500; // ms
+const throttleTime = 100; // ms
 
 export default class TepacheGameClientControllerComponent extends Component {
   @service
