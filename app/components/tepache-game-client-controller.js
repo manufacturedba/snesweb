@@ -96,10 +96,10 @@ export default class TepacheGameClientControllerComponent extends Component {
     });
   }
 
-  @action
   /**
    * @param {MouseEvent} event
    */
+  @action
   async handleMouseDown(event) {
     event.stopPropagation();
 

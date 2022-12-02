@@ -41,9 +41,11 @@
             />
           </div>
         {{else}}
-          <div class="d-lg-none my-4">
+          <div
+            class="col-lg-3 col-xs-12 my-4 d-flex flex-column justify-content-end"
+          >
             <TepacheGameClientController
-              class="w-100"
+              class="w-100 flex-grow-0"
               @gameSessionModel={{@gameSessionModel}}
               @playerSessionModel={{@playerSessionModel}}
               @currentPressedButton={{this.currentPressedButton}}

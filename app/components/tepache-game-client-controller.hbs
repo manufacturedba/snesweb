@@ -1,6 +1,7 @@
 <div
-  class="tepache-game-client-controller justify-content-center align-items-center text-center
+  class="tepache-game-client-controller
     {{if this.socketConnected 'tepache-game-client-controller--connected'}}"
+  ...attributes
   {{on 'mousedown' this.handleMouseDown}}
   {{on 'mouseup' this.handleMouseUp}}
   {{on 'touchstart' this.handleMouseDown}}
