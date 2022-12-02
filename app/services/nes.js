@@ -76,6 +76,7 @@ export default class NesService extends Service {
       },
       reconnect: true,
       delay: 1000,
+      retries: 1000,
       maxDelay: RECONNECT_TIME,
     });
 
