@@ -46,7 +46,7 @@ const BUTTON_TIMING_PRIORITY = [
   'r',
 ];
 
-const throttleTime = 100; // ms
+const throttleTime = 200; // ms
 
 export default class TepacheGameClientControllerComponent extends Component {
   @service
@@ -141,6 +141,8 @@ export default class TepacheGameClientControllerComponent extends Component {
 
   @action
   async handleMouseUp(event) {
+    event.stopPropagation();
+
     const target = event.target;
     const button = target.getAttribute(dataAttribute);
 
