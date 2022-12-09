@@ -10,12 +10,6 @@
   {{will-destroy this.remove}}
   {{did-insert this.listenForController}}
 >
-  {{#unless this.socketConnected}}
-    <span
-      class="spinner-border spinner-border-lg text-warning position-absolute p-5"
-      role="status"
-    ></span>
-  {{/unless}}
   {{inline-svg
     'controller/reduced-stacked-controller'
     class='tepache-game-client-controller__svg'

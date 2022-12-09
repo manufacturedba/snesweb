@@ -1,8 +1,8 @@
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { throttle } from '@ember/runloop';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 const BUTTONS_FOR_HIDE_TOGGLE = ['left', 'right', 'up', 'down'];
 
@@ -30,54 +30,11 @@ const buttonMap = {
   16: NOT_SUPPORTED,
 };
 
-// https://gamesx.com/controldata/snesdat.htm
-const BUTTON_TIMING_PRIORITY = [
-  'b',
-  'y',
-  'select',
-  'start',
-  'up',
-  'down',
-  'left',
-  'right',
-  'a',
-  'x',
-  'l',
-  'r',
-];
-
 const throttleTime = 200; // ms
 
 export default class TepacheGameClientControllerComponent extends Component {
   @service
-  nes;
-
-  @tracked
-  socketConnected = true;
-
-  #connectUnsubscribe;
-
-  #disconnectUnsubscribe;
-
-  #errorUnsubscribe;
-
-  #depressButton = {};
-
-  constructor() {
-    super(...arguments);
-
-    this.#connectUnsubscribe = this.nes.onConnect(() => {
-      this.socketConnected = true;
-    });
-
-    this.#disconnectUnsubscribe = this.nes.onDisconnect(() => {
-      this.socketConnected = false;
-    });
-
-    this.#errorUnsubscribe = this.nes.onError(() => {
-      this.socketConnected = false;
-    });
-  }
+  pubnub;
 
   @action
   async request(button) {
@@ -85,15 +42,19 @@ export default class TepacheGameClientControllerComponent extends Component {
       navigator?.vibrate(100); // vibrate for 100ms
     }
 
-    return await this.nes.request({
-      path: '/api/socket/tepache-session-captures',
-      method: 'POST',
-      payload: {
-        button,
-        gameSessionId: this.args.gameSessionModel?.id,
-        playerSessionId: this.args.playerSessionModel?.id,
-      },
+    logEvent(getAnalytics(), 'send_message_controller', {
+      channel: this.args.chatChannel,
     });
+
+    try {
+      await this.pubnub.publish({
+        message: button?.toUpperCase(),
+        channel: this.args.chatChannel,
+        storeInHistory: true,
+      });
+    } catch (status) {
+      console.error(status);
+    }
   }
 
   /**
@@ -105,9 +66,6 @@ export default class TepacheGameClientControllerComponent extends Component {
 
     const target = event.target;
     const button = target.getAttribute(dataAttribute);
-
-    clearInterval(this.#depressButton[button]);
-    this.#depressButton[button] = null;
 
     if (button) {
       if (BUTTONS_FOR_HIDE_TOGGLE.includes(button)) {
@@ -125,40 +83,12 @@ export default class TepacheGameClientControllerComponent extends Component {
       }
 
       throttle(this, this.request, button, throttleTime);
-
-      this.#depressButton[button] = setInterval(() => {
-        for (let i = 0; i < BUTTON_TIMING_PRIORITY.length; i++) {
-          if (BUTTON_TIMING_PRIORITY[i] === button) {
-            return this.request(button);
-          } else if (this.#depressButton[BUTTON_TIMING_PRIORITY[i]]) {
-            // a higher priority button is being held down so exit
-            return;
-          }
-        }
-      }, throttleTime);
     }
   }
 
   @action
   async handleMouseUp(event) {
     event.stopPropagation();
-
-    const target = event.target;
-    const button = target.getAttribute(dataAttribute);
-
-    if (!button) {
-      console.warn(
-        'Button cannot be determined so purging all depressed buttons'
-      );
-
-      BUTTON_TIMING_PRIORITY.forEach((button) => {
-        clearInterval(this.#depressButton[button]);
-        this.#depressButton[button] = null;
-      });
-    } else {
-      clearInterval(this.#depressButton[button]);
-      this.#depressButton[button] = null;
-    }
 
     document
       .querySelector(`[data-tepache-game-client-controller-destination-base]`)
@@ -223,14 +153,5 @@ export default class TepacheGameClientControllerComponent extends Component {
     };
 
     window.requestAnimationFrame(update);
-  }
-
-  @action
-  remove() {
-    super.willDestroy(...arguments);
-
-    this.#connectUnsubscribe();
-    this.#errorUnsubscribe();
-    this.#disconnectUnsubscribe();
   }
 }

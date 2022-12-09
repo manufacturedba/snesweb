@@ -1,15 +1,7 @@
 .tepache-game-client-controller {
-  opacity: 0.1;
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
-.tepache-game-client-controller--connected {
-  opacity: 1;
   pointer-events: auto;
   cursor: pointer;
 }
-
 
 .tepache-game-client-controller__svg {
   pointer-events: none;
