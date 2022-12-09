@@ -29,7 +29,6 @@ Router.map(function () {
       });
       this.route('cookie-policy');
     });
-    this.route('construction');
     // TODO - This treats 404 scenarios as valid.
     this.route('404', { path: '/*path' });
   });

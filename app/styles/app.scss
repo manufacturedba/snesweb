@@ -52,36 +52,6 @@ body {
     color: #FFFFFF;
 }
 
-.tepache-mode-construction {
-    color: #FFFFFF;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    grid-auto-rows: 200px;
-    grid-template-areas:
-      ". a a ."
-      ". a a ."
-      ". a a .";
-}
-
-.tepache-mode-construction__message {
-    margin-top: 200px;
-    grid-area: a;
-    align-self: center;
-    justify-self: center;
-}
-
-.tepache-mode-construction__content {
-    margin-top: 20px;
-    height: 200px;
-    resize: both;
-    overflow: auto;
-}
-
-.tepache-mode-construction__image {
-    height: inherit;
- }
-
 .tepache-mode-credits__artist-profile-image {
     border-radius: 2px;
     max-height: 100px;

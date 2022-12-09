@@ -61,10 +61,10 @@ export default class TepacheLoginComponent extends Component {
             this.session
               .authenticate('authenticator:firebase', () => error.credential)
               .finally(() =>
-                this.router.transitionTo('authenticated.base.construction')
+                this.router.transitionTo('authenticated.base.index')
               );
           } else {
-            this.router.transitionTo('authenticated.base.construction');
+            this.router.transitionTo('authenticated.base.index');
           }
         },
       },
