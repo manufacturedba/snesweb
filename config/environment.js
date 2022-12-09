@@ -71,6 +71,16 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
+    ENV['ember-cloud-firestore-adapter']['firebaseConfig'] = {
+      apiKey: 'AIzaSyB4qE0_mYuHrpuE0AxhqhpEqd0uJGC4nYE',
+      authDomain: 'tepache-mode-dev.firebaseapp.com',
+      projectId: 'tepache-mode-dev',
+      storageBucket: 'tepache-mode-dev.appspot.com',
+      messagingSenderId: '909423050243',
+      appId: '1:909423050243:web:ef1f0c441ecc10e00a9836',
+      measurementId: 'G-ZE99WSEPPE',
+    };
+
     ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
     ENV.APP.LOG_TRANSITIONS = true;

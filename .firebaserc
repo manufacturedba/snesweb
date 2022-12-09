@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "tepache-mode"
-  }
+    "default": "tepache-mode",
+    "dev": "tepache-mode-dev"
+  },
+  "targets": {},
+  "etags": {}
 }
