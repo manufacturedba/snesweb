@@ -147,7 +147,7 @@ export default class TepacheGameClientControllerComponent extends Component {
     const button = target.getAttribute(dataAttribute);
 
     if (!button) {
-      console.warning(
+      console.warn(
         'Button cannot be determined so purging all depressed buttons'
       );
 
