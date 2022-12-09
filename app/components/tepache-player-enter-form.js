@@ -25,9 +25,11 @@ export default class TepachePlayerEnterFormComponent extends Component {
       logEvent(getAnalytics(), 'submit_player_enter_form_named');
     }
 
-    await this.playerSessionModel.save();
+    if (this.playerSessionModel.hasDirtyAttributes) {
+      await this.playerSessionModel.save();
+    }
 
-    return this.router.transitionTo('authenticated.base.play.live');
+    this.router.transitionTo('authenticated.base.play.live');
   }
 
   /**
