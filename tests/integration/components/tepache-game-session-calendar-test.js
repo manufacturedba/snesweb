@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module(
-  'Integration | Component | tepache-admin-active-player-session-count-card',
+  'Integration | Component | tepache-game-session-calendar',
   function (hooks) {
     setupRenderingTest(hooks);
 
@@ -12,15 +12,15 @@ module(
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
 
-      await render(hbs`<TepacheAdminActivePlayerSessionCountCard />`);
+      await render(hbs`<TepacheGameSessionCalendar />`);
 
       assert.dom(this.element).hasText('');
 
       // Template block usage:
       await render(hbs`
-      <TepacheAdminActivePlayerSessionCountCard>
+      <TepacheGameSessionCalendar>
         template block text
-      </TepacheAdminActivePlayerSessionCountCard>
+      </TepacheGameSessionCalendar>
     `);
 
       assert.dom(this.element).hasText('template block text');

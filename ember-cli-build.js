@@ -1,4 +1,5 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const path = require('path');
 
 module.exports = function emberCLIBuild(defaults) {
   let app = new EmberApp(defaults, {
@@ -42,6 +43,34 @@ module.exports = function emberCLIBuild(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+  const { Webpack } = require('@embroider/webpack');
 
-  return app.toTree();
+  return require('@embroider/compat').compatBuild(app, Webpack, {
+    staticAddonTestSupportTrees: true,
+    staticAddonTrees: true,
+    staticHelpers: true,
+    staticModifiers: true,
+    staticComponents: true,
+    splitAtRoutes: [/.*/],
+    packageRules: [
+      {
+        package: 'ember-power-calendar',
+        components: {
+          '<PowerCalendar />': {
+            acceptsComponentArguments: [
+              'this.navComponent',
+              'this.daysComponent',
+            ],
+            layout: {
+              addonPath: 'templates/components/power-calendar.hbs',
+            },
+          },
+        },
+      },
+    ],
+    staticAppPaths: ['svgs.js'],
+    packagerOptions: {
+      webpackConfig: {},
+    },
+  });
 };

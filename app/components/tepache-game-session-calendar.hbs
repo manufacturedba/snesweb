@@ -4,6 +4,8 @@
 >
   <PowerCalendarRange
     class="tepache-game-session-calendar__power-calendar text-dark"
+    @navComponent={{component 'power-calendar/nav'}}
+    @daysComponent={{component 'power-calendar/days'}}
     @selected={{this.range}}
     @center={{this.center}}
     @onCenterChange={{this.onCenterChange}} as |calendar|

@@ -15,8 +15,8 @@
     >
       <li
         class="list-group-item tepache-chat__message-list-item tepache-chat__message-list-item--detector position-absolute"
-        {{did-intersect onEnter=this.onIntersectingTop onExit=this.onExitingTop
-        }}
+        {{!-- {{did-intersect onEnter=this.onIntersectingTop onExit=this.onExitingTop
+        }} --}}
       ></li>
       {{#each @messages as |message|}}
         <li
