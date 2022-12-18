@@ -48,9 +48,28 @@
       href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/castjs/5.2.0/cast.min.js"></script>
+    <script
+      async
+      src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"
+    ></script>
+    <script
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/castjs/5.2.0/cast.min.js"
+    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VNHTKVCJLS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
 
+      gtag('config', 'G-VNHTKVCJLS');
+    </script>
     {{content-for "head-footer"}}
   </head>
   <body>
