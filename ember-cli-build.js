@@ -51,7 +51,7 @@ module.exports = function emberCLIBuild(defaults) {
     staticHelpers: true,
     staticModifiers: true,
     staticComponents: true,
-    splitAtRoutes: [/.*/],
+    splitAtRoutes: [/authenticated.base.*/],
     packageRules: [
       {
         package: 'ember-power-calendar',
