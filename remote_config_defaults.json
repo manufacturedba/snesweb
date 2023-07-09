@@ -2,5 +2,6 @@
   "live": "true",
   "game_session_id": "KT3qy9XyXzID84KXNvEB",
   "ovenplayer_config": "{\"image\":\"https://stream.site.com/stream.jpg\",\"sources\":[{\"label\":\"WebRTC\",\"type\":\"webrtc\",\"file\":\"wss://hls.stream.site.com/stream\"},{\"type\":\"hls\",\"file\":\"https://sitestreamer.com/app/stream/playlist.m3u8\",\"framerate\":60,\"label\":\"HLS\"}],\"autoStart\":true,\"autoFallback\":true,\"controls\":true,\"disableSeekUI\":true,\"webrtcConfig\":{\"timeoutMaxRetry\":420}}",
-  "chromecast": "{\"playlist\":\"https: //stream.stream.com:2053/app/stream/stream.m3u8\",\"receiver\":\"DDDD0EA\",\"poster\":\"https://stream.stream.com:1337/app/stream/thumb.jpg\",\"title\":\"Tepache Mode\",\"description\":\"Stream of Tepache Mode\"}"
+  "chromecast": "{\"playlist\":\"https: //stream.stream.com:2053/app/stream/stream.m3u8\",\"receiver\":\"DDDD0EA\",\"poster\":\"https://stream.stream.com:1337/app/stream/thumb.jpg\",\"title\":\"Tepache Mode\",\"description\":\"Stream of Tepache Mode\"}",
+  "pubnub_config": "{\"subscribeKey\":\"sub-1\",\"publishKey\":\"pub-2\",\"logVerbosity\":false,\"ssl\":true,\"heartbeatInterval\":12,\"restore\":true,\"keepAlive\":false,\"suppressLeaveEvents\":false}"
 }
