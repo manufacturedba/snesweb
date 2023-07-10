@@ -1,15 +1,19 @@
 <div
+  class="d-flex row justify-content-center"
   {{did-insert this.subscribeForHeartbeatController}}
   {{will-destroy this.unsubscribeForHeartbeatController}}
 >
-  <TepacheWelcomeJumbotron
-    @gameModel={{@gameModel}}
-    @gameSessionModel={{@gameSessionModel}}
-  />
-  <div class="d-flex justify-content-center">
+  <div class="col-12">
+    <TepacheWelcomeJumbotron
+      @gameModel={{@gameModel}}
+      @gameSessionModel={{@gameSessionModel}}
+    />
+  </div>
+  <div class="col-10 col-lg-4 mt-4">
     <TepacheGameServerController
-      class="tepache-welcome__controller w-50"
+      class="tepache-welcome__controller w-100"
       @pressedState={{this.lastAdminMessage.userMetadata.button}}
+      {{on 'click' this.transitionToPlay}}
     />
   </div>
 </div>

@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { debounce } from '@ember/runloop';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 export default class TepacheWelcomeComponent extends Component {
   @service
@@ -45,5 +46,11 @@ export default class TepacheWelcomeComponent extends Component {
   @action
   async unsubscribeForHeartbeatController() {
     this.pubnub.unsubscribeAll();
+  }
+
+  @action
+  transitionToPlay() {
+    logEvent(getAnalytics(), 'game_controller_clicked');
+    this.router.transitionTo('authenticated.base.play');
   }
 }
