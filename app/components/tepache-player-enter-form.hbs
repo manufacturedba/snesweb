@@ -1,19 +1,33 @@
 <div class="bg-white p-4 shadow-lg">
-  <BsForm
-    @formLayout="horizontal"
-    @model={{this.playerSessionModel}}
-    @onSubmit={{this.submitToEnterRoom}} as |form|
-  >
-    <form.element
-      @size="lg"
-      @controlType="text"
-      @label="Enter a name or go anonymous"
-      @property="name" as |el|
+  {{#with
+    (changeset
+      this.playerSessionModel this.playerSessionValidations
+    ) as |changesetObj|
+  }}
+    <BsForm
+      @formLayout="horizontal"
+      @model={{changesetObj}}
+      @onSubmit={{this.submitToEnterRoom}} as |form|
     >
-      <el.control maxlength="36" placeholder="Anonymous" />
-    </form.element>
-    <form.submitButton @type="primary" @size="lg">
-      ENTER THE ROOM
-    </form.submitButton>
-  </BsForm>
+      <form.element
+        @size="lg"
+        @controlType="text"
+        @label="Enter a name for chat"
+        @property="name" as |el|
+      >
+        <el.control maxlength="36" placeholder="Billiam Myboy" />
+      </form.element>
+      <form.submitButton disabled={{changesetObj.isInvalid}} @size="lg">
+        ENTER THE ROOM WITH NAME
+      </form.submitButton>
+      <BsButton
+        @size="lg"
+        @type="secondary"
+        type="submit"
+        {{on 'click' this.goAnonymous}}
+      >
+        JUST GO ANONYMOUS
+      </BsButton>
+    </BsForm>
+  {{/with}}
 </div>
