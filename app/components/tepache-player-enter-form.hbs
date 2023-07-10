@@ -1,5 +1,5 @@
 <div class="bg-white p-4 shadow-lg">
-  {{#with
+  {{#let
     (changeset
       this.playerSessionModel this.playerSessionValidations
     ) as |changesetObj|
@@ -34,5 +34,5 @@
         JUST GO ANONYMOUS
       </BsButton>
     </BsForm>
-  {{/with}}
+  {{/let}}
 </div>
