@@ -1,0 +1,15 @@
+<div
+  {{did-insert this.subscribeForHeartbeatController}}
+  {{will-destroy this.unsubscribeForHeartbeatController}}
+>
+  <TepacheWelcomeJumbotron
+    @gameModel={{@gameModel}}
+    @gameSessionModel={{@gameSessionModel}}
+  />
+  <div class="d-flex justify-content-center">
+    <TepacheGameServerController
+      class="tepache-welcome__controller w-75"
+      @pressedState={{this.lastAdminMessage.userMetadata.button}}
+    />
+  </div>
+</div>

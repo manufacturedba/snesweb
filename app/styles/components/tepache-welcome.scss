@@ -1,0 +1,15 @@
+.tepache-welcome__controller {
+    cursor: not-allowed;
+    animation: live 6s;
+
+}
+
+@keyframes live {
+	0% {
+        filter: grayscale(100%);
+	}
+
+	100% {
+        filter: grayscale(0%);
+	}
+}

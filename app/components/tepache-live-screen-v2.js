@@ -29,9 +29,6 @@ export default class TepacheLiveScreenV2Component extends Component {
   missingPlayerIds = null;
 
   @tracked
-  controllerEnlarged = false;
-
-  @tracked
   showChat = true;
 
   constructor() {
@@ -175,10 +172,5 @@ export default class TepacheLiveScreenV2Component extends Component {
   @action
   toggleChat() {
     this.showChat = !this.showChat;
-  }
-
-  @action
-  toggleControllerEnlarged() {
-    this.controllerEnlarged = !this.controllerEnlarged;
   }
 }
