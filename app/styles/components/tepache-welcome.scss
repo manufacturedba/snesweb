@@ -1,15 +1,4 @@
 .tepache-welcome__controller {
     cursor: pointer;
-    animation: live 6s;
     height: 10rem;
-}
-
-@keyframes live {
-	0% {
-        filter: grayscale(100%);
-	}
-
-	100% {
-        filter: grayscale(0%);
-	}
 }

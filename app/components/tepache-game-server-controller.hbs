@@ -1,5 +1,8 @@
 <div class="tepache-game-server-controller" ...attributes>
-  <div class="tepache-game-server-controller__wrapper">
+  <div
+    class="tepache-game-server-controller__wrapper
+      {{if @pressedState 'tepache-game-server-controller__wrapper--active'}}"
+  >
     <img
       class="tepache-game-server-controller__image"
       alt="controller base"
