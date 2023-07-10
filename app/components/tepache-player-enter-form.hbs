@@ -17,10 +17,15 @@
       >
         <el.control maxlength="36" placeholder="Billiam Myboy" />
       </form.element>
-      <form.submitButton disabled={{changesetObj.isInvalid}} @size="lg">
-        ENTER THE ROOM WITH NAME
+      <form.submitButton
+        class="mt-1"
+        disabled={{changesetObj.isInvalid}}
+        @size="lg"
+      >
+        PLAY WITH NAME
       </form.submitButton>
       <BsButton
+        class="mt-1"
         @size="lg"
         @type="secondary"
         type="submit"

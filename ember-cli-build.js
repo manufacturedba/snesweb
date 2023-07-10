@@ -52,22 +52,6 @@ module.exports = function emberCLIBuild(defaults) {
     staticModifiers: true,
     staticComponents: true,
     splitAtRoutes: [/authenticated.base.*/],
-    packageRules: [
-      {
-        package: 'ember-power-calendar',
-        components: {
-          '<PowerCalendar />': {
-            acceptsComponentArguments: [
-              'this.navComponent',
-              'this.daysComponent',
-            ],
-            layout: {
-              addonPath: 'templates/components/power-calendar.hbs',
-            },
-          },
-        },
-      },
-    ],
     staticAppPaths: ['svgs.js'],
     packagerOptions: {
       webpackConfig: {},
