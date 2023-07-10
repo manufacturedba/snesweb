@@ -22,7 +22,7 @@ export default class AuthenticatedBasePlayLiveRoute extends Route {
     let { gameSession, playerSession } =
       this.modelFor('authenticated.base.play') || {};
 
-    if (!gameSession || gameSession.expiresAt < new Date()) {
+    if (!gameSession) {
       return this.router.transitionTo('authenticated.base');
     }
 

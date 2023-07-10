@@ -28,13 +28,6 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
       return true;
     }
 
-    if (
-      !this.args.gameSessionModel ||
-      this.args.gameSessionModel.expiresAt < Date.now()
-    ) {
-      return true;
-    }
-
     return false;
   }
 

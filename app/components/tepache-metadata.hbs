@@ -36,18 +36,9 @@
           <BsTooltip @placement="top">
             {{@totalOccupancy}}
             active players
-            {{short-date @gameSessionModel.createdAt}}
           </BsTooltip>
           <i class="bi bi-person-video"></i>
           {{@totalOccupancy}}
-        </span>
-        <span class="me-2">
-          <BsTooltip @placement="top">
-            Game session was created on
-            {{short-date @gameSessionModel.createdAt}}
-          </BsTooltip>
-          <i class="bi bi-calendar-event"></i>
-          {{short-date @gameSessionModel.createdAt}}
         </span>
         <span class="me-2">
           <BsTooltip @placement="top">
