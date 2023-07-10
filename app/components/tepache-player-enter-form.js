@@ -19,14 +19,12 @@ export default class TepachePlayerEnterFormComponent extends Component {
   router;
 
   @action
-  async submitToEnterRoom() {
+  async submitToEnterRoom(changeset) {
     logEvent(getAnalytics(), 'submit_player_enter_form');
 
     logEvent(getAnalytics(), 'submit_player_enter_form_named');
 
-    if (this.playerSessionModel.hasDirtyAttributes) {
-      await this.playerSessionModel.save();
-    }
+    await changeset.save();
 
     this.router.transitionTo('authenticated.base.play.live');
   }

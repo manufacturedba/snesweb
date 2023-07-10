@@ -7,7 +7,7 @@
     <BsForm
       @formLayout="horizontal"
       @model={{changesetObj}}
-      @onSubmit={{this.submitToEnterRoom}} as |form|
+      @onSubmit={{fn this.submitToEnterRoom changesetObj}} as |form|
     >
       <form.element
         @size="lg"
