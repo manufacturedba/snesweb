@@ -39,7 +39,7 @@ export default class PubnubService extends Service {
 
   unsubscribeAll() {
     this.#instance.removeAllListeners();
-    return this.#instance.unsubscribeAll();
+    return this.#instance.destroy();
   }
 
   addListener(option) {

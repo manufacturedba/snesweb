@@ -28,6 +28,7 @@ export default class TepacheWelcomeComponent extends Component {
       this.lastAdminMessage = null;
     }
 
+    this.pubnub.unsubscribeAll();
     this.pubnub.setUserId(this.identifiedUser.uid);
 
     this.pubnub.subscribe({
