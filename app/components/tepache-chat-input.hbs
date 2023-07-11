@@ -1,21 +1,12 @@
-<div class="input-group mb-3">
+<div class="input-group">
   <Input
     @type="text"
     maxlength="120"
     @value={{this.messageText}}
-    class="form-control tepache-chat-input__large-input"
+    class="text-light bg-dark form-control tepache-chat-input__large-input"
     placeholder="Tell me about it"
     aria-label="Tell me about it"
     aria-describedby="button-message"
     {{on 'keyup' this.handleEnter}}
   />
-  <button
-    class="btn btn-info"
-    type="button"
-    id="button-message"
-    disabled={{not this.messageText}}
-    {{on 'click' this.message}}
-  >
-    Message
-  </button>
 </div>
