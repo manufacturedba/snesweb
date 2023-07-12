@@ -1,4 +1,6 @@
-<div class="tepache-chat h-100 row d-flex flex-column bg-dark flex-nowrap">
+<div
+  class="tepache-chat h-100 row d-flex flex-column bg-dark flex-nowrap justify-content-between"
+>
   <div
     class="tepache-chat__header d-none d-lg-flex text-center text-white border-bottom sticky-top bg-dark"
   >
@@ -38,7 +40,7 @@
       <TepacheChatInput @onMessage={{this.message}} />
     </div>
     <div
-      class="tepache-chat__message-input tepache-chat__message-input--sticky d-flex justify-content-end flex-grow-1 flex-column p-2 d-sm-none bg-dark fixed-bottom border-top"
+      class="tepache-chat__message-input d-flex justify-content-end flex-grow-1 flex-column p-2 d-sm-none bg-dark border-top"
     >
       <TepacheChatInput @onMessage={{this.message}} />
     </div>
