@@ -24,7 +24,10 @@
           data-list-scroll-detector
           {{did-insert this.scrollToBottom}}
         >
-          <span style="color: {{string-to-random-color message.publisher}}">
+          <span
+            class="tepache-chat__publisher"
+            style="color: {{string-to-random-color message.publisher}}"
+          >
             {{message.publisher}}
             :
           </span>
