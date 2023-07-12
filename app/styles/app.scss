@@ -22,16 +22,22 @@ html {
 body {
     height: 100%;
     min-height: 100%;
-    padding-bottom: 60px;
 }
 
-.tepache-mode {
-    height: 100%;
+@include media-breakpoint-down(md) {
+    .tepache-application {
+        // height: 100vh;
+    }    
 }
 
 .tepache-mode-base {
     color: #FFFFFF;
     --bs-border-color: rgba(0, 0, 0, 0.5);
+}
+
+.tepache-mode-base__content {
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .tepache-mode-base__icon {

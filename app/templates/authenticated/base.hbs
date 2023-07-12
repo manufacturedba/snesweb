@@ -1,50 +1,54 @@
-<div class="tepache-mode-base text-dark mb-5 h-100">
-  <BsNavbar
-    class="border-bottom"
-    @toggleBreakpoint={{null}}
-    @type="dark"
-    @backgroundColor="dark" as |navbar|
-  >
-    <LinkTo @route="authenticated.base.index" class="navbar-brand">
-      <img
-        class="tepache-mode-base__icon me-4"
-        alt="painting of rotting pineapple character"
-        title="Rotting pineapple"
-        loading="lazy"
-        src="/its-tepache-bb.png"
-      />
-    </LinkTo>
-    <navbar.content>
-      <navbar.nav as |nav|>
-        <nav.item>
-          <a href="https://discord.gg/zuQ7Jp6zA6" class="me-4 text-white">
-            <i class="bi bi-discord"></i>
-          </a>
-        </nav.item>
-        <nav.item>
-          <a href="https://github.com/tepachemode" class="me-4 text-white">
-            <i class="bi bi-github"></i>
-          </a>
-        </nav.item>
-        <nav.item>
-          {{#if this.identifiedUser.identified}}
-            <BsButton
-              @type="dark"
-              class="ml-auto"
-              {{on 'click' this.invalidateSession}}
-            >
-              Logout
-            </BsButton>
-          {{/if}}
-        </nav.item>
-      </navbar.nav>
-    </navbar.content>
-  </BsNavbar>
-  <main class="h-100">
-    {{outlet}}
-  </main>
+<div
+  class="tepache-mode-base text-dark h-100 d-flex justify-content-between flex-column"
+>
+  <div class="tepache-mode-base__content">
+    <BsNavbar
+      class="border-bottom"
+      @toggleBreakpoint={{null}}
+      @type="dark"
+      @backgroundColor="dark" as |navbar|
+    >
+      <LinkTo @route="authenticated.base.index" class="navbar-brand">
+        <img
+          class="tepache-mode-base__icon me-4"
+          alt="painting of rotting pineapple character"
+          title="Rotting pineapple"
+          loading="lazy"
+          src="/its-tepache-bb.png"
+        />
+      </LinkTo>
+      <navbar.content>
+        <navbar.nav as |nav|>
+          <nav.item>
+            <a href="https://discord.gg/zuQ7Jp6zA6" class="me-4 text-white">
+              <i class="bi bi-discord"></i>
+            </a>
+          </nav.item>
+          <nav.item>
+            <a href="https://github.com/tepachemode" class="me-4 text-white">
+              <i class="bi bi-github"></i>
+            </a>
+          </nav.item>
+          <nav.item>
+            {{#if this.identifiedUser.identified}}
+              <BsButton
+                @type="dark"
+                class="ml-auto"
+                {{on 'click' this.invalidateSession}}
+              >
+                Logout
+              </BsButton>
+            {{/if}}
+          </nav.item>
+        </navbar.nav>
+      </navbar.content>
+    </BsNavbar>
+    <main>
+      {{outlet}}
+    </main>
+  </div>
   {{#if this.showFooter}}
-    <footer class="footer fixed-bottom">
+    <footer class="footer">
       <BsNavbar
         @type="light"
         @backgroundColor="light"

@@ -7,16 +7,14 @@
     </h2>
   </div>
   <div
-    class="tepache-chat__message-container text-white small d-flex flex-shrink-1 flex-column p-3"
+    class="tepache-chat__message-container h-100 text-white small d-flex flex-shrink-1 flex-column p-3"
     data-list-container-selector
   >
     <ul
-      class="list-group list-group-flush tepache-chat__message-list-group position-relative pb-5 pb-md-0"
+      class="list-group list-group-flush tepache-chat__message-list-group position-relative pb-md-0"
     >
       <li
         class="list-group-item tepache-chat__message-list-item tepache-chat__message-list-item--detector position-absolute"
-        {{!-- {{did-intersect onEnter=this.onIntersectingTop onExit=this.onExitingTop
-        }} --}}
       ></li>
       {{#each @messages as |message|}}
         <li
@@ -33,14 +31,21 @@
       {{/each}}
     </ul>
   </div>
-  <div
-    class="tepache-chat__message-input justify-content-end flex-grow-1 flex-column px-1 p-2 d-none d-sm-flex border-top"
-  >
-    <TepacheChatInput @onMessage={{this.message}} />
-  </div>
-  <div
-    class="tepache-chat__message-input tepache-chat__message-input--sticky d-flex justify-content-end flex-grow-1 flex-column p-2 d-sm-none bg-dark fixed-bottom border-top"
-  >
-    <TepacheChatInput @onMessage={{this.message}} />
-  </div>
+  {{#if @showInput}}
+    <div
+      class="tepache-chat__message-input justify-content-end flex-grow-1 flex-column px-1 p-2 d-none d-sm-flex border-top"
+    >
+      <TepacheChatInput @onMessage={{this.message}} />
+    </div>
+    <div
+      class="tepache-chat__message-input tepache-chat__message-input--sticky d-flex justify-content-end flex-grow-1 flex-column p-2 d-sm-none bg-dark fixed-bottom border-top"
+    >
+      <TepacheChatInput @onMessage={{this.message}} />
+    </div>
+  {{else}}
+    <TepacheGameClientController
+      class="w-100 flex-grow-0"
+      @chatChannel={{@chatChannel}}
+    />
+  {{/if}}
 </div>
