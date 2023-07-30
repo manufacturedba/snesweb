@@ -30,7 +30,7 @@ const buttonMap = {
   16: NOT_SUPPORTED,
 };
 
-const throttleTime = 200; // ms
+const throttleTime = 100; // ms
 
 export default class TepacheGameClientControllerComponent extends Component {
   @service
