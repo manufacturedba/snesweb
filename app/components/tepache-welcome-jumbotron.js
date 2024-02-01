@@ -37,7 +37,7 @@ export default class TepacheWelcomeJumbotronComponent extends Component {
 
   @action
   transitionToPlay() {
-    logEvent(getAnalytics(), 'play_button_clicked');
-    this.router.transitionTo('authenticated.base.play');
+    // logEvent(getAnalytics(), 'play_button_clicked');
+    // this.router.transitionTo('authenticated.base.play');
   }
 }

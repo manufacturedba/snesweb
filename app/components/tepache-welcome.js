@@ -51,7 +51,7 @@ export default class TepacheWelcomeComponent extends Component {
 
   @action
   transitionToPlay() {
-    logEvent(getAnalytics(), 'game_controller_clicked');
-    this.router.transitionTo('authenticated.base.play');
+    // logEvent(getAnalytics(), 'game_controller_clicked');
+    // this.router.transitionTo('authenticated.base.play');
   }
 }
