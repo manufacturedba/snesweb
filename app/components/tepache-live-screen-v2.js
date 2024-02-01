@@ -29,7 +29,7 @@ export default class TepacheLiveScreenV2Component extends Component {
   missingPlayerIds = null;
 
   @tracked
-  showChat = true;
+  showInput = true;
 
   constructor() {
     super(...arguments);
@@ -171,6 +171,6 @@ export default class TepacheLiveScreenV2Component extends Component {
 
   @action
   toggleChat() {
-    this.showChat = !this.showChat;
+    this.showInput = !this.showInput;
   }
 }

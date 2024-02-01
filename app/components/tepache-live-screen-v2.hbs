@@ -1,5 +1,5 @@
 <div
-  class="tepache-live-screen-v2 bg-dark container-fluid h-100"
+  class="tepache-live-screen-v2 bg-dark container-fluid"
   {{will-destroy this.unsubscribeFromGameSessionChannel}}
   {{did-insert this.subscribeToGameSessionChannel}}
 >
@@ -20,27 +20,17 @@
             @toggleChat={{this.toggleChat}}
           />
         </div>
-        {{#if this.showChat}}
-          <div class="col-lg-3 col-xs-12 bg-dark">
-            <TepacheChat
-              @messages={{this.filteredMessages}}
-              @chatChannel={{this.chatChannel}}
-              @channel={{@gameSessionModel.id}}
-              @userId={{@playerSessionModel.id}}
-              @lastAdminMessage={{this.lastAdminMessage}}
-              @onIntersectingTop={{this.fetchMoreMessages}}
-            />
-          </div>
-        {{else}}
-          <div
-            class="col-lg-3 col-xs-12 my-4 d-flex flex-column justify-content-end"
-          >
-            <TepacheGameClientController
-              class="w-100 flex-grow-0"
-              @chatChannel={{this.chatChannel}}
-            />
-          </div>
-        {{/if}}
+        <div class="col-lg-3 col-xs-12 bg-dark">
+          <TepacheChat
+            @messages={{this.filteredMessages}}
+            @chatChannel={{this.chatChannel}}
+            @channel={{@gameSessionModel.id}}
+            @userId={{@playerSessionModel.id}}
+            @lastAdminMessage={{this.lastAdminMessage}}
+            @onIntersectingTop={{this.fetchMoreMessages}}
+            @showInput={{this.showInput}}
+          />
+        </div>
       {{/if}}
     {{/if}}
     {{#if (is-paused @gameSessionModel.state)}}
