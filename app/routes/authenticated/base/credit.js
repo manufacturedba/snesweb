@@ -19,8 +19,8 @@ export default class CreditRoute extends Route {
         image: '/credits/kelsey.jpg',
         title: 'Artist',
         description:
-          'Kelsey Clarke paints, draws, and makes ice cream.  Kelsey likes to surround herself with dumb, sentient things. Kelsey has two cats and a boyfriend who all live in a big, dumb apartment in San Francisco. Find Kelsey on Instagram.',
-        links: ['https://www.instagram.com/kelseyclarkeart/'],
+          'Kelsey Clarke paints, draws, and makes ice cream.  Kelsey likes to surround herself with dumb, sentient things. Kelsey has two cats and a boyfriend who all live in a big, dumb apartment in San Francisco.',
+        links: ['https://kelseyclarkestudio.com'],
       },
       {
         imageAlt: "Roberto's face",
@@ -29,7 +29,7 @@ export default class CreditRoute extends Route {
         description:
           'Roberto Rodriguez used to make pasta on the weekend. Some supermarkets have banned Roberto for sniffing the pineapples. Roberto would also like you to know he owns a Roomba, but perhaps for not much longer. Find Roberto at tumblr and his bad website.',
         links: [
-          'https://tumblr.roberto-rodriguez.com',
+          'https://bsky.app/profile/roberto-rodriguez.com',
           'https://roberto-rodriguez.com',
         ],
       },
