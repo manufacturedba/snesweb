@@ -1,21 +1,9 @@
-<div
-  class="tepache-mode-base text-dark h-100 d-flex justify-content-between flex-column"
->
+<div class="tepache-mode-base text-dark h-100 d-flex justify-content-between flex-column">
   <div class="tepache-mode-base__content">
-    <BsNavbar
-      class="border-bottom"
-      @toggleBreakpoint={{null}}
-      @type="dark"
-      @backgroundColor="dark" as |navbar|
-    >
+    <BsNavbar class="border-bottom" @toggleBreakpoint={{null}} @type="dark" @backgroundColor="dark" as |navbar|>
       <LinkTo @route="authenticated.base.index" class="navbar-brand">
-        <img
-          class="tepache-mode-base__icon me-4"
-          alt="painting of rotting pineapple character"
-          title="Rotting pineapple"
-          loading="lazy"
-          src="/its-tepache-bb.png"
-        />
+        <img class="tepache-mode-base__icon me-4" alt="painting of rotting pineapple character"
+          title="Rotting pineapple" loading="lazy" src="/its-tepache-bb.png" />
       </LinkTo>
       <navbar.content>
         <navbar.nav as |nav|>
@@ -31,13 +19,9 @@
           </nav.item>
           <nav.item>
             {{#if this.identifiedUser.identified}}
-              <BsButton
-                @type="dark"
-                class="ml-auto"
-                {{on 'click' this.invalidateSession}}
-              >
-                Logout
-              </BsButton>
+            <BsButton @type="dark" class="ml-auto" {{on 'click' this.invalidateSession}}>
+              Logout
+            </BsButton>
             {{/if}}
           </nav.item>
         </navbar.nav>
@@ -48,60 +32,50 @@
     </main>
   </div>
   {{#if this.showFooter}}
-    <footer class="footer">
-      <BsNavbar
-        @type="light"
-        @backgroundColor="light"
-        @toggleBreakpoint={{null}} as |navbar|
-      >
-        <LinkTo
-          @route="authenticated.base.index"
-          class="navbar-brand d-none d-sm-block"
-        >
-          Tepache Mode
-        </LinkTo>
-        <navbar.content>
-          <navbar.nav as |nav|>
-            <nav.item>
-              <nav.link-to @route="authenticated.base.about" class="nav-link">
-                About
-              </nav.link-to>
-            </nav.item>
-            <nav.item>
-              <LinkTo @route="authenticated.base.credit" class="nav-link">
-                Credits
-              </LinkTo>
-            </nav.item>
-            <nav.item>
-              <LinkTo @route="authenticated.base.terms" class="nav-link">
-                Terms
-              </LinkTo>
-            </nav.item>
-            <nav.item>
-              <nav.link-to @route="authenticated.base.privacy" class="nav-link">
-                Privacy
-              </nav.link-to>
-            </nav.item>
-            <nav.item>
-              {{#if this.identifiedUser.isAdmin}}
-                <nav.link-to
-                  @route="authenticated.base.admin"
-                  class="text-color-owner nav-link"
-                >
-                  Admin
-                </nav.link-to>
-              {{/if}}
-            </nav.item>
-            <nav.item>
-              {{#if this.identifiedUser.canLogin}}
-                <nav.link-to @route="login" class="nav-link">
-                  Login
-                </nav.link-to>
-              {{/if}}
-            </nav.item>
-          </navbar.nav>
-        </navbar.content>
-      </BsNavbar>
-    </footer>
+  <footer class="footer">
+    <BsNavbar @type="light" @backgroundColor="light" @toggleBreakpoint={{null}} as |navbar|>
+      <LinkTo @route="authenticated.base.index" class="navbar-brand d-none d-sm-block">
+        Tepache Mode
+      </LinkTo>
+      <navbar.content>
+        <navbar.nav as |nav|>
+          <nav.item>
+            <nav.link-to @route="authenticated.base.about" class="nav-link">
+              About
+            </nav.link-to>
+          </nav.item>
+          {{!-- <nav.item>
+            <LinkTo @route="authenticated.base.credit" class="nav-link">
+              Credits
+            </LinkTo>
+          </nav.item> --}}
+          <nav.item>
+            <LinkTo @route="authenticated.base.terms" class="nav-link">
+              Terms
+            </LinkTo>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="authenticated.base.privacy" class="nav-link">
+              Privacy
+            </nav.link-to>
+          </nav.item>
+          <nav.item>
+            {{#if this.identifiedUser.isAdmin}}
+            <nav.link-to @route="authenticated.base.admin" class="text-color-owner nav-link">
+              Admin
+            </nav.link-to>
+            {{/if}}
+          </nav.item>
+          <nav.item>
+            {{#if this.identifiedUser.canLogin}}
+            <nav.link-to @route="login" class="nav-link">
+              Login
+            </nav.link-to>
+            {{/if}}
+          </nav.item>
+        </navbar.nav>
+      </navbar.content>
+    </BsNavbar>
+  </footer>
   {{/if}}
 </div>
