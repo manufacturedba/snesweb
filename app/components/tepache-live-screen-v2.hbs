@@ -1,54 +1,22 @@
-<div
-  class="tepache-live-screen-v2 bg-dark container-fluid"
-  {{will-destroy this.unsubscribeFromGameSessionChannel}}
-  {{did-insert this.subscribeToGameSessionChannel}}
->
-  <div class="row h-100">
-    {{#if (is-active @gameSessionModel.state)}}
-      {{#if this.ovenPlayerConfig}}
-        <div
-          class="col-lg-9 col-xs-12 bg-dark sticky-top d-flex flex-nowrap flex-column"
-        >
-          <TepacheVideoPlayer
-            @options={{this.ovenPlayerConfig}}
-            class="flex-grow-1 border-end"
-          />
-          <TepacheMetadata
-            @game={{@game}}
-            @gameSessionModel={{@gameSessionModel}}
-            @totalOccupancy={{this.totalOccupancy}}
-            @toggleChat={{this.toggleChat}}
-          />
-        </div>
-        <div class="col-lg-3 col-xs-12 bg-dark">
-          <TepacheChat
-            @messages={{this.filteredMessages}}
-            @chatChannel={{this.chatChannel}}
-            @channel={{@gameSessionModel.id}}
-            @userId={{@playerSessionModel.id}}
-            @lastAdminMessage={{this.lastAdminMessage}}
-            @onIntersectingTop={{this.fetchMoreMessages}}
-            @showInput={{this.showInput}}
-          />
-        </div>
-      {{/if}}
-    {{/if}}
-    {{#if (is-paused @gameSessionModel.state)}}
-      <div class="jumbotron jumbotron-fluid bg-dark text-light">
-        <div class="container text-center p-5">
-          <div class="row">
-            <div class="col-12">
-              <h2 class="display-4">
-                {{capitalize 'paused'}}
-              </h2>
-            </div>
-            <div class="col-12 p-5"></div>
-            <div class="col-12 p-5"></div>
-          </div>
-          <br />
-        </div>
-        <br class="mt-5" />
-      </div>
-    {{/if}}
+<div id="live-screen"
+  class="tepache-live-screen-v2 bg-black container-fluid d-flex flex-column fixed-bottom flex-nowrap" {{will-destroy
+  this.unsubscribeFromGameSessionChannel}} {{did-insert this.subscribeToGameSessionChannel}}>
+  {{#if this.ovenPlayerConfig}}
+  <div class="tepache-chat__video-player-container bg-black flex-grow-1 flex-shrink-3">
+    <TepacheVideoPlayer @options={{this.ovenPlayerConfig}} class="border-end" />
+  </div>
+  <div class="flex-shrink-0 flex-grow-0">
+    <TepacheMetadata @game={{@game}} @gameSessionModel={{@gameSessionModel}} @totalOccupancy={{this.totalOccupancy}}
+      @toggleChat={{this.toggleChat}} />
+  </div>
+  <div class="bg-black flex-grow-2 flex-shrink-1 overflow-scroll" data-list-container-selector>
+    <TepacheChat @messages={{this.filteredMessages}} @chatChannel={{this.chatChannel}} @channel={{@gameSessionModel.id}}
+      @userId={{@playerSessionModel.id}} @lastAdminMessage={{this.lastAdminMessage}}
+      @onIntersectingTop={{this.fetchMoreMessages}} @showInput={{this.showInput}}
+      @scrollToBottom={{this.scrollToBottom}} />
+  </div>
+  {{/if}}
+  <div class="tepache-chat__message-input flex-shrink-0 flex-grow-0 px-3 p-2 border-top bg-dark">
+    <TepacheChatInput @onMessage={{this.message}} />
   </div>
 </div>

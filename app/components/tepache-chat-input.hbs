@@ -1,12 +1,5 @@
 <div class="input-group">
-  <Input
-    @type="text"
-    maxlength="120"
-    @value={{this.messageText}}
-    class="text-light bg-dark form-control tepache-chat-input__large-input"
-    placeholder="Message"
-    aria-label="Write a message"
-    aria-describedby="button-message"
-    {{on 'keyup' this.handleEnter}}
-  />
+  <Input @type="text" maxlength="120" @value={{this.messageText}}
+    class="text-light bg-secondary form-control tepache-chat-input__large-input" placeholder="Send a message"
+    aria-label="Send a message" aria-describedby="button-message" {{on 'keyup' this.handleEnter}} />
 </div>

@@ -4,6 +4,17 @@ import { getRemoteConfig, getValue } from 'firebase/remote-config';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { PUBNUB_HISTORY_LIMIT } from 'tepacheweb/constants';
+import { getAnalytics, logEvent } from 'firebase/analytics';
+import { scheduleOnce } from '@ember/runloop';
+
+function scrollToBottomOfChat() {
+  const listGroup = document.querySelector('[data-list-container-selector]');
+
+  listGroup.scrollTo({
+    top: listGroup.scrollHeight,
+    behavior: 'smooth',
+  });
+}
 
 export default class TepacheLiveScreenV2Component extends Component {
   @service
@@ -77,6 +88,12 @@ export default class TepacheLiveScreenV2Component extends Component {
 
   @action
   async subscribeToGameSessionChannel() {
+    window.visualViewport.addEventListener('resize', () => {
+      document.querySelector(
+        '#live-screen'
+      ).style.height = `${window.visualViewport.height}px`;
+    });
+
     await this.loadMessages();
 
     this.pubnub.subscribe({
@@ -172,5 +189,29 @@ export default class TepacheLiveScreenV2Component extends Component {
   @action
   toggleChat() {
     this.showInput = !this.showInput;
+  }
+
+  @action
+  async message(text) {
+    logEvent(getAnalytics(), 'send_message', {
+      channel: this.chatChannel,
+    });
+    try {
+      await this.pubnub.publish({
+        message: text,
+        channel: this.chatChannel,
+        storeInHistory: true,
+      });
+    } catch (status) {
+      console.log(status);
+    }
+  }
+
+  @action
+  scrollToBottom() {
+    if (!this.disableScrollDown || !this.initialScrollCompleted) {
+      scheduleOnce('afterRender', scrollToBottomOfChat);
+      this.initialScrollCompleted = true;
+    }
   }
 }

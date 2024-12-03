@@ -29,6 +29,10 @@ export default class BaseController extends Controller {
     }
   }
 
+  get showHeader() {
+    return this.router.currentRouteName !== 'authenticated.base.play.live';
+  }
+
   get showFooter() {
     return this.router.currentRouteName !== 'authenticated.base.play.live';
   }

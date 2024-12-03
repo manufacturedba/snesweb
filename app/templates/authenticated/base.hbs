@@ -1,5 +1,6 @@
 <div class="tepache-mode-base text-dark h-100 d-flex justify-content-between flex-column">
-  <div class="tepache-mode-base__content">
+  <div class="tepache-mode-base__content h-100">
+    {{#if this.showHeader}}
     <BsNavbar class="border-bottom" @toggleBreakpoint={{null}} @type="dark" @backgroundColor="dark" as |navbar|>
       <LinkTo @route="authenticated.base.index" class="navbar-brand">
         <img class="tepache-mode-base__icon me-4" alt="painting of rotting pineapple character"
@@ -27,7 +28,8 @@
         </navbar.nav>
       </navbar.content>
     </BsNavbar>
-    <main>
+    {{/if}}
+    <main class="h-100">
       {{outlet}}
     </main>
   </div>

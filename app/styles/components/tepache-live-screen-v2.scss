@@ -1,11 +1,12 @@
 @import 'bootstrap';
 
 .tepache-live-screen-v2 {
-    --bs-border-color: rgba(255, 255, 255, 0.1);
+  height: 100%;
+  --bs-border-color: rgba(255, 255, 255, 0.1);
 }
 
 .tepache-live-screen-v2__thumbnail {
-    width: 4rem;
-    height: 4rem;
-    overflow: hidden;
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
 }

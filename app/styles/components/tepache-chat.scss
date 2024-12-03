@@ -1,52 +1,50 @@
 @import 'bootstrap';
 
 .tepache-chat {
-    --bs-border-color: rgba(255, 255, 255, 0.1);
-    max-height: 560px;
+  --bs-border-color: rgba(255, 255, 255, 0.1);
+  max-height: 560px;
 }
 
 @include media-breakpoint-down(md) {
-    .tepache-chat {
-        max-height: 340px;
-    }
+  .tepache-chat {
+    max-height: 340px;
+  }
 }
 
 .tepache-chat__controller {
-    width: 100px;
+  width: 100px;
 }
 
 .tepache-chat__message-container {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 .tepache-chat__message-list-group {
-    --bs-list-group-bg: var(--bs-dark);
+  --bs-list-group-bg: var(--bs-black);
 }
 
 .tepache-chat__message-list-item {
-    --bs-list-group-border-width: 0;
-    --bs-list-group-color: var(--bs-white-rgb);
-    --bs-list-group-bg: var(--bs-dark);
-    --bs-list-group-item-padding-y: 0;
-    --bs-list-group-item-padding-x: 0;
-    line-height: 1.5em;
+  --bs-list-group-border-width: 0;
+  --bs-list-group-color: var(--bs-white-rgb);
+  --bs-list-group-bg: var(--bs-black);
+  --bs-list-group-item-padding-y: 0;
+  --bs-list-group-item-padding-x: 0;
+  line-height: 1.5em;
 }
 
 .tepache-chat__message-list-item--detector {
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 100px;
-}
-
-.tepache-chat__message-list-item:hover {
-    background:rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100px;
 }
 
 .tepache-chat__publisher {
-     text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.tepache-chat__video-player-container {
+  max-height: 500px;
+  min-height: 150px;
 }
