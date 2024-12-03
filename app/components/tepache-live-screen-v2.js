@@ -86,12 +86,16 @@ export default class TepacheLiveScreenV2Component extends Component {
     return this.messages?.filterBy('publisher');
   }
 
+  setVisualViewportHeight() {
+    document.querySelector(
+      '#live-screen'
+    ).style.height = `${window.visualViewport.height}px`;
+  }
+
   @action
   async subscribeToGameSessionChannel() {
     window.visualViewport.addEventListener('resize', () => {
-      document.querySelector(
-        '#live-screen'
-      ).style.height = `${window.visualViewport.height}px`;
+      scheduleOnce('afterRender', this.setVisualViewportHeight);
     });
 
     await this.loadMessages();
