@@ -6,9 +6,17 @@ export default class TepacheMetadataComponent extends Component {
   @tracked
   reportingModalOpen = false;
 
+  @tracked
+  helpModalOpen = false;
+
   @action
   report() {
     this.reportingModalOpen = true;
+  }
+
+  @action
+  help() {
+    this.helpModalOpen = true;
   }
 
   @action

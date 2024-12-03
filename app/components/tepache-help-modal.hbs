@@ -1,0 +1,19 @@
+<BsModal class="text-dark" @open={{@open}} @fade={{true}} @backdrop={{true}} @backdropClose={{true}} as |modal|>
+    <modal.header>
+        <h4 class="modal-title">
+            Help?
+        </h4>
+    </modal.header>
+    <modal.body>
+        <p>The chat here operates as the controller. Any reference to a button from a Super Nintendo controller will be
+            interpreted
+            as a button press <span class="small">(with some restrictions).</span></p>
+        <p>Also note that your message counts more as a vote to what should happen. If the majority votes in a different
+            direction, your selection may get ignored!</p>
+    </modal.body>
+    <modal.footer>
+        <BsButton @onClick={{modal.close}}>
+            Cancel
+        </BsButton>
+    </modal.footer>
+</BsModal>
