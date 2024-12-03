@@ -1,13 +1,6 @@
-<div
-  ...attributes
-  class="tepache-video-player"
-  {{did-insert this.createCastHook}}
->
-  <TepacheCast {{on 'click' this.cast}} />
-  <OvenPlayer
-    @options={{@options}}
-    @onStateChanged={{this.onStateChanged}}
-    onMute={{this.onMute}}
-    onVolumeChange={{this.onVolumeChange}}
-  />
+<div ...attributes class="tepache-video-player" {{did-insert this.createCastHook}}>
+  {{!--
+  <TepacheCast {{on 'click' this.cast}} /> --}}
+  <OvenPlayer @options={{@options}} @onStateChanged={{this.onStateChanged}} onMute={{this.onMute}}
+    onVolumeChange={{this.onVolumeChange}} />
 </div>
