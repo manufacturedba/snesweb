@@ -98,6 +98,12 @@ export default class TepacheLiveScreenV2Component extends Component {
       scheduleOnce('afterRender', this.setVisualViewportHeight);
     });
 
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        scheduleOnce('afterRender', this.setVisualViewportHeight);
+      }
+    });
+
     await this.loadMessages();
 
     this.pubnub.subscribe({
